@@ -21,7 +21,7 @@
 
 Altenticação!
 
-### Como adicionar as variáveis de ambiente no App e no Banco de Dados Railway:
+### Como fazer Deploy do Github Laravel no Railway adicionar as variáveis de ambiente no App e no Banco de Dados Railway:
 
 <div align="center">
 
@@ -45,11 +45,10 @@ Adicionar as variáveis de ambiente do .env local como mostra na imagem abaixo e
 
 ### <img src="https://github.com/user-attachments/assets/fa7f0c04-376f-4a6d-ad9b-e49898ed5f4e" width="450px"/>
 
-</div>
 
 <div align="start">
 
-Subistuir os valores das seguintes variáveis:
+Substituir os valores das seguintes variáveis:
 
 DB_HOST por PGHOST<br>
 DB_PORT por PGPORT<br>
@@ -60,7 +59,7 @@ DB_PASSWORD por POSTGRES_PASSWORD<br>
 
 Em seguida copiar o conteúdo da variável de ambiente DATABASE_PUBLIC_URL do Railway para o .env local.
 
-E inserir os valores nas variáveis no .env local para fezer o migration no Banco de Dados no Railway.
+E inserir os valores nas variáveis no .env local para fazer o migration no Banco de Dados no Railway.
 
 DB_HOST<br>
 DB_PORT<br>
@@ -68,12 +67,28 @@ DB_DATABASE<br>
 DB_USERNAME<br>
 DB_PASSWORD<br>
 
-Após a copia dos valores corretos usar o seginte comando:
+Após a copia dos valores corretos usar o seguinte comando:
 
 ```bach
 php artisan migrate
 
 ```
+
+Após fazer a mogration publique o App como mostro nas imagens abaixo:
+
+</div>
+
+### <img src="https://github.com/user-attachments/assets/f1ccba37-9dc3-4dfa-9dd3-d7bc973cd5e4" width="450px"/>
+
+### <img src="https://github.com/user-attachments/assets/6315b3e5-1a8a-40a2-b01f-24fca5c2ca78" width="450px"/>
+
+### <img src="https://github.com/user-attachments/assets/c5554800-0223-48c0-a48c-48588e513efc" width="450px"/>
+
+<div align="start">
+
+Por padrão a porta do App esta como 8080 e quando publicamos é 9000, altere-a para 8080, pronto o seu App esta no ar.
+
+</div>
 
 </div>
 
