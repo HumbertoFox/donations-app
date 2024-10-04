@@ -48,7 +48,19 @@ Adicionar as variáveis de ambiente do .env local como mostra na imagem abaixo e
 
 <div align="start">
 
+Para garantir que as URLs utilizem sempre HTTPS adicione este if no /app/Providers/AppServiceProvider.php
+
+register
+
+```php
+  if ($this->app->environment('production', 'staging')) {
+    URL::forceScheme('https');
+  }
+```
+
 Substituir os valores das seguintes variáveis:
+
+APP_ENV="local" por APP_ENV="production"
 
 DB_HOST por PGHOST<br>
 DB_PORT por PGPORT<br>
