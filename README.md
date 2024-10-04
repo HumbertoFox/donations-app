@@ -21,6 +21,62 @@
 
 Altenticação!
 
+### Como adicionar as variáveis de ambiente no App e no Banco de Dados Railway:
+
+<div align="center">
+
+### <img src="https://github.com/user-attachments/assets/aede684a-b961-448a-96c8-7a64b2750550" width="450px"/>
+
+### <img src="https://github.com/user-attachments/assets/f21d02fd-4101-413d-a321-99f38ddc3711" width="450px"/>
+
+### <img src="https://github.com/user-attachments/assets/2f04f20b-4293-4fe0-a90a-1664af61ed1b" width="450px" />
+
+### <img src="https://github.com/user-attachments/assets/04386811-2328-4704-9180-9834e67b022a" width="450px"/>
+
+<div align="start">
+
+Adicionar as variáveis de ambiente do .env local como mostra na imagem abaixo e fazer as substituição a seguir:
+
+</div>
+
+### <img src="https://github.com/user-attachments/assets/72b73678-aced-4209-998a-3491f1b8b223" width="450px"/>
+
+### <img src="https://github.com/user-attachments/assets/b6f3046b-aea6-4c3b-84b8-8602a9fe48f3" width="450px"/>
+
+### <img src="https://github.com/user-attachments/assets/fa7f0c04-376f-4a6d-ad9b-e49898ed5f4e" width="450px"/>
+
+</div>
+
+<div align="start">
+
+Subistuir os valores das seguintes variáveis:
+
+DB_HOST por PGHOST<br>
+DB_PORT por PGPORT<br>
+DB_DATABASE por PGDATABASE<br>
+DB_USERNAME por PGUSER<br>
+DB_PASSWORD por POSTGRES_PASSWORD<br>
+
+
+Em seguida copiar o conteúdo da variável de ambiente DATABASE_PUBLIC_URL do Railway para o .env local.
+
+E inserir os valores nas variáveis no .env local para fezer o migration no Banco de Dados no Railway.
+
+DB_HOST<br>
+DB_PORT<br>
+DB_DATABASE<br>
+DB_USERNAME<br>
+DB_PASSWORD<br>
+
+Após a copia dos valores corretos usar o seginte comando:
+
+```bach
+php artisan migrate
+
+```
+
+</div>
+
 ## Desenvolvido em:
 
 <div>
