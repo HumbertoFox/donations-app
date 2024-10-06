@@ -1,1 +1,1 @@
-<img src="{{ Vite::asset('resources/images/LOGO_BFN.png') }}" width="150" alt="Logo BetoFoxNet_Info">
+<img src="{{ URL::asset('images/LOGO_BFN.png') }}" width="150" alt="Logo BetoFoxNet_Info">

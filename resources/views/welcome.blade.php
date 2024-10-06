@@ -44,14 +44,14 @@
         <main class="w-full min-h-full p-[10px] text-center">
             <div class="flex justify-between">
                 <a href="https://betofoxnet-info.vercel.app/" target="_blank" rel="">
-                    <img src="{{ Vite::asset('resources/images/LOGO_BFN.png') }}" width="150" alt="Logo BetoFoxNet_Info">
+                    <img src="{{ URL::asset('images/LOGO_BFN.png') }}" width="150" alt="Logo BetoFoxNet_Info">
                 </a>
                 <a href="https://betofoxnet-info.vercel.app/" target="_blank" rel="">
-                    <img class="bg-cyan-300 rounded-full" src="{{ Vite::asset('resources/images/LOGO_BFN.png') }}" width="150"
+                    <img class="bg-cyan-300 rounded-full" src="{{ URL::asset('images/LOGO_BFN.png') }}" width="150"
                         alt="Logo BetoFoxNet_Info">
                 </a>
                 <a href="https://betofoxnet-info.vercel.app/" target="_blank" rel="">
-                    <img src="{{ Vite::asset('resources/images/LOGO_BFN.png') }}" width="150" alt="Logo BetoFoxNet_Info">
+                    <img src="{{ URL::asset('images/LOGO_BFN.png') }}" width="150" alt="Logo BetoFoxNet_Info">
                 </a>
             </div>
         </main>
