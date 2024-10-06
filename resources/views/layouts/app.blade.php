@@ -28,7 +28,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="w-full min-h-full">
                 {{ $slot }}
             </main>
         </div>
