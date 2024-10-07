@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DonorController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/donor/agenda', [DonorController::class, 'agenda'])->name('donor.agenda');
+    Route::get('/donor/create', [DonorController::class, 'create'])->name('donor.create');
+    Route::get('/donor', [DonorController::class, 'store'])->name('donor.store');
+    Route::put('/donor/edit/{is}', [DonorController::class, 'edit'])->name('donor.edit');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
