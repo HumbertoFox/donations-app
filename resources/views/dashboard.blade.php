@@ -13,12 +13,13 @@
                     <a href="{{ route('donor.agenda') }}" title="Início">
                         <i class="fa-solid fa-house text-[95px] text-[green] duration-[400ms] hover:text-[blue]"></i>
                     </a>
+
                     <a href="/" title="Cadastrar Usuário">
                         <i
                             class="fa-solid fa-user-check text-[95px] text-[green] duration-[400ms] hover:text-[blue]"></i>
                     </a>
 
-                    <a href="/" title="Editar Usuário">
+                    <a href="{{ route('profile.edit') }}" title="Editar Usuário">
                         <i
                             class="fa-solid fa-user-pen text-[95px] text-[green] duration-[400ms] hover:text-[orange]"></i>
                     </a>
