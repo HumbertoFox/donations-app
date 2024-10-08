@@ -1,0 +1,78 @@
+<div>
+    <form class="flex flex-col gap-1 p-1 w-[280px] text-sm text-gray-600" method="POST"
+        action="{{ Route::is('donor.create') ? route('donor.store') : route('donor.edit') }}">
+        @csrf
+        @if (!Route::is('donor.create'))
+            @method('PUT')
+            <label class="flex flex-col" for="iddonor">Código do Doador
+                <input class="rounded-md p-[2px]" type="number" name="iddonor" id="iddonor" disabled>
+            </label>
+        @endif
+        <label class="flex flex-col" for="name">Nome do Doador
+            <input class="rounded-md p-[2px]" type="text" name="name" id="name">
+        </label>
+        <label class="flex flex-col" for="phone">Contato do Responsável
+            <input class="rounded-md p-[2px]" type="tel" name="phone" id="phone" minlength="11"
+                maxlength="11">
+        </label>
+        <label class="flex flex-col" for="contacto1">Contato do Responsável/Opcional
+            <input class="rounded-md p-[2px]" type="tel" name="contacto1" id="contacto1" minlength="11"
+                maxlength="11">
+        </label>
+        <label class="flex flex-col" for="contacto2">Contato/Opcional ou Ramal
+            <input class="rounded-md p-[2px]" type="tel" name="contacto2" id="contacto2">
+        </label>
+        <label class="flex flex-col" for="zipcode">CEP
+            <input class="rounded-md p-[2px]" type="number" name="zipcode" id="zipcode" maxlength="9">
+        </label>
+        <label class="flex flex-col" for="street">Logradouro: Av/Rua/Trav
+            <input class="rounded-md p-[2px]" type="text" name="street" id="street">
+        </label>
+        <label class="flex flex-col" for="district">Bairro/Distrito
+            <input class="rounded-md p-[2px]" type="text" name="district" id="district">
+        </label>
+        <label class="flex flex-col" for="city">Cidade
+            <input class="rounded-md p-[2px]" type="text" name="city" id="city">
+        </label>
+        <label class="flex flex-col" for="numresidence">Nº Casa/Edifício/Empresa
+            <input class="rounded-md p-[2px]" type="text" name="numresidence" id="numresidence">
+        </label>
+        <div class="flex justify-center items-center gap-3 p-1">
+            <label class="flex items-center gap-1 cursor-pointer" for="house">
+                <input class="cursor-pointer" type="radio" name="typeresidence" id="house" value="house" checked>
+                Casa
+            </label>
+            <label class="flex items-center gap-1 cursor-pointer" for="buildings">
+                <input class="cursor-pointer" type="radio" name="typeresidence" id="buildings" value="buildings">
+                Edifício
+            </label>
+            <label class="flex items-center gap-1 cursor-pointer" for="enterprise">
+                <input class="cursor-pointer" type="radio" name="typeresidence" id="enterprise" value="enterprise">
+                Empresa
+            </label>
+        </div>
+        <label class="flex flex-col" for="cnpj">CNPJ
+            <input class="rounded-md p-[2px]" type="number" name="cnpj" id="cnpj">
+        </label>
+        <label class="flex flex-col" for="building">Nome do Edifício/Empresa
+            <input class="rounded-md p-[2px]" type="text" name="building" id="building">
+        </label>
+        <label class="flex flex-col" for="block">Bloco
+            <input class="rounded-md p-[2px]" type="text" name="block" id="block">
+        </label>
+        <label class="flex flex-col" for="livingapartmentroom">Apartamento/Sala
+            <input class="rounded-md p-[2px]" type="text" name="livingapartmentroom" id="livingapartmentroom">
+        </label>
+        <label class="flex flex-col" for="referencepoint">Ponto de Referência
+            <textarea class="rounded-md p-[2px]" name="referencepoint" id="referencepoint"></textarea>
+        </label>
+        <div class="flex justify-around pt-3">
+            <button
+                class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
+                type="submit" name="cadastrar_doacao">Cadastrar</button>
+            <button
+                class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
+                type="submit" name="cadastrar_doador">Cadastrar Ir.</button>
+        </div>
+    </form>
+</div>

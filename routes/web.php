@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/donor/agenda', [DonorController::class, 'agenda'])->name('donor.agenda');
     Route::get('/donor/create', [DonorController::class, 'create'])->name('donor.create');
     Route::get('/donor', [DonorController::class, 'store'])->name('donor.store');
-    Route::put('/donor/edit/{is}', [DonorController::class, 'edit'])->name('donor.edit');
+    Route::get('/donor/edit', [DonorController::class, 'edit'])->name('donor.edit');
 });
 
 require __DIR__ . '/auth.php';

@@ -14,7 +14,11 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans]
             },
-        },
+            width: {
+                'calc-sidebarfull': 'calc(100% - 200px)',
+                'calc-sidebarmin': 'calc(100% - 70px)'
+            }
+        }
     },
 
     plugins: [forms]
