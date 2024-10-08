@@ -39,30 +39,41 @@
         </label>
         <div class="flex justify-center items-center gap-3 p-1">
             <label class="flex items-center gap-1 cursor-pointer" for="house">
-                <input class="cursor-pointer" type="radio" name="typeresidence" id="house" value="house" checked>
+                <input class="cursor-pointer" type="radio" name="typeresidence" id="house" value="house" checked
+                    onclick="toggleSections()">
                 Casa
             </label>
             <label class="flex items-center gap-1 cursor-pointer" for="buildings">
-                <input class="cursor-pointer" type="radio" name="typeresidence" id="buildings" value="buildings">
+                <input class="cursor-pointer" type="radio" name="typeresidence" id="buildings" value="buildings"
+                    onclick="toggleSections()">
                 Edifício
             </label>
             <label class="flex items-center gap-1 cursor-pointer" for="enterprise">
-                <input class="cursor-pointer" type="radio" name="typeresidence" id="enterprise" value="enterprise">
+                <input class="cursor-pointer" type="radio" name="typeresidence" id="enterprise" value="enterprise"
+                    onclick="toggleSections()">
                 Empresa
             </label>
         </div>
-        <label class="flex flex-col" for="cnpj">CNPJ
-            <input class="rounded-md p-[2px]" type="number" name="cnpj" id="cnpj">
-        </label>
-        <label class="flex flex-col" for="building">Nome do Edifício/Empresa
-            <input class="rounded-md p-[2px]" type="text" name="building" id="building">
-        </label>
-        <label class="flex flex-col" for="block">Bloco
-            <input class="rounded-md p-[2px]" type="text" name="block" id="block">
-        </label>
-        <label class="flex flex-col" for="livingapartmentroom">Apartamento/Sala
-            <input class="rounded-md p-[2px]" type="text" name="livingapartmentroom" id="livingapartmentroom">
-        </label>
+        <div id="enterpriseSection" style="display: none">
+            <label class="flex flex-col" for="cnpj">CNPJ
+                <input class="rounded-md p-[2px]" type="number" name="cnpj" id="cnpj">
+            </label>
+            <label class="flex flex-col" for="corporatename">Nome Empresa
+                <input class="rounded-md p-[2px]" type="text" name="corporatename" id="corporatename">
+            </label>
+        </div>
+        <div id="buildingSection" style="display: none">
+            <label class="flex flex-col" for="building">Nome do Edifício/Empresa
+                <input class="rounded-md p-[2px]" type="text" name="building" id="building">
+            </label>
+            <label class="flex flex-col" for="block">Bloco
+                <input class="rounded-md p-[2px]" type="text" name="block" id="block">
+            </label>
+            <label class="flex flex-col" for="livingapartmentroom">Apartamento/Sala
+                <input class="rounded-md p-[2px]" type="text" name="livingapartmentroom"
+                    id="livingapartmentroom">
+            </label>
+        </div>
         <label class="flex flex-col" for="referencepoint">Ponto de Referência
             <textarea class="rounded-md p-[2px]" name="referencepoint" id="referencepoint"></textarea>
         </label>
@@ -76,3 +87,22 @@
         </div>
     </form>
 </div>
+<script>
+    function toggleSections() {
+        const buildingSection = document.getElementById('buildingSection');
+        const enterpriseSection = document.getElementById('enterpriseSection');
+        const buildingRadio = document.getElementById('buildings');
+        const enterpriseRadio = document.getElementById('enterprise');
+
+        if (buildingRadio.checked) {
+            buildingSection.style.display = 'block';
+            enterpriseSection.style.display = 'none';
+        } else if (enterpriseRadio.checked) {
+            enterpriseSection.style.display = 'block';
+            buildingSection.style.display = 'none';
+        } else {
+            buildingSection.style.display = 'none';
+            enterpriseSection.style.display = 'none';
+        };
+    };
+</script>
