@@ -119,16 +119,20 @@
             <div class="flex justify-around pt-3">
                 <button
                     class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
-                    type="submit" name="in_agender">Cadastrar Ir</button>
+                    type="submit" title="Cadastrar Doação e ir para Agendamento" name="in_agender">
+                    Cadastrar Ir
+                </button>
                 <button
                     class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
-                    type="submit" name="register_donation">Cadastrar</button>
+                    type="submit" title="Cadastrar Doação" name="register_donation">
+                    Cadastrar
+                </button>
             </div>
         @else
             <div class="flex justify-around pt-3">
                 <button
                     class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
-                    type="submit" name="in_agender">Editar</button>
+                    type="submit" title="Editar Doação" name="in_agender">Editar</button>
         @endif
     </form>
 </div>
