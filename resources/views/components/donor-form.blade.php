@@ -2,10 +2,13 @@
     <form class="flex flex-col gap-1 p-1 w-[280px] text-sm text-gray-600" method="POST"
         action="{{ Route::is('donor.create') ? route('donor.store') : route('donor.edit') }}">
         @csrf
+        <legend class="mx-auto py-1 duration-[400ms] drop-shadow-[1px_1px_0.5px_#AAF998]">
+            Dados do Doador
+        </legend>
         @if (!Route::is('donor.create'))
             @method('PUT')
             <label class="flex flex-col" for="iddonor">Código do Doador
-                <input class="rounded-md p-[2px]" type="number" name="iddonor" id="iddonor" disabled>
+                <input class="rounded-md p-[2px] cursor-not-allowed" type="number" name="iddonor" id="iddonor" disabled>
             </label>
         @endif
         <label class="flex flex-col" for="name">Nome do Doador
@@ -77,14 +80,22 @@
         <label class="flex flex-col" for="referencepoint">Ponto de Referência
             <textarea class="rounded-md p-[2px]" name="referencepoint" id="referencepoint"></textarea>
         </label>
-        <div class="flex justify-around pt-3">
-            <button
-                class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
-                type="submit" name="cadastrar_doacao">Cadastrar</button>
-            <button
-                class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
-                type="submit" name="cadastrar_doador">Cadastrar Ir.</button>
-        </div>
+        @if (Route::is('donor.create'))
+            <div class="flex justify-around pt-3">
+                <button
+                    class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
+                    type="submit" title="Cadastrar Doador ir Cadastrar Doação" name="in_donation">Cadastrar
+                    Ir</button>
+                <button
+                    class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
+                    type="submit" title="Cadastrar Doador" name="register_donor">Cadastrar</button>
+            </div>
+        @else
+            <div class="flex justify-around pt-3">
+                <button
+                    class="bg-green-600 px-2 py-1 rounded-md text-white font-bold duration-[400ms] hover:bg-green-800 active:text-black"
+                    type="submit" title="Cadastrar Doador ir Cadastrar Doação" name="in_donation">Editar</button>
+        @endif
     </form>
 </div>
 <script>

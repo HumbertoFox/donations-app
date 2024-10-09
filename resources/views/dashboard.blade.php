@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex flex-wrap justify-center items-center gap-8 p-8 text-gray-900">
 
-                    <a href="{{ route('donor.agenda') }}" title="Início">
+                    <a href="{{ route('agenda.agenda') }}" title="Início">
                         <i class="fa-solid fa-house text-[95px] text-[green] duration-[400ms] hover:text-[blue]"></i>
                     </a>
 

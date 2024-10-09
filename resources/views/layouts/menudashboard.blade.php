@@ -25,8 +25,8 @@
             </a>
             <ul>
                 <li title="Cadastrar Doação">
-                    <a class="flex items-center p-2.5 gap-[15px] duration-[400ms] text-[black] hover:bg-[#79D1FF] hover:text-white"
-                        href="/">
+                    <a class="flex items-center p-2.5 gap-[15px] duration-[400ms] text-[black] hover:bg-[#79D1FF] hover:text-white {{ Route::is('donation.create') ? 'bg-[#79D1FF] text-white hover:text-[black]' : '' }}"
+                        href="{{ route('donation.create') }}">
                         <i class="fa-solid fa-pen-to-square text-[2rem]"></i>
                         <span class="text-sm max-[1080px]:hidden">Cadastrar Doação</span>
                     </a>
@@ -39,8 +39,8 @@
                     </a>
                 </li>
                 <li title="Editar Doação">
-                    <a class="flex items-center p-2.5 gap-[15px] duration-[400ms] text-[black] hover:bg-[#79D1FF] hover:text-white"
-                        href="/">
+                    <a class="flex items-center p-2.5 gap-[15px] duration-[400ms] text-[black] hover:bg-[#79D1FF] hover:text-white {{ Route::is('donation.edit') ? 'bg-[#79D1FF] text-white hover:text-[black]' : '' }}"
+                        href="{{ route('donation.edit') }}">
                         <i class="fa-regular fa-pen-to-square text-[2rem]"></i>
                         <span class="text-sm max-[1080px]:hidden">Editar Doação</span>
                     </a>
@@ -74,8 +74,8 @@
                     </a>
                 </li>
                 <li title="Agenda">
-                    <a class="flex items-center p-2.5 gap-[15px] duration-[400ms] text-[black] hover:bg-[#79D1FF] hover:text-white {{ Route::is('donor.agenda') ? 'bg-[#79D1FF] text-white hover:text-[black]' : '' }}"
-                        href="{{ route('donor.agenda') }}">
+                    <a class="flex items-center p-2.5 gap-[15px] duration-[400ms] text-[black] hover:bg-[#79D1FF] hover:text-white {{ Route::is('agenda.agenda') ? 'bg-[#79D1FF] text-white hover:text-[black]' : '' }}"
+                        href="{{ route('agenda.agenda') }}">
                         <i class="fa-solid fa-calendar-days text-[2rem]"></i>
                         <span class="text-sm max-[1080px]:hidden">Agenda</span>
                     </a>
@@ -92,7 +92,8 @@
                 </li>
             </ul>
         </nav>
-        <main class="relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin max-[1080px]:left-[70px] duration-[400ms]">
+        <main
+            class="relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin max-[1080px]:left-[70px] duration-[400ms]">
             @yield('content')
         </main>
     </div>

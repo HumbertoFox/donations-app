@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DonorController extends Controller
+class DonationController extends Controller
 {
     public function create()
     {
-        return view('donors.create');
+        return view('donations.create');
     }
 
     public function store()
     {
-        return view('donors.store');
+        return view('donations.store');
     }
 
     public function edit()
     {
-        return view('donors.edit');
+        return view('donations.edit');
     }
 }
