@@ -1,1 +1,0 @@
-<img src="{{ URL::asset('images/LOGO_BFN.png') }}" width="150" alt="Logo BetoFoxNet_Info">

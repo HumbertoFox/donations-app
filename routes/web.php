@@ -1,17 +1,27 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\ConfirmCollectionController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ScheduleCollectionController;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -19,15 +29,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('agenda/agenda', [AgendaController::class, 'agenda'])->name('agenda.agenda');
+    Route::get('/agenda', [AgendaController::class, 'show'])->name('menu.agenda');
 
-    Route::get('/donor/create', [DonorController::class, 'create'])->name('donor.create');
-    Route::get('/donor/edit', [DonorController::class, 'edit'])->name('donor.edit');
-    Route::get('/donor', [DonorController::class, 'store'])->name('donor.store');
+    Route::get('/registerdonor', [DonorController::class, 'register'])->name('menu.registerdonor');
+    Route::get('/editdonor', [DonorController::class, 'edit'])->name('menu.editdonor');
 
-    Route::get('/donation/create', [DonationController::class, 'create'])->name('donation.create');
-    Route::get('/donation/edit', [DonationController::class, 'edit'])->name('donation.edit');
-    Route::get('/donation', [DonationController::class, 'store'])->name('donation.store');
+    Route::get('/registerdonation', [DonationController::class, 'register'])->name('menu.registerdonation');
+    Route::get('/editdonation', [DonationController::class, 'edit'])->name('menu.editdonation');
+
+    Route::get('/report', [ReportController::class, 'show'])->name('menu.report');
+
+    Route::get('/schedulecollection', [ScheduleCollectionController::class, 'register'])->name('menu.schedulecollection');
+
+    Route::get('/confirmcollection', [ConfirmCollectionController::class, 'register'])->name('menu.confirmcollection');
 });
 
 require __DIR__ . '/auth.php';

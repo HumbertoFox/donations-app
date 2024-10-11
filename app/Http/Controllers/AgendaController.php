@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AgendaController extends Controller
 {
-    public function agenda()
+    public function show()
     {
-        return view('agenda.agenda');
+        return Inertia::render('Menu/Agenda');
     }
 }

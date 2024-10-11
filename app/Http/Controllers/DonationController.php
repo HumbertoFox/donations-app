@@ -3,21 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DonationController extends Controller
 {
-    public function create()
+    public function register()
     {
-        return view('donations.create');
+        return Inertia::render('Menu/RegisterDonation');
     }
-
-    public function store()
-    {
-        return view('donations.store');
-    }
-
+    
     public function edit()
     {
-        return view('donations.edit');
+        return Inertia::render('Menu/EditDonation');
     }
 }
