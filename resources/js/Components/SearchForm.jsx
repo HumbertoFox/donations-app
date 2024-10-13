@@ -12,8 +12,8 @@ export default function SearchForm({ point, legend, labelText, valueButton }) {
     };
 
     return (
-        <form className='p-1 w-[280px] text-sm' onSubmit={submit}>
-            <fieldset className='flex flex-col gap-[5px]'>
+        <form className='p-1 w-[280px] text-sm duration-[400ms]' onSubmit={submit}>
+            <fieldset className='flex flex-col gap-[5px] duration-[400ms]'>
                 <legend className='mx-auto py-1 duration-[400ms] drop-shadow-[1px_1px_0.5px_#AAF998]'>{legend}</legend>
                 <label className='flex flex-col' htmlFor="donorcodephone">{labelText}
                     <input

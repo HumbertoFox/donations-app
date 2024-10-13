@@ -6,7 +6,7 @@ const CustomToolbar = ({ onView, label, onNavigate }) => (
       <button type='button' onClick={() => onNavigate('NEXT')}>Avançar</button>
     </div>
     <div className='rbc-toolbar-label'>
-      <h2>{label}</h2>
+      <h2 className='font-bold capitalize text-xl'>{label}</h2>
     </div>
     <div className='rbc-btn-group'>
       <button type='button' onClick={() => onView('day')}>Dia</button>
@@ -16,4 +16,5 @@ const CustomToolbar = ({ onView, label, onNavigate }) => (
     </div>
   </div>
 );
+
 export default CustomToolbar;

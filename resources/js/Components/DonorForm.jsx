@@ -28,7 +28,7 @@ export default function DonorForm({ point, valueButton }) {
 
     return (
         <form className='p-1 w-[280px] text-sm' onSubmit={submit}>
-            <fieldset className='flex flex-col gap-[5px]' disabled={valueButton ? false : true}>
+            <fieldset className='flex flex-col gap-[5px] duration-[400ms]' disabled={valueButton ? false : true}>
                 <legend className='mx-auto py-1 duration-[400ms] drop-shadow-[1px_1px_0.5px_#AAF998]'>Informações do Doador</legend>
 
                 {valueButton !== 'Cadastrar' && (
@@ -278,7 +278,7 @@ export default function DonorForm({ point, valueButton }) {
 
             </fieldset>
             {valueButton && (
-                <div className='flex justify-around py-4'>
+                <div className='flex justify-around py-4 duration-[400ms]'>
                     {valueButton === 'Cadastrar' && (
                         <PrimaryButton title='Cadastrar e Ir para Doação' disabled={processing}>
                             Cadastrar Ir
