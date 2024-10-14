@@ -4,9 +4,12 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\ConfirmCollectionController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonorController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\HelperController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ScheduleCollectionController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +45,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/schedulecollection', [ScheduleCollectionController::class, 'register'])->name('menu.schedulecollection');
 
     Route::get('/confirmcollection', [ConfirmCollectionController::class, 'register'])->name('menu.confirmcollection');
+
+    Route::get('/registervehicle', [VehicleController::class, 'register'])->name('vehicle.registervehicle');
+    Route::get('/editvehicle', [VehicleController::class, 'edit'])->name('vehicle.editvehicle');
+
+    Route::get('/registerdriver', [DriverController::class, 'register'])->name('driver.registerdriver');
+    Route::get('/editdriver', [DriverController::class, 'edit'])->name('driver.editdriver');
+
+    Route::get('/registerhelper', [HelperController::class, 'register'])->name('helper.registerhelper');
+    Route::get('/edithelper', [HelperController::class, 'edit'])->name('helper.edithelper');
 });
 
 require __DIR__ . '/auth.php';

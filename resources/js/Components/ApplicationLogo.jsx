@@ -5,7 +5,7 @@ export default function ApplicationLogo(props) {
         <img
             {...props}
             src={LogobetofoxNet}
-            alt="Log BetoFoxNet_Info"
+            alt="Logo BetoFoxNet_Info"
         />
     );
 }
