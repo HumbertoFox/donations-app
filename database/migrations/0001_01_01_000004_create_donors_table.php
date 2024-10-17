@@ -14,14 +14,17 @@ return new class extends Migration
         Schema::create('donors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
-            $table->string('cnpj');
-            $table->integer('address_id');
-            $table->integer('user_id');
+            $table->string('phone')->unique();
+            $table->string('cnpj')->nullable();
+            $table->foreignId('address_id')->constrained('addresses');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
+            $table->softDeletes();
+            
+            $table->foreign('phone')->references('phone')->on('phones');
+            $table->foreign('cnpj')->references('cnpj')->on('cnpjs');
         });
     }
-
     /**
      * Reverse the migrations.
      */

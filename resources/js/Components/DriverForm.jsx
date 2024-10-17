@@ -9,19 +9,19 @@ export default function DriverForm({ point, valueButton }) {
         name: '',
         cpf: '',
         cnh: '',
-        dateofbirth: '',
+        birthdate: '',
         phone: '',
         email: '',
         zipcode: '',
         street: '',
         district: '',
         city: '',
-        numresidence: '',
-        typeresidence: 'house',
+        number_residence: '',
+        type_residence: 'house',
         building: '',
         block: '',
         livingapartmentroom: '',
-        referencepoint: ''
+        reference_point: ''
     });
 
     const submit = (e) => {
@@ -83,20 +83,20 @@ export default function DriverForm({ point, valueButton }) {
             </div>
 
             <div className='mt-4'>
-                <InputLabel htmlFor='dateofbirth' value='Data de Nascimento' />
+                <InputLabel htmlFor='birthdate' value='Data de Nascimento' />
 
                 <TextInput
-                    id='dateofbirth'
-                    name='dateofbirth'
+                    id='birthdate'
+                    name='birthdate'
                     type={'date'}
-                    value={data.dateofbirth}
+                    value={data.birthdate}
                     className='mt-1 block w-full'
-                    autoComplete='dateofbirth'
-                    onChange={(e) => setData('dateofbirth', e.target.value)}
+                    autoComplete='birthdate'
+                    onChange={(e) => setData('birthdate', e.target.value)}
                     required
                 />
 
-                <InputError message={errors.dateofbirth} className='mt-2' />
+                <InputError message={errors.birthdate} className='mt-2' />
             </div>
 
             <div className='mt-4'>
@@ -203,10 +203,10 @@ export default function DriverForm({ point, valueButton }) {
                     <input
                         className='border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 cursor-pointer'
                         id='house'
-                        name='typeresidence'
+                        name='type_residence'
                         type='radio'
                         value='house'
-                        onChange={e => setData('typeresidence', e.target.value)}
+                        onChange={e => setData('type_residence', e.target.value)}
                         defaultChecked
                     />
                     <InputLabel className='cursor-pointer' htmlFor='house' value='Casa' />
@@ -215,32 +215,32 @@ export default function DriverForm({ point, valueButton }) {
                     <input
                         className='border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 cursor-pointer'
                         id='buildings'
-                        name='typeresidence'
+                        name='type_residence'
                         type='radio'
                         value='buildings'
-                        onChange={e => setData('typeresidence', e.target.value)}
+                        onChange={e => setData('type_residence', e.target.value)}
                     />
                     <InputLabel className='cursor-pointer' htmlFor='buildings' value='Edifício' />
                 </div>
             </div>
 
-            <div className='mt-4'>
-                <InputLabel htmlFor='numresidence' value='Nº Casa/Edifício' />
+            <div>
+                <InputLabel htmlFor='number_residence' value='Nº Casa/Edifício' />
 
                 <TextInput
-                    id='numresidence'
-                    name='numresidence'
-                    value={data.numresidence}
+                    id='number_residence'
+                    name='number_residence'
+                    value={data.number_residence}
                     className='mt-1 block w-full'
-                    autoComplete='numresidence'
-                    onChange={(e) => setData('numresidence', e.target.value)}
+                    autoComplete='number_residence'
+                    onChange={(e) => setData('number_residence', e.target.value)}
                     required
                 />
 
-                <InputError message={errors.numresidence} className='mt-2' />
+                <InputError message={errors.number_residence} className='mt-2' />
             </div>
 
-            {data.typeresidence === 'buildings' && (
+            {data.type_residence === 'buildings' && (
                 <div>
                     <div className='mt-4'>
                         <InputLabel htmlFor='building' value='Nome do Edifício' />
@@ -293,19 +293,19 @@ export default function DriverForm({ point, valueButton }) {
             )}
 
             <div className='mt-4'>
-                <InputLabel htmlFor='referencepoint' value='Ponto de Referência' />
+                <InputLabel htmlFor='reference_point' value='Ponto de Referência' />
 
                 <textarea
-                    id='referencepoint'
-                    name='referencepoint'
-                    value={data.referencepoint}
+                    id='reference_point'
+                    name='reference_point'
+                    value={data.reference_point}
                     className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500'
-                    autoComplete='referencepoint'
-                    onChange={(e) => setData('referencepoint', e.target.value)}
+                    autoComplete='reference_point'
+                    onChange={(e) => setData('reference_point', e.target.value)}
                     required
                 />
 
-                <InputError message={errors.referencepoint} className='mt-2' />
+                <InputError message={errors.reference_point} className='mt-2' />
             </div>
 
             <div className='flex justify-around pt-4 sm:pt-8 duration-[400ms]'>

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
+use App\Models\Cpf;
+use App\Models\Phone;
 use App\Models\User;
+use App\Models\Zipcode;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +26,6 @@ class RegisteredUserController extends Controller
     {
         return Inertia::render('Auth/Register');
     }
-
     /**
      * Handle an incoming registration request.
      *
@@ -30,17 +33,71 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|string|max:255',
+                'cpf' => 'required|string|max:11|unique:' . User::class,
+                'birthdate' => 'required|date',
+                'phone' => 'required|string|max:15|unique:' . User::class,
+                'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
+                'zipcode' => 'required|string|max:9',
+                'city' => 'required|string|max:255',
+                'district' => 'nullable|string|max:255',
+                'street' => 'nullable|string|max:255',
+                'number_residence' => 'required|string|max:50',
+                'type_residence' => 'nullable|string|max:255',
+                'building' => 'nullable|string|max:255',
+                'block' => 'nullable|string|max:255',
+                'livingapartmentroom' => 'nullable|string|max:255',
+                'reference_point' => 'nullable|string|max:255',
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]
+        );
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $cpf = Cpf::firstOrCreate(
+            ['cpf' => $request->cpf],
+            [
+                'name' => $request->name,
+                'birthdate' => $request->birthdate
+            ]
+        );
+
+        $zipcode = Zipcode::firstOrCreate(
+            ['zipcode' => $request->zipcode],
+            [
+                'city' => $request->city,
+                'district' => $request->district,
+                'street' => $request->street
+            ]
+        );
+
+        $address = Address::firstOrCreate(
+            [
+                'zipcode' => $zipcode->zipcode,
+                'number_residence' => $request->number_residence,
+                'type_residence' => $request->type_residence,
+                'reference_point' => $request->reference_point,
+                'building' => $request->building,
+                'block' => $request->block,
+                'livingapartmentroom' => $request->livingapartmentroom
+            ]
+        );
+
+        $phone = Phone::firstOrCreate(
+            ['phone' => $request->phone],
+            ['email' => $request->email]
+        );
+
+        $user = User::create(
+            [
+                'name' => $request->name,
+                'cpf' => $cpf->cpf,
+                'address_id' => $address->id,
+                'email' => $request->email,
+                'phone' => $phone->phone,
+                'password' => Hash::make($request->password),
+            ]
+        );
 
         event(new Registered($user));
 

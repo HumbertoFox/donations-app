@@ -6,19 +6,20 @@ export default function DonorForm({ point, valueButton }) {
         donorcode: '',
         name: '',
         phone: '',
-        contact1: '',
-        contact2: '',
+        contact: '',
+        contact_old: '',
         zipcode: '',
         street: '',
         district: '',
         city: '',
-        typeresidence: 'house',
-        numresidence: '',
+        type_residence: 'house',
+        number_residence: '',
         cnpj: '',
         corporatename: '',
         building: '',
         block: '',
-        livingapartmentroom: ''
+        livingapartmentroom: '',
+        reference_point: ''
     });
 
     function submit(e) {
@@ -73,30 +74,30 @@ export default function DonorForm({ point, valueButton }) {
                     {errors.phone && <div>{errors.phone}</div>}
                 </label>
 
-                <label className='flex flex-col' htmlFor='contact1'>Contato/Ramal
+                <label className='flex flex-col' htmlFor='contact'>Contato/Ramal
                     <input
-                        id='contact1'
+                        id='contact'
                         className='rounded py-0.5'
                         type='tel'
-                        value={data.contact1}
-                        onChange={e => setData('contact1', e.target.value)}
+                        value={data.contact}
+                        onChange={e => setData('contact', e.target.value)}
                         required
-                        autoComplete='contact1'
+                        autoComplete='contact'
                     />
-                    {errors.contact1 && <div>{errors.contact1}</div>}
+                    {errors.contact && <div>{errors.contact}</div>}
                 </label>
 
-                <label className='flex flex-col' htmlFor='contact2'>Contato do Responsável
+                <label className='flex flex-col' htmlFor='contact_old'>Contato do Responsável
                     <input
-                        id='contact2'
+                        id='contact_old'
                         className='rounded py-0.5'
                         type='tel'
-                        value={data.contact2}
-                        onChange={e => setData('contact2', e.target.value)}
+                        value={data.contact_old}
+                        onChange={e => setData('contact_old', e.target.value)}
                         required
-                        autoComplete='contact2'
+                        autoComplete='contact_old'
                     />
-                    {errors.contact2 && <div>{errors.contact2}</div>}
+                    {errors.contact_old && <div>{errors.contact_old}</div>}
                 </label>
 
                 <label className='flex flex-col' htmlFor='zipcode'>CEP
@@ -155,11 +156,11 @@ export default function DonorForm({ point, valueButton }) {
                     <label className={valueButton ? 'flex items-center cursor-pointer' : 'flex items-center cursor-default'} htmlFor='house'>
                         <input
                             id='house'
-                            name='typeresidence'
+                            name='type_residence'
                             className='mr-1.5'
                             type='radio'
                             value='house'
-                            onChange={e => setData('typeresidence', e.target.value)}
+                            onChange={e => setData('type_residence', e.target.value)}
                             defaultChecked
                         />
                         Casa
@@ -168,11 +169,11 @@ export default function DonorForm({ point, valueButton }) {
                     <label className={valueButton ? 'flex items-center cursor-pointer' : 'flex items-center cursor-default'} htmlFor='buildings'>
                         <input
                             id='buildings'
-                            name='typeresidence'
+                            name='type_residence'
                             className='mr-1.5'
                             type='radio'
                             value='buildings'
-                            onChange={e => setData('typeresidence', e.target.value)}
+                            onChange={e => setData('type_residence', e.target.value)}
                         />
                         Edifício
                     </label>
@@ -180,30 +181,30 @@ export default function DonorForm({ point, valueButton }) {
                     <label className={valueButton ? 'flex items-center cursor-pointer' : 'flex items-center cursor-default'} htmlFor='enterprise'>
                         <input
                             id='enterprise'
-                            name='typeresidence'
+                            name='type_residence'
                             className='mr-1.5'
                             type='radio'
                             value='enterprise'
-                            onChange={e => setData('typeresidence', e.target.value)}
+                            onChange={e => setData('type_residence', e.target.value)}
                         />
                         Empresa
                     </label>
                 </div>
 
-                <label className='flex flex-col' htmlFor='numresidence'>Nº Casa/Edifício
+                <label className='flex flex-col' htmlFor='number_residence'>Nº Casa/Edifício
                     <input
-                        id='numresidence'
+                        id='number_residence'
                         className='rounded py-0.5'
                         type='text'
-                        value={data.numresidence}
-                        onChange={e => setData('numresidence', e.target.value)}
+                        value={data.number_residence}
+                        onChange={e => setData('number_residence', e.target.value)}
                         required
-                        autoComplete='numresidence'
+                        autoComplete='number_residence'
                     />
-                    {errors.numresidence && <div>{errors.numresidence}</div>}
+                    {errors.number_residence && <div>{errors.number_residence}</div>}
                 </label>
 
-                {data.typeresidence === 'enterprise' && (
+                {data.type_residence === 'enterprise' && (
                     <div>
                         <label className='flex flex-col' htmlFor='cnpj'>CNPJ
                             <input
@@ -233,7 +234,7 @@ export default function DonorForm({ point, valueButton }) {
                     </div>
                 )}
 
-                {data.typeresidence !== 'house' && (
+                {data.type_residence !== 'house' && (
                     <div>
                         <label className='flex flex-col' htmlFor='building'>Nome do Edifício
                             <input
@@ -275,6 +276,18 @@ export default function DonorForm({ point, valueButton }) {
                         </label>
                     </div>
                 )}
+
+                <label className='flex flex-col' htmlFor='reference_point'>Ponto de Referência
+                    <textarea
+                        id='reference_point'
+                        className='rounded py-0.5'
+                        value={data.reference_point}
+                        onChange={e => setData('reference_point', e.target.value)}
+                        required
+                        autoComplete='reference_point'
+                    />
+                    {errors.reference_point && <div>{errors.reference_point}</div>}
+                </label>
 
             </fieldset>
             {valueButton && (

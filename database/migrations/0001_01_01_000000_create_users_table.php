@@ -11,24 +11,65 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('telephones', function (Blueprint $table) {
-            $table->string('phone')->primary();
-            $table->string('contacto')->nullable();
-            $table->string('contactoold')->nullable();
+        Schema::create('cpfs', function (Blueprint $table) {
+            $table->id();
+            $table->string('cpf')->primary();
+            $table->string('name');
+            $table->date('birthdate');
             $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('phones', function (Blueprint $table) {
+            $table->id();
+            $table->string('phone')->primary();
+            $table->string('contact')->nullable();
+            $table->string('contact_old')->nullable();
+            $table->string('email')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('zipcodes', function (Blueprint $table) {
+            $table->id();
+            $table->string('zipcode')->primary();
+            $table->string('city');
+            $table->string('district');
+            $table->string('street');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('addresses', function (Blueprint $table) {
+            $table->id();
+            $table->string('zipcode');
+            $table->string('type_residence')->nullable();
+            $table->string('number_residence');
+            $table->string('building')->nullable();
+            $table->string('block')->nullable();
+            $table->string('livingapartmentroom')->nullable();
+            $table->string('reference_point')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('zipcode')->references('zipcode')->on('zipcodes');
         });
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('cpf')->unique();
+            $table->foreignId('address_id')->constrained('addresses');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->softDeletes();
             $table->timestamps();
-            $table->foreign('phone')->references('phone')->on('telephones')->onDelete('cascade');
+            $table->softDeletes();
+
+            $table->foreign('cpf')->references('cpf')->on('cpfs');
+            $table->foreign('phone')->references('phone')->on('phones');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -46,14 +87,16 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
     }
-
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
+        Schema::dropIfExists('cpfs');
+        Schema::dropIfExists('phones');
+        Schema::dropIfExists('zipcodes');
+        Schema::dropIfExists('addresses');
         Schema::dropIfExists('users');
-        Schema::dropIfExists('telephones');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

@@ -16,9 +16,14 @@ class ProfileController extends Controller
 {
     public function edit(Request $request): Response
     {
+        $user = $request->user();
+        $address = DB::table('addresses')->where('id', $user->address_id)->first();
+        $zipcode = DB::table('zipcodes')->where('zipcode', $address->zipcode)->first();
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status')
+            'status' => session('status'),
+            'address' => $address,
+            'zipcode' => $zipcode
         ]);
     }
 
@@ -27,13 +32,13 @@ class ProfileController extends Controller
         $request->user()->fill($request->validated());
 
         $phone = $request->input('phone');
-        $telephoneExists = DB::table('telephones')->where('phone', $phone)->exists();
+        $existingPhone = DB::table('phones')->where('phone', $phone)->exists();
 
-        if (!$telephoneExists) {
-            DB::table('telephones')->insert([
+        if (!$existingPhone) {
+            DB::table('phones')->insert([
                 'phone' => $phone,
-                'contacto' => null,
-                'contactoold' => null,
+                'contact' => null,
+                'contact_old' => null,
                 'created_at' => now(),
                 'updated_at' => now()
             ]);
