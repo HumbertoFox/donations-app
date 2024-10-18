@@ -61,4 +61,19 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Phone::class);
     }
+
+    public function driver(): BelongsTo
+    {
+        return $this->belongsTo(Driver::class, 'user_id');
+    }
+
+    public function helper(): BelongsTo
+    {
+        return $this->belongsTo(Helper::class, 'user_id');
+    }
+
+    public function vehicle(): BelongsTo
+    {
+        return $this->belongsTo(Vehicle::class, 'user_id');
+    }
 }

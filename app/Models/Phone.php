@@ -28,4 +28,14 @@ class Phone extends Model
     {
         return $this->hasOne(User::class, 'phone_id');
     }
+
+    public function driver(): HasOne
+    {
+        return $this->hasOne(Driver::class, 'phone_id');
+    }
+
+    public function helper(): BelongsTo
+    {
+        return $this->belongsTo(Helper::class, 'phone_id');
+    }
 }

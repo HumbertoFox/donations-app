@@ -7,28 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cpf extends Model
+class Vehicle extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'cpf',
-        'name',
-        'birthdate'
+        'chassi',
+        'plate',
+        'model',
+        'km',
+        'user_id'
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'cpf_id');
-    }
-
-    public function cnh(): BelongsTo
-    {
-        return $this->belongsTo(Cnh::class, 'cpf_id');
-    }
-
-    public function helper(): BelongsTo
-    {
-        return $this->belongsTo(Helper::class, 'cpf_id');
+        return $this->belongsTo(User::class);
     }
 }

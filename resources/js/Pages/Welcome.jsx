@@ -34,7 +34,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </nav>
                 </header>
 
-                <h1 className="text-center text-3xl font-bold">Bem vindo ao Programa de Gestão de Doações</h1>
+                <h1 className="text-center text-3xl font-bold">Bem-vindo ao Programa de Gestão de Doações</h1>
 
                 <main className="w-full min-h-full p-[10px] text-center">
                     <div className="flex justify-between">
