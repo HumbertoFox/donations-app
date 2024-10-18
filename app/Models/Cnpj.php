@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cnpj extends Model
@@ -16,8 +16,8 @@ class Cnpj extends Model
         'corporatename'
     ];
 
-    public function donors(): HasMany
+    public function donor(): BelongsTo
     {
-        return $this->hasMany(Donor::class);
+        return $this->belongsTo(Donor::class, 'cnpj_id');
     }
 }

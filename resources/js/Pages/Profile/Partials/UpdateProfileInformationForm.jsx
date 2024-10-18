@@ -11,25 +11,22 @@ export default function UpdateProfileInformation({
     className = '',
 }) {
     const user = usePage().props.auth.user;
-    const address = usePage().props.address;
-    const zipcode = usePage().props.zipcode;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             name: user.name,
-            cpf: user.cpf,
-            phone: user.phone,
+            phone: user.phone.phone,
             email: user.email,
-            zipcode: address.zipcode,
-            street: zipcode.street,
-            district: zipcode.district,
-            city: zipcode.city,
-            number_residence: address.number_residence,
-            type_residence: address.type_residence,
-            building: address.building,
-            block: address.block,
-            livingapartmentroom: address.livingapartmentroom,
-            reference_point: address.reference_point
+            zipcode: user.address.zipcode.zipcode,
+            street: user.address.zipcode.street,
+            district: user.address.zipcode.district,
+            city: user.address.zipcode.city,
+            number_residence: user.address.number_residence,
+            type_residence: user.address.type_residence,
+            building: user.address.building,
+            block: user.address.block,
+            livingapartmentroom: user.address.livingapartmentroom,
+            reference_point: user.address.reference_point
         });
 
     const submit = (e) => {
@@ -67,30 +64,13 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.name} />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="cpf" value="CPF" />
-
-                    <TextInput
-                        id="cpf"
-                        type="number"
-                        name="cpf"
-                        value={data.cpf}
-                        className="mt-1 block w-full cursor-not-allowed"
-                        autoComplete="cpf"
-                        onChange={(e) => setData('cpf', e.target.value)}
-                        required
-                        disabled
-                    />
-
-                    <InputError message={errors.cpf} className="mt-2" />
-                </div>
-
                 <div>
                     <InputLabel htmlFor="phone" value="Phone" />
 
                     <TextInput
                         id="phone"
                         name="phone"
+                        type="tel"
                         className="mt-1 block w-full"
                         value={data.phone}
                         onChange={(e) => setData('phone', e.target.value)}

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -18,13 +19,13 @@ class Phone extends Model
         'email'
     ];
 
-    public function donors(): HasOne
+    public function donor(): BelongsTo
     {
-        return $this->hasOne(Donor::class);
+        return $this->belongsTo(Donor::class, 'phone_id');
     }
 
-    public function users(): HasOne
+    public function user(): HasOne
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'phone_id');
     }
 }

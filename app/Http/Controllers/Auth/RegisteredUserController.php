@@ -36,19 +36,19 @@ class RegisteredUserController extends Controller
         $request->validate(
             [
                 'name' => 'required|string|max:255',
-                'cpf' => 'required|string|max:11|unique:' . User::class,
+                'cpf' => 'required|string|max:11|unique:cpfs,cpf',
                 'birthdate' => 'required|date',
-                'phone' => 'required|string|max:15|unique:' . User::class,
+                'phone' => 'required|string|max:15|unique:phones,phone',
                 'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
                 'zipcode' => 'required|string|max:9',
                 'city' => 'required|string|max:255',
-                'district' => 'nullable|string|max:255',
-                'street' => 'nullable|string|max:255',
+                'district' => 'required|string|max:255',
+                'street' => 'required|string|max:255',
                 'number_residence' => 'required|string|max:50',
-                'type_residence' => 'nullable|string|max:255',
+                'type_residence' => 'required|string|max:10',
                 'building' => 'nullable|string|max:255',
-                'block' => 'nullable|string|max:255',
-                'livingapartmentroom' => 'nullable|string|max:255',
+                'block' => 'nullable|string|max:50',
+                'livingapartmentroom' => 'nullable|string|max:50',
                 'reference_point' => 'nullable|string|max:255',
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]
@@ -73,7 +73,7 @@ class RegisteredUserController extends Controller
 
         $address = Address::firstOrCreate(
             [
-                'zipcode' => $zipcode->zipcode,
+                'zipcode_id' => $zipcode->id,
                 'number_residence' => $request->number_residence,
                 'type_residence' => $request->type_residence,
                 'reference_point' => $request->reference_point,
@@ -91,10 +91,10 @@ class RegisteredUserController extends Controller
         $user = User::create(
             [
                 'name' => $request->name,
-                'cpf' => $cpf->cpf,
+                'cpf_id' => $cpf->id,
                 'address_id' => $address->id,
                 'email' => $request->email,
-                'phone' => $phone->phone,
+                'phone_id' => $phone->id,
                 'password' => Hash::make($request->password),
             ]
         );

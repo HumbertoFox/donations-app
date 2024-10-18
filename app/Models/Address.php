@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,7 +13,7 @@ class Address extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'zipcode',
+        'zipcode_id',
         'type_residence',
         'number_residence',
         'building',
@@ -22,18 +22,18 @@ class Address extends Model
         'reference_point'
     ];
 
-    public function zipcodes(): HasOne
+    public function zipcode(): BelongsTo
     {
-        return $this->hasOne(Zipcode::class);
+        return $this->belongsTo(Zipcode::class, 'zipcode_id');
     }
 
-    public function donors(): HasMany
+    public function donor(): BelongsTo
     {
-        return $this->hasMany(Donor::class);
+        return $this->belongsTo(Donor::class, 'address_id');
     }
 
-    public function users(): HasMany
+    public function user(): HasOne
     {
-        return $this->hasMany(User::class);
+        return $this->hasOne(User::class, 'address_id');
     }
 }

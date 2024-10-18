@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cnpjs', function (Blueprint $table) {
             $table->id();
-            $table->string('cnpj')->primary();
+            $table->string('cnpj');
             $table->string('corporatename')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -13,24 +13,24 @@ class Donor extends Model
 
     protected $fillable = [
         'name',
-        'phone',
-        'cnpj',
+        'phone_id',
+        'cnpj_id',
         'address_id',
         'user_id'
     ];
 
-    public function phones(): HasOne
+    public function phone(): HasOne
     {
-        return $this->hasOne(Phone::class);
+        return $this->hasOne(Phone::class, 'id', 'phone_id');
     }
 
-    public function addresses(): HasOne
+    public function address(): HasOne
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class, 'id', 'address_id');
     }
 
-    public function cnpjs(): HasOne
+    public function cnpj(): HasOne
     {
-        return $this->hasOne(Cnpj::class);
+        return $this->hasOne(Cnpj::class, 'id', 'cnpj_id');
     }
 }

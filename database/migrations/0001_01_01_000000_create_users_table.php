@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cpfs', function (Blueprint $table) {
             $table->id();
-            $table->string('cpf')->primary();
+            $table->string('cpf')->unique();
             $table->string('name');
             $table->date('birthdate');
             $table->timestamps();
@@ -22,7 +22,7 @@ return new class extends Migration
 
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
-            $table->string('phone')->primary();
+            $table->string('phone')->unique();
             $table->string('contact')->nullable();
             $table->string('contact_old')->nullable();
             $table->string('email')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
 
         Schema::create('zipcodes', function (Blueprint $table) {
             $table->id();
-            $table->string('zipcode')->primary();
+            $table->string('zipcode')->unique();
             $table->string('city');
             $table->string('district');
             $table->string('street');
@@ -42,34 +42,29 @@ return new class extends Migration
 
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('zipcode');
+            $table->foreignId('zipcode_id')->constrained('zipcodes');
             $table->string('type_residence')->nullable();
-            $table->string('number_residence');
+            $table->string('number_residence')->unique();
             $table->string('building')->nullable();
             $table->string('block')->nullable();
             $table->string('livingapartmentroom')->nullable();
             $table->string('reference_point')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('zipcode')->references('zipcode')->on('zipcodes');
         });
 
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('cpf')->unique();
+            $table->foreignId('cpf_id')->constrained('cpfs');
             $table->foreignId('address_id')->constrained('addresses');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone')->unique();
+            $table->foreignId('phone_id')->constrained('phones');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('cpf')->references('cpf')->on('cpfs');
-            $table->foreign('phone')->references('phone')->on('phones');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

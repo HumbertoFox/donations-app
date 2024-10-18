@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -20,10 +19,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'cpf',
+        'cpf_id',
         'address_id',
         'email',
-        'phone',
+        'phone_id',
         'password'
     ];
     /**
@@ -48,18 +47,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function addresses(): HasOne
+    public function address(): BelongsTo
     {
-        return $this->hasOne(Address::class);
+        return $this->belongsTo(Address::class);
     }
 
-    public function cpfs(): HasOne
+    public function cpf(): BelongsTo
     {
-        return $this->hasOne(Cpf::class);
+        return $this->belongsTo(Cpf::class);
     }
 
-    public function phones(): HasOne
+    public function phone(): BelongsTo
     {
-        return $this->hasOne(Phone::class);
+        return $this->belongsTo(Phone::class);
     }
 }
