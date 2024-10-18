@@ -3,7 +3,9 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
+import { getCheckedCpf } from '@/utils/cpfValidation';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useRef } from 'react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -26,8 +28,18 @@ export default function Register() {
         password_confirmation: '',
     });
 
+    const cpfRef = useRef(null);
+
     const submit = (e) => {
         e.preventDefault();
+
+        if (!getCheckedCpf(data.cpf)) {
+            errors.cpf = 'CPF Inválido.';
+            if (cpfRef.current) {
+                cpfRef.current.focus();
+            }
+            return;
+        };
 
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation'),
@@ -68,6 +80,7 @@ export default function Register() {
                         autoComplete="cpf"
                         onChange={(e) => setData('cpf', e.target.value)}
                         required
+                        ref={cpfRef}
                     />
 
                     <InputError message={errors.cpf} className="mt-2" />
