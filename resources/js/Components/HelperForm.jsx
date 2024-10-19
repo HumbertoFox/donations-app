@@ -25,7 +25,11 @@ export default function HelperForm({ point, valueButton }) {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(data);
+        post(route(point), {
+            onSuccess: () => {
+                reset();
+            }
+        });
     };
 
     return (

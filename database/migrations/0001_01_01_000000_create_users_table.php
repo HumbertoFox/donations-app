@@ -44,7 +44,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('zipcode_id')->constrained('zipcodes');
             $table->string('type_residence')->nullable();
-            $table->string('number_residence')->unique();
+            $table->string('number_residence');
             $table->string('building')->nullable();
             $table->string('block')->nullable();
             $table->string('livingapartmentroom')->nullable();

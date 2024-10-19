@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('helpers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('cpf_id')->constrained('cpfs');
+            $table->foreignId('phone_id')->constrained('phones');
+            $table->foreignId('address_id')->constrained('addresses');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

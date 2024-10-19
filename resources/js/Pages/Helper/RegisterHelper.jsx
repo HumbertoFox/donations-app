@@ -22,7 +22,7 @@ export default function RegisterHelper() {
                                 className='fa-solid fa-address-card text-[45px] text-[blue]'
                             />
                         </div>
-                        <HelperForm point={''} valueButton={'Cadastrar'} />
+                        <HelperForm point='helper.register' valueButton={'Cadastrar'} />
                     </div>
                 </div>
             </div>

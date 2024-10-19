@@ -52,7 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/registerdriver', [DriverController::class, 'register'])->name('driver.registerdriver');
     Route::get('/editdriver', [DriverController::class, 'edit'])->name('driver.editdriver');
 
-    Route::get('/registerhelper', [HelperController::class, 'register'])->name('helper.registerhelper');
+    Route::get('/registerhelper', [HelperController::class, 'create'])->name('helper.registerhelper');
+    Route::post('/helper', [HelperController::class, 'store'])->name('helper.register');
     Route::get('/edithelper', [HelperController::class, 'edit'])->name('helper.edithelper');
 });
 
