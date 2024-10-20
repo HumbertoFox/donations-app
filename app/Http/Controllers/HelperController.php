@@ -13,7 +13,7 @@ use Inertia\Inertia;
 
 class HelperController extends Controller
 {
-    public function create()
+    public function register()
     {
         return Inertia::render('Helper/RegisterHelper');
     }
@@ -23,10 +23,10 @@ class HelperController extends Controller
         $request->validate(
             [
                 'name' => 'required|string|max:255',
-                'cpf' => 'required|string|max:11|unique:cpfs,cpf',
+                'cpf' => 'required|string|max:11',
                 'birthdate' => 'required|date',
-                'phone' => 'required|string|max:15|unique:phones,phone',
-                'email' => 'required|string|lowercase|email|max:255|unique:phones,email',
+                'phone' => 'required|string|max:15',
+                'email' => 'required|string|lowercase|email|max:255',
                 'zipcode' => 'required|string|max:9',
                 'city' => 'required|string|max:255',
                 'district' => 'required|string|max:255',
@@ -84,7 +84,14 @@ class HelperController extends Controller
                 'user_id' => $userId
             ]
         );
+    }
 
+    public function index()
+    {
+        $helpers = Helper::with('cpf')->get();
+        return Inertia::render('Helper/Show', [
+            'helpers' => $helpers
+        ]);
     }
 
     public function edit()

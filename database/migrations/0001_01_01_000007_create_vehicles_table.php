@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('chassi')->unique();
             $table->string('plate')->unique();
-            $table->string('model');
             $table->string('km');
+            $table->string('model');
+            $table->string('Automaker');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();

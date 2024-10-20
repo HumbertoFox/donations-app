@@ -34,12 +34,12 @@ class Address extends Model
 
     public function user(): HasOne
     {
-        return $this->hasOne(User::class, 'address_id');
+        return $this->hasOne(User::class, 'id', 'address_id');
     }
 
     public function driver(): HasOne
     {
-        return $this->hasOne(Driver::class, 'address_id');
+        return $this->hasOne(Driver::class, 'id', 'address_id');
     }
 
     public function helper(): BelongsTo

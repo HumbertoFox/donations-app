@@ -7,6 +7,7 @@ import { useForm } from '@inertiajs/react';
 export default function VehicleForm({ point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         model: '',
+        Automaker: '',
         chassi: '',
         plate: '',
         km: ''
@@ -14,8 +15,12 @@ export default function VehicleForm({ point, valueButton }) {
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(data);
+        
+        post(route(point), {
+            onSuccess: () => reset()
+        });
     };
+
     return (
         <form className='max-w-xl' onSubmit={submit}>
             <div>
@@ -33,6 +38,22 @@ export default function VehicleForm({ point, valueButton }) {
                 />
 
                 <InputError message={errors.model} className='mt-2' />
+            </div>
+
+            <div className='mt-4'>
+                <InputLabel htmlFor='Automaker' value='Montadora' />
+
+                <TextInput
+                    id='Automaker'
+                    name='Automaker'
+                    value={data.Automaker}
+                    className='mt-1 block w-full'
+                    autoComplete='Automaker'
+                    onChange={(e) => setData('Automaker', e.target.value)}
+                    required
+                />
+
+                <InputError message={errors.Automaker} className='mt-2' />
             </div>
 
             <div className='mt-4'>

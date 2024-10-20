@@ -21,21 +21,21 @@ class Helper extends Model
 
     public function cpf(): HasOne
     {
-        return $this->hasOne(Cpf::class);
+        return $this->hasOne(Cpf::class, 'id', 'cpf_id');
     }
 
     public function phone(): HasOne
     {
-        return $this->hasOne(Phone::class);
+        return $this->hasOne(Phone::class, 'id', 'phone_id');
     }
 
     public function address(): HasOne
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class, 'id', 'address_id');
     }
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

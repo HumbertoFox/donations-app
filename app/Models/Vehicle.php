@@ -14,13 +14,14 @@ class Vehicle extends Model
     protected $fillable = [
         'chassi',
         'plate',
-        'model',
         'km',
+        'model',
+        'Automaker',
         'user_id'
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

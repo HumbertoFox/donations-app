@@ -40,21 +40,23 @@ Route::middleware('auth')->group(function () {
     Route::get('/registerdonation', [DonationController::class, 'register'])->name('menu.registerdonation');
     Route::get('/editdonation', [DonationController::class, 'edit'])->name('menu.editdonation');
 
-    Route::get('/report', [ReportController::class, 'show'])->name('menu.report');
+    Route::get('/report', [ReportController::class, 'index'])->name('menu.report');
 
     Route::get('/schedulecollection', [ScheduleCollectionController::class, 'register'])->name('menu.schedulecollection');
 
     Route::get('/confirmcollection', [ConfirmCollectionController::class, 'register'])->name('menu.confirmcollection');
 
     Route::get('/registervehicle', [VehicleController::class, 'register'])->name('vehicle.registervehicle');
-    Route::get('/editvehicle', [VehicleController::class, 'edit'])->name('vehicle.editvehicle');
+    Route::post('/vehicle/store', [VehicleController::class, 'store'])->name('vehicle.register');
+    Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicle.all');
 
     Route::get('/registerdriver', [DriverController::class, 'register'])->name('driver.registerdriver');
-    Route::get('/editdriver', [DriverController::class, 'edit'])->name('driver.editdriver');
+    Route::post('/driver/store', [DriverController::class, 'store'])->name('driver.register');
+    Route::get('/drivers', [DriverController::class, 'index'])->name('driver.all');
 
-    Route::get('/registerhelper', [HelperController::class, 'create'])->name('helper.registerhelper');
-    Route::post('/helper', [HelperController::class, 'store'])->name('helper.register');
-    Route::get('/edithelper', [HelperController::class, 'edit'])->name('helper.edithelper');
+    Route::get('/registerhelper', [HelperController::class, 'register'])->name('helper.registerhelper');
+    Route::post('/helper/store', [HelperController::class, 'store'])->name('helper.register');
+    Route::get('/helpers', [HelperController::class, 'index'])->name('helper.all');
 });
 
 require __DIR__ . '/auth.php';

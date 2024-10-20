@@ -12,7 +12,7 @@ export default function RegisterDriver() {
                 </h2>
             }
         >
-            <Head title='Veículo' />
+            <Head title='Motorista' />
 
             <div className='py-12'>
                 <div className='mx-auto max-w-xl space-y-6 sm:px-6 lg:px-8'>
@@ -22,7 +22,7 @@ export default function RegisterDriver() {
                                 className='fa-solid fa-address-card text-[45px] text-[blue]'
                             />
                         </div>
-                        <DriverForm point={''} valueButton={'Cadastrar'} />
+                        <DriverForm point={'driver.register'} valueButton={'Cadastrar'} />
                     </div>
                 </div>
             </div>

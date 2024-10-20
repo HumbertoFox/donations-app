@@ -34,15 +34,12 @@ export default function Register() {
         e.preventDefault();
 
         if (!getCheckedCpf(data.cpf)) {
-            errors.cpf = 'CPF Inválido.';
-            if (cpfRef.current) {
-                cpfRef.current.focus();
-            }
+            cpfRef.current.focus();
             return;
         };
 
         post(route('register'), {
-            onFinish: () => reset('password', 'password_confirmation'),
+            onFinish: () => reset('password', 'password_confirmation')
         });
     };
 
@@ -78,7 +75,15 @@ export default function Register() {
                         value={data.cpf}
                         className="mt-1 block w-full"
                         autoComplete="cpf"
-                        onChange={(e) => setData('cpf', e.target.value)}
+                        onChange={(e) => {
+                            const newCpf = e.target.value
+                            setData('cpf', newCpf);
+                            !getCheckedCpf(newCpf)
+                                ?
+                                errors.cpf = 'CPF Inválido!'
+                                :
+                                errors.cpf = null;
+                        }}
                         required
                         ref={cpfRef}
                     />

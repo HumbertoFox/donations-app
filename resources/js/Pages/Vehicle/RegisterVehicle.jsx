@@ -23,7 +23,7 @@ export default function RegisterVehicle() {
                                 className='fa-solid fa-truck-medical text-[45px] text-[blue]'
                             />
                         </div>
-                        <VehicleForm point={''} valueButton={'Cadastrar'} />
+                        <VehicleForm point={'vehicle.register'} valueButton={'Cadastrar'} />
                     </div>
                 </div>
             </div>

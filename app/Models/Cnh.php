@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cnh extends Model
@@ -16,9 +17,9 @@ class Cnh extends Model
         'cpf_id'
     ];
 
-    public function cpf(): BelongsTo
+    public function cpf(): HasOne
     {
-        return $this->belongsTo(Cpf::class);
+        return $this->hasOne(Cpf::class, 'id', 'cpf_id');
     }
 
     public function driver(): BelongsTo

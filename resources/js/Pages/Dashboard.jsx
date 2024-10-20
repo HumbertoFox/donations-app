@@ -38,7 +38,7 @@ export default function Dashboard() {
                                 <Icon className='fa-solid fa-truck-medical text-[95px] text-[green] duration-[400ms] hover:text-[blue]' />
                             </Link>
 
-                            <Link href={route('vehicle.editvehicle')} title='Editar Veículo'>
+                            <Link href={route('vehicle.all')} title='Veículos Cadastrados'>
                                 <Icon className='fa-solid fa-truck text-[95px] text-[green] duration-[400ms] hover:text-[orange]' />
                             </Link>
 
@@ -46,7 +46,7 @@ export default function Dashboard() {
                                 <Icon className='fa-solid fa-address-card text-[95px] text-[green] duration-[400ms] hover:text-[blue]' />
                             </Link>
 
-                            <Link href={route('driver.editdriver')} title='Editar Motorista'>
+                            <Link href={route('driver.all')} title='Motoristas Cadastrados'>
                                 <Icon className='fa-regular fa-address-card text-[95px] text-[green] duration-[400ms] hover:text-[orange]' />
                             </Link>
 
@@ -54,7 +54,7 @@ export default function Dashboard() {
                                 <Icon className='fa-solid fa-id-card text-[95px] text-[green] duration-[400ms] hover:text-[blue]' />
                             </Link>
 
-                            <Link href={route('helper.edithelper')} title='Editar Ajudante'>
+                            <Link href={route('helper.all')} title='Ajudantes Cadastrados'>
                                 <Icon className='fa-regular fa-id-card text-[95px] text-[green] duration-[400ms] hover:text-[orange]' />
                             </Link>
 

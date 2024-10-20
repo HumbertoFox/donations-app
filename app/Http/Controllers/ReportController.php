@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 class ReportController extends Controller
 {
-    public function show()
+    public function index()
     {
         return Inertia::render('Menu/Report');
     }

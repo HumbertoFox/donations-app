@@ -20,6 +20,6 @@ class Zipcode extends Model
 
     public function addresses(): HasMany
     {
-        return $this->hasMany(Address::class, 'zipcode_id');
+        return $this->hasMany(Address::class, 'id', 'zipcode_id');
     }
 }

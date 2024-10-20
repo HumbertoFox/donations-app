@@ -2,7 +2,9 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { getCheckedCpf } from '@/utils/cpfValidation';
 import { useForm } from '@inertiajs/react';
+import { useRef } from 'react';
 
 export default function HelperForm({ point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -23,12 +25,18 @@ export default function HelperForm({ point, valueButton }) {
         reference_point: ''
     });
 
+    const cpfRef = useRef(null);
+
     const submit = (e) => {
         e.preventDefault();
+
+        if (!getCheckedCpf(data.cpf)) {
+            cpfRef.current.focus();
+            return;
+        };
+
         post(route(point), {
-            onSuccess: () => {
-                reset();
-            }
+            onSuccess: () => reset()
         });
     };
 
@@ -59,10 +67,26 @@ export default function HelperForm({ point, valueButton }) {
                     name='cpf'
                     type='number'
                     value={data.cpf}
-                    className='mt-1 block w-full'
+                    className={
+                        valueButton === 'Editar'
+                            ?
+                            'mt-1 block w-full cursor-not-allowed'
+                            :
+                            'mt-1 block w-full'
+                    }
                     autoComplete='cpf'
-                    onChange={(e) => setData('cpf', e.target.value)}
+                    onChange={(e) => {
+                        const newCpf = e.target.value
+                        setData('cpf', newCpf);
+                        !getCheckedCpf(newCpf)
+                            ?
+                            errors.cpf = 'CPF Inválido!'
+                            :
+                            errors.cpf = null;
+                    }}
                     required
+                    disabled={valueButton === 'Editar' ? true : false}
+                    ref={cpfRef}
                 />
 
                 <InputError message={errors.cpf} className='mt-2' />
@@ -86,7 +110,7 @@ export default function HelperForm({ point, valueButton }) {
             </div>
 
             <div className='mt-4'>
-                <InputLabel htmlFor='phone' value='Telefone' />
+                <InputLabel htmlFor='phone' value='Phone' />
 
                 <TextInput
                     id='phone'
