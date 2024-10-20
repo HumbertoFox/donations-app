@@ -16,7 +16,7 @@ class Vehicle extends Model
         'plate',
         'km',
         'model',
-        'Automaker',
+        'automaker',
         'user_id'
     ];
 

@@ -22,7 +22,7 @@ class VehicleController extends Controller
                 'plate' => 'required|string|uppercase|max:50|unique:vehicles,plate',
                 'km' => 'required|string|max:255',
                 'model' => 'required|string|uppercase|max:150',
-                'Automaker' => 'required|string|upupercase|max:100'
+                'automaker' => 'required|string|uppercase|max:100'
             ]
         );
 
@@ -32,8 +32,9 @@ class VehicleController extends Controller
             [
                 'chassi' => $request->chassi,
                 'plate' => $request->plate,
-                'model' => $request->model,
                 'km' => $request->km,
+                'model' => $request->model,
+                'automaker' => $request->automaker,
                 'user_id' => $userId
             ]
         );

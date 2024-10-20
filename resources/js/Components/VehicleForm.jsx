@@ -7,7 +7,7 @@ import { useForm } from '@inertiajs/react';
 export default function VehicleForm({ point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         model: '',
-        Automaker: '',
+        automaker: '',
         chassi: '',
         plate: '',
         km: ''
@@ -30,10 +30,10 @@ export default function VehicleForm({ point, valueButton }) {
                     id='model'
                     name='model'
                     value={data.model}
-                    className='mt-1 block w-full'
+                    className='mt-1 block w-full uppercase'
                     autoComplete='model'
                     isFocused={valueButton === 'Cadastrar' ? true : false}
-                    onChange={(e) => setData('model', e.target.value)}
+                    onChange={(e) => setData('model', e.target.value.toUpperCase())}
                     required
                 />
 
@@ -41,19 +41,19 @@ export default function VehicleForm({ point, valueButton }) {
             </div>
 
             <div className='mt-4'>
-                <InputLabel htmlFor='Automaker' value='Montadora' />
+                <InputLabel htmlFor='automaker' value='Montadora' />
 
                 <TextInput
-                    id='Automaker'
-                    name='Automaker'
-                    value={data.Automaker}
-                    className='mt-1 block w-full'
-                    autoComplete='Automaker'
-                    onChange={(e) => setData('Automaker', e.target.value)}
+                    id='automaker'
+                    name='automaker'
+                    value={data.automaker}
+                    className='mt-1 block w-full uppercase'
+                    autoComplete='automaker'
+                    onChange={(e) => setData('automaker', e.target.value.toUpperCase())}
                     required
                 />
 
-                <InputError message={errors.Automaker} className='mt-2' />
+                <InputError message={errors.automaker} className='mt-2' />
             </div>
 
             <div className='mt-4'>
@@ -79,9 +79,9 @@ export default function VehicleForm({ point, valueButton }) {
                     id='plate'
                     name='plate'
                     value={data.plate}
-                    className='mt-1 block w-full'
+                    className='mt-1 block w-full uppercase'
                     autoComplete='plate'
-                    onChange={(e) => setData('plate', e.target.value)}
+                    onChange={(e) => setData('plate', e.target.value.toUpperCase())}
                     required
                 />
 

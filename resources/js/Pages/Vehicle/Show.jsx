@@ -51,7 +51,7 @@ export default function ShowVehicle({ vehicles }) {
                                         <td>{vehicle.chassi}</td>
                                         <td>{vehicle.plate}</td>
                                         <td>{vehicle.model}</td>
-                                        <td>{vehicle.Automaker}</td>
+                                        <td>{vehicle.automaker}</td>
                                         <td className='flex justify-center items-center my-1'>
                                             <Icon
                                                 title={`Editar ${vehicle.id}`}

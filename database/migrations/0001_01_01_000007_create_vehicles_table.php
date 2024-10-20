@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('plate')->unique();
             $table->string('km');
             $table->string('model');
-            $table->string('Automaker');
+            $table->string('automaker');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
