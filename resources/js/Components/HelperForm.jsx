@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { getCheckedCpf } from '@/utils/cpfValidation';
+import { checkedZipCode } from '@/utils/viaCep';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
 
@@ -26,18 +27,25 @@ export default function HelperForm({ point, valueButton }) {
     });
 
     const cpfRef = useRef(null);
+    const zipCodeRef = useRef(null);
+    const numberResidenceRef = useRef(null);
 
     const submit = (e) => {
         e.preventDefault();
 
         if (!getCheckedCpf(data.cpf)) {
-            cpfRef.current.focus();
-            return;
+            return cpfRef.current.focus();
         };
 
         post(route(point), {
             onSuccess: () => reset()
         });
+    };
+
+    const handleZipCodeChange = (e) => {
+        const newZipCode = e.target.value;
+        setData('zipcode', newZipCode);
+        checkedZipCode(e, setData, errors, zipCodeRef, numberResidenceRef);
     };
 
     return (
@@ -154,7 +162,9 @@ export default function HelperForm({ point, valueButton }) {
                     className='mt-1 block w-full'
                     autoComplete='zipcode'
                     onChange={(e) => setData('zipcode', e.target.value)}
+                    onBlur={handleZipCodeChange}
                     required
+                    ref={zipCodeRef}
                 />
 
                 <InputError message={errors.zipcode} className='mt-2' />
@@ -245,6 +255,7 @@ export default function HelperForm({ point, valueButton }) {
                     autoComplete='number_residence'
                     onChange={(e) => setData('number_residence', e.target.value)}
                     required
+                    ref={numberResidenceRef}
                 />
 
                 <InputError message={errors.number_residence} className='mt-2' />

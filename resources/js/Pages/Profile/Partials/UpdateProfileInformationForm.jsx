@@ -2,8 +2,10 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { checkedZipCode } from '@/utils/viaCep';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useRef } from 'react';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -11,6 +13,8 @@ export default function UpdateProfileInformation({
     className = '',
 }) {
     const user = usePage().props.auth.user;
+    const zipCodeRef = useRef(null);
+    const numberResidenceRef = useRef(null);
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -33,6 +37,12 @@ export default function UpdateProfileInformation({
         e.preventDefault();
 
         patch(route('profile.update'));
+    };
+
+    const handleZipCodeChange = (e) => {
+        const newZipCode = e.target.value;
+        setData('zipcode', newZipCode);
+        checkedZipCode(e, setData, errors, zipCodeRef, numberResidenceRef);
     };
 
     return (
@@ -108,7 +118,9 @@ export default function UpdateProfileInformation({
                         className="mt-1 block w-full"
                         autoComplete="zipcode"
                         onChange={(e) => setData('zipcode', e.target.value)}
+                        onBlur={handleZipCodeChange}
                         required
+                        ref={zipCodeRef}
                     />
 
                     <InputError message={errors.zipcode} className="mt-2" />
@@ -199,6 +211,7 @@ export default function UpdateProfileInformation({
                         autoComplete='number_residence'
                         onChange={(e) => setData('number_residence', e.target.value)}
                         required
+                        ref={numberResidenceRef}
                     />
 
                     <InputError message={errors.number_residence} className='mt-2' />

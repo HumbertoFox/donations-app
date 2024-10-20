@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { getCheckedCpf } from '@/utils/cpfValidation';
+import { checkedZipCode } from '@/utils/viaCep';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useRef } from 'react';
 
@@ -29,6 +30,8 @@ export default function Register() {
     });
 
     const cpfRef = useRef(null);
+    const zipCodeRef = useRef(null);
+    const numberResidenceRef = useRef(null);
 
     const submit = (e) => {
         e.preventDefault();
@@ -41,6 +44,12 @@ export default function Register() {
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation')
         });
+    };
+
+    const handleZipCodeChange = (e) => {
+        const newZipCode = e.target.value;
+        setData('zipcode', newZipCode);
+        checkedZipCode(e, setData, errors, zipCodeRef, numberResidenceRef);
     };
 
     return (
@@ -152,7 +161,9 @@ export default function Register() {
                         className="mt-1 block w-full"
                         autoComplete="zipcode"
                         onChange={(e) => setData('zipcode', e.target.value)}
+                        onBlur={handleZipCodeChange}
                         required
+                        ref={zipCodeRef}
                     />
 
                     <InputError message={errors.zipcode} className="mt-2" />
@@ -243,6 +254,7 @@ export default function Register() {
                         autoComplete='number_residence'
                         onChange={(e) => setData('number_residence', e.target.value)}
                         required
+                        ref={numberResidenceRef}
                     />
 
                     <InputError message={errors.number_residence} className='mt-2' />
