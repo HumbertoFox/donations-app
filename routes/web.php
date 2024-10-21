@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/registervehicle', [VehicleController::class, 'register'])->name('vehicle.registervehicle');
     Route::post('/vehicle/store', [VehicleController::class, 'store'])->name('vehicle.register');
+    Route::get('/vehicle/{id}/edit', [VehicleController::class, 'edit'])->name('vehicle.edit');
+    Route::post('/vehicle/{id}', [VehicleController::class, 'update'])->name('vehicle.update');
     Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicle.all');
 
     Route::get('/registerdriver', [DriverController::class, 'register'])->name('driver.registerdriver');

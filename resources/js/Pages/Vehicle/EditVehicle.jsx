@@ -3,7 +3,7 @@ import VehicleForm from '@/Components/VehicleForm';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function EditVehicle() {
+export default function EditVehicle({ vehicle }) {
 
     return (
         <AuthenticatedLayout
@@ -23,7 +23,7 @@ export default function EditVehicle() {
                                 className='fa-solid fa-truck text-[45px] text-[blue]'
                             />
                         </div>
-                        <VehicleForm point={''} valueButton={'Editar'} />
+                        <VehicleForm vehicle={vehicle} point={'vehicle.update'} valueButton={'Editar'} />
                     </div>
                 </div>
             </div>

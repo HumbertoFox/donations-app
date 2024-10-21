@@ -4,19 +4,19 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 
-export default function VehicleForm({ point, valueButton }) {
+export default function VehicleForm({ vehicle = {}, point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        model: '',
-        automaker: '',
-        chassi: '',
-        plate: '',
-        km: ''
+        model: vehicle.model ?? '',
+        automaker: vehicle.automaker ?? '',
+        chassi: vehicle.chassi ?? '',
+        plate: vehicle.plate ?? '',
+        km: vehicle.km ?? ''
     });
 
     const submit = (e) => {
         e.preventDefault();
-        
-        post(route(point), {
+
+        post(route(point, vehicle.id), {
             onSuccess: () => reset()
         });
     };
@@ -95,10 +95,11 @@ export default function VehicleForm({ point, valueButton }) {
                     id='km'
                     name='km'
                     value={data.km}
-                    className='mt-1 block w-full'
+                    className={valueButton === 'Editar' ? 'cursor-not-allowed mt-1 block w-full' : 'mt-1 block w-full'}
                     autoComplete='km'
                     onChange={(e) => setData('km', e.target.value)}
                     required
+                    disabled={valueButton === 'Editar' ? true : false}
                 />
 
                 <InputError message={errors.km} className='mt-2' />

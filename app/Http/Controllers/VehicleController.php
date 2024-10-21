@@ -19,8 +19,8 @@ class VehicleController extends Controller
         $request->validate(
             [
                 'chassi' => 'required|string|max:100|unique:vehicles,chassi',
-                'plate' => 'required|string|uppercase|max:50|unique:vehicles,plate',
-                'km' => 'required|string|max:255',
+                'plate' => 'required|string|uppercase|max:10|unique:vehicles,plate',
+                'km' => 'required|string|min:0',
                 'model' => 'required|string|uppercase|max:150',
                 'automaker' => 'required|string|uppercase|max:100'
             ]
@@ -48,8 +48,24 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function edit()
+    public function edit(Request $request, $id)
     {
-        return Inertia::render('Vehicle/EditVehicle');
+        $vehicle = Vehicle::findOrFail($id);
+        return Inertia::render('Vehicle/EditVehicle', [
+            'vehicle' => $vehicle
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'chassi' => 'required|string|max:100',
+            'plate' => 'required|string|uppercase|max:50',
+            'model' => 'required|string|uppercase|max:150',
+            'automaker' => 'required|string|uppercase|max:100'
+        ]);
+
+        $vehicle = Vehicle::findOrFail($id);
+        $vehicle->update($validatedData);
     }
 }

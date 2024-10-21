@@ -1,6 +1,6 @@
 import Icon from '@/Components/Icon';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function ShowVehicle({ vehicles }) {
@@ -53,12 +53,15 @@ export default function ShowVehicle({ vehicles }) {
                                         <td>{vehicle.model}</td>
                                         <td>{vehicle.automaker}</td>
                                         <td className='flex justify-center items-center my-1'>
-                                            <Icon
-                                                title={`Editar ${vehicle.id}`}
-                                                className={`${hoveredIcon[vehicle.id] ? 'fa-solid fa-truck' : 'fa-solid fa-truck-medical'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
-                                                onMouseEnter={() => handleMouseEnter(vehicle.id)}
-                                                onMouseLeave={() => handleMouseLeave(vehicle.id)}
-                                            />
+                                            <Link href={`/vehicle/${vehicle.id}/edit`}>
+                                                <Icon
+                                                    title={`Editar ${vehicle.plate}`}
+                                                    aria-label={`Editar ${vehicle.plate}`}
+                                                    className={`${hoveredIcon[vehicle.id] ? 'fa-solid fa-truck' : 'fa-solid fa-truck-medical'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                    onMouseEnter={() => handleMouseEnter(vehicle.id)}
+                                                    onMouseLeave={() => handleMouseLeave(vehicle.id)}
+                                                />
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}
