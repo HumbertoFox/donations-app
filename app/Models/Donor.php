@@ -31,6 +31,6 @@ class Donor extends Model
 
     public function cnpj(): HasOne
     {
-        return $this->hasOne(Cnpj::class, 'id', 'cnpj_id');
+        return $this->hasOne(Cnpj::class, 'id', 'cnpj_id')->withDefault();
     }
 }

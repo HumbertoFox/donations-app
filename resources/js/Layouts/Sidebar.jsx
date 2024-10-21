@@ -11,7 +11,7 @@ const menuItems = [
     { title: 'Cadastrar Doação', icon: 'fa-solid fa-pen-to-square', route: route('menu.registerdonation'), url: 'menu.registerdonation' },
     { title: 'Cadastrar Doador', icon: 'fa-solid fa-user-plus', route: route('menu.registerdonor'), url: 'menu.registerdonor' },
     { title: 'Editar Doação', icon: 'fa-regular fa-pen-to-square', route: route('menu.editdonation'), url: 'menu.editdonation' },
-    { title: 'Editar Doador', icon: 'fa-solid fa-user-pen', route: route('menu.editdonor'), url: 'menu.editdonor' },
+    { title: 'Editar Doador', icon: 'fa-solid fa-user-pen', route: route('menu.donors'), url: 'menu.donors' },
     { title: 'Agendar Coleta', icon: 'fa-solid fa-file-circle-plus', route: route('menu.schedulecollection'), url: 'menu.schedulecollection' },
     { title: 'Confirmar Coleta', icon: 'fa-solid fa-file-circle-check', route: route('menu.confirmcollection'), url: 'menu.confirmcollection' },
     { title: 'Relatório', icon: 'fa-solid fa-file-lines', route: route('menu.report'), url: 'menu.report' },

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreignId('phone_id')->constrained('phones');
-            $table->foreignId('cnpj_id')->constrained('cnpjs');
+            $table->foreignId('cnpj_id')->nullable()->constrained('cnpjs');
             $table->foreignId('address_id')->constrained('addresses');
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();

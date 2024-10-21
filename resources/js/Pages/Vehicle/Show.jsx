@@ -41,7 +41,7 @@ export default function ShowVehicle({ vehicles }) {
                             <tbody>
                                 {vehicles.length === 0 && (
                                     <tr className='text-red-600'>
-                                        <td colSpan={6}>Não Existe Veículo Cadastrado</td>
+                                        <td colSpan={7}>Não Existe Veículo Cadastrado</td>
                                     </tr>
                                 )}
                                 {vehicles.map((vehicle, index) => (

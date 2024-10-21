@@ -35,7 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/agenda', [AgendaController::class, 'show'])->name('menu.agenda');
 
     Route::get('/registerdonor', [DonorController::class, 'register'])->name('menu.registerdonor');
-    Route::get('/editdonor', [DonorController::class, 'edit'])->name('menu.editdonor');
+    Route::post('/donor/store', [DonorController::class, 'store'])->name('menu.register');
+    Route::get('/donor/{id}/edit', [DonorController::class, 'edit'])->name('donor.edit');
+    Route::post('/donor/{id}', [DonorController::class, 'update'])->name('donor.update');
+    Route::get('/donors', [DonorController::class, 'index'])->name('menu.donors');
 
     Route::get('/registerdonation', [DonationController::class, 'register'])->name('menu.registerdonation');
     Route::get('/editdonation', [DonationController::class, 'edit'])->name('menu.editdonation');

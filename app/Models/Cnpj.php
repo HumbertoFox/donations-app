@@ -18,6 +18,6 @@ class Cnpj extends Model
 
     public function donor(): BelongsTo
     {
-        return $this->belongsTo(Donor::class, 'cnpj_id');
+        return $this->belongsTo(Donor::class, 'cnpj_id')->withDefault();
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('cnpjs', function (Blueprint $table) {
             $table->id();
             $table->string('cnpj');
-            $table->string('corporatename')->nullable();
+            $table->string('corporatename');
             $table->timestamps();
             $table->softDeletes();
         });

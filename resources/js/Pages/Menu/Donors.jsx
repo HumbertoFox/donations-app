@@ -1,10 +1,10 @@
 import Icon from '@/Components/Icon';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import { formatCep } from '@/utils/cepFormat';
 import { useState } from 'react';
-import { formatCpf } from '@/utils/cpfFormat';
+import SideBar from '@/Layouts/Sidebar';
 
-export default function ShowHelper({ helpers }) {
+export default function ShowDonors({ donors }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
     const handleMouseEnter = (id) => {
@@ -15,47 +15,44 @@ export default function ShowHelper({ helpers }) {
         setHoveredIcon((prev) => ({ ...prev, [id]: false }));
     };
     return (
-        <AuthenticatedLayout
-            header={
-                <h2 className='text-xl font-semibold leading-tight text-gray-800'>
-                    Editar Ajudante
-                </h2>
-            }
-        >
-            <Head title='Ajudantes' />
-
-            <div className='py-12'>
-                <div className='mx-auto max-w-3xl space-y-6 sm:px-6 lg:px-8'>
+        <div className="max-w-[1440px] flex justify-start items-start">
+            <Head title='Doadores' />
+            <SideBar />
+            <main className="relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]">
+                <div className='max-w-3xl p-1'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <table className='w-full text-center'>
                             <thead>
                                 <tr className='border-b-[1px] border-gray-600'>
                                     <th>Nº</th>
                                     <th>Cód.</th>
-                                    <th>CPF</th>
                                     <th>Nome</th>
+                                    <th>Telefone</th>
+                                    <th>CEP</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {helpers.length === 0 && (
+                                {donors.length === 0 && (
                                     <tr className='text-red-600'>
-                                        <td colSpan={5}>Não Existe Ajudante Cadastrado</td>
+                                        <td colSpan={6}>Não Existe Veículo Cadastrado</td>
                                     </tr>
                                 )}
-                                {helpers.map((helper, index) => (
+                                {donors.map((donor, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
                                         <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
-                                        <td>{helper.id}</td>
-                                        <td>{formatCpf(helper.cpf.cpf)}</td>
-                                        <td>{helper.cpf.name}</td>
+                                        <td>{donor.id}</td>
+                                        <td>{donor.name}</td>
+                                        <td>{donor.phone?.phone}</td>
+                                        <td>{formatCep(donor.address?.zipcode)}</td>
                                         <td className='flex justify-center items-center my-1'>
-                                            <Link href={`/helper/${helper.id}/edit`}>
+                                            <Link href={`/donor/${donor.id}/edit`}>
                                                 <Icon
-                                                    title={`Editar ${helper.cpf.name}`}
-                                                    className={`${hoveredIcon[helper.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-id-card'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
-                                                    onMouseEnter={() => handleMouseEnter(helper.id)}
-                                                    onMouseLeave={() => handleMouseLeave(helper.id)}
+                                                    title={`Editar ${donor.name}`}
+                                                    aria-label={`Editar ${donor.name}`}
+                                                    className={`${hoveredIcon[donor.id] ? 'fa-solid fa-user-pen' : 'fa-solid fa-user-check'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                    onMouseEnter={() => handleMouseEnter(donor.id)}
+                                                    onMouseLeave={() => handleMouseLeave(donor.id)}
                                                 />
                                             </Link>
                                         </td>
@@ -65,7 +62,7 @@ export default function ShowHelper({ helpers }) {
                         </table>
                     </div>
                 </div>
-            </div>
-        </AuthenticatedLayout>
+            </main>
+        </div>
     );
 }
