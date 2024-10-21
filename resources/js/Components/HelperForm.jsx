@@ -7,23 +7,23 @@ import { checkedZipCode } from '@/utils/viaCep';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
 
-export default function HelperForm({ point, valueButton }) {
+export default function HelperForm({ helper = {}, point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        cpf: '',
-        birthdate: '',
-        phone: '',
-        email: '',
-        zipcode: '',
-        street: '',
-        district: '',
-        city: '',
-        number_residence: '',
-        type_residence: 'house',
-        building: '',
-        block: '',
-        livingapartmentroom: '',
-        reference_point: ''
+        name: helper.cpf?.name ?? '',
+        cpf: helper.cpf?.cpf ?? '',
+        birthdate: helper.cpf?.birthdate ?? '',
+        phone: helper.phone?.phone ?? '',
+        email: helper.phone?.email ?? '',
+        zipcode: helper.address?.zipcode?.zipcode ?? '',
+        street: helper.address?.zipcode?.street ?? '',
+        district: helper.address?.zipcode?.district ?? '',
+        city: helper.address?.zipcode?.city ?? '',
+        number_residence: helper.address?.number_residence ?? '',
+        type_residence: helper.address?.type_residence ?? 'house',
+        building: helper.address?.building ?? '',
+        block: helper.address?.block ?? '',
+        livingapartmentroom: helper.address?.livingapartmentroom ?? '',
+        reference_point: helper.address?.reference_point ?? ''
     });
 
     const cpfRef = useRef(null);
@@ -37,7 +37,7 @@ export default function HelperForm({ point, valueButton }) {
             return cpfRef.current.focus();
         };
 
-        post(route(point), {
+        post(route(point, helper.id), {
             onSuccess: () => reset()
         });
     };
@@ -75,13 +75,7 @@ export default function HelperForm({ point, valueButton }) {
                     name='cpf'
                     type='number'
                     value={data.cpf}
-                    className={
-                        valueButton === 'Editar'
-                            ?
-                            'mt-1 block w-full cursor-not-allowed'
-                            :
-                            'mt-1 block w-full'
-                    }
+                    className={`mt-1 block w-full ${valueButton === 'Editar' ? 'cursor-not-allowed' : ''}`}
                     autoComplete='cpf'
                     onChange={(e) => {
                         const newCpf = e.target.value
@@ -227,7 +221,7 @@ export default function HelperForm({ point, valueButton }) {
                         type='radio'
                         value='house'
                         onChange={e => setData('type_residence', e.target.value)}
-                        defaultChecked
+                        checked={data.type_residence === 'house'}
                     />
                     <InputLabel className='cursor-pointer' htmlFor='house' value='Casa' />
                 </div>
@@ -239,6 +233,7 @@ export default function HelperForm({ point, valueButton }) {
                         type='radio'
                         value='buildings'
                         onChange={e => setData('type_residence', e.target.value)}
+                        checked={data.type_residence === 'buildings'}
                     />
                     <InputLabel className='cursor-pointer' htmlFor='buildings' value='Edifício' />
                 </div>

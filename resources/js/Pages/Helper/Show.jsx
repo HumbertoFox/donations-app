@@ -1,6 +1,6 @@
 import Icon from '@/Components/Icon';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { formatCpf } from '@/utils/cpfFormat.js';
 
@@ -50,12 +50,14 @@ export default function ShowHelper({ helpers }) {
                                         <td>{formatCpf(helper.cpf.cpf)}</td>
                                         <td>{helper.cpf.name}</td>
                                         <td className='flex justify-center items-center my-1'>
-                                            <Icon
-                                                title={`Editar ${helper.cpf.name}`}
-                                                className={`${hoveredIcon[helper.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-id-card'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
-                                                onMouseEnter={() => handleMouseEnter(helper.id)}
-                                                onMouseLeave={() => handleMouseLeave(helper.id)}
-                                            />
+                                            <Link href={`/helper/${helper.id}/edit`}>
+                                                <Icon
+                                                    title={`Editar ${helper.cpf.name}`}
+                                                    className={`${hoveredIcon[helper.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-id-card'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                    onMouseEnter={() => handleMouseEnter(helper.id)}
+                                                    onMouseLeave={() => handleMouseLeave(helper.id)}
+                                                />
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}

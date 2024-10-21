@@ -1,11 +1,9 @@
 import HelperForm from '@/Components/HelperForm';
 import Icon from '@/Components/Icon';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head } from '@inertiajs/react';
 
-import { Head, useForm } from '@inertiajs/react';
-
-export default function EditHelper() {
-
+export default function EditHelper({ helper }) {
     return (
         <AuthenticatedLayout
             header={
@@ -24,7 +22,7 @@ export default function EditHelper() {
                                 className='fa-solid fa-address-card text-[45px] text-[blue]'
                             />
                         </div>
-                        <HelperForm point={'helper.update'} valueButton={'Editar'} />
+                        <HelperForm helper={helper} point={'helper.update'} valueButton={'Editar'} />
                     </div>
                 </div>
             </div>

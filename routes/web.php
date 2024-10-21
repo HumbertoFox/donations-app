@@ -54,10 +54,14 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/registerdriver', [DriverController::class, 'register'])->name('driver.registerdriver');
     Route::post('/driver/store', [DriverController::class, 'store'])->name('driver.register');
+    Route::get('/driver/{id}/edit', [DriverController::class, 'edit'])->name('driver.edit');
+    Route::post('/driver/{id}', [DriverController::class, 'update'])->name('driver.update');
     Route::get('/drivers', [DriverController::class, 'index'])->name('driver.all');
 
     Route::get('/registerhelper', [HelperController::class, 'register'])->name('helper.registerhelper');
     Route::post('/helper/store', [HelperController::class, 'store'])->name('helper.register');
+    Route::get('/helper/{id}/edit', [HelperController::class, 'edit'])->name('helper.edit');
+    Route::post('/helper/{id}', [HelperController::class, 'update'])->name('helper.update');
     Route::get('/helpers', [HelperController::class, 'index'])->name('helper.all');
 });
 

@@ -14,6 +14,12 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'cpf' => [
+                'required',
+                'string',
+                'max:11',
+                Rule::unique(Cpf::class)->ignore($this->user()->cpf_id),
+            ],
             'phone' => [
                 'required',
                 'string',

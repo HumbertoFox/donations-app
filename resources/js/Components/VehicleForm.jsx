@@ -95,7 +95,7 @@ export default function VehicleForm({ vehicle = {}, point, valueButton }) {
                     id='km'
                     name='km'
                     value={data.km}
-                    className={valueButton === 'Editar' ? 'cursor-not-allowed mt-1 block w-full' : 'mt-1 block w-full'}
+                    className={`mt-1 block w-full ${valueButton === 'Editar' ? 'cursor-not-allowed' : ''}`}
                     autoComplete='km'
                     onChange={(e) => setData('km', e.target.value)}
                     required

@@ -7,24 +7,24 @@ import { checkedZipCode } from '@/utils/viaCep';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
 
-export default function DriverForm({ point, valueButton }) {
+export default function DriverForm({ driver = {}, point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        cpf: '',
-        cnh: '',
-        birthdate: '',
-        phone: '',
-        email: '',
-        zipcode: '',
-        street: '',
-        district: '',
-        city: '',
-        number_residence: '',
-        type_residence: 'house',
-        building: '',
-        block: '',
-        livingapartmentroom: '',
-        reference_point: ''
+        name: driver.cnh?.cpf?.name ?? '',
+        cpf: driver.cnh?.cpf?.cpf ?? '',
+        cnh: driver.cnh?.cnh ?? '',
+        birthdate: driver.cnh?.cpf?.birthdate ?? '',
+        phone: driver.phone?.phone ?? '',
+        email: driver.phone?.email ?? '',
+        zipcode: driver.address?.zipcode?.zipcode ?? '',
+        street: driver.address?.zipcode?.street ?? '',
+        district: driver.address?.zipcode?.district ?? '',
+        city: driver.address?.zipcode?.city ?? '',
+        number_residence: driver.address?.number_residence ?? '',
+        type_residence: driver.address?.type_residence ?? 'house',
+        building: driver.address?.building ?? '',
+        block: driver.address?.block ?? '',
+        livingapartmentroom: driver.address?.livingapartmentroom ?? '',
+        reference_point: driver.address?.reference_point ?? ''
     });
 
     const cpfRef = useRef(null);
@@ -39,7 +39,7 @@ export default function DriverForm({ point, valueButton }) {
             return;
         };
 
-        post(route(point), {
+        post(route(point, driver.id), {
             onSuccess: () => reset()
         });
     };
@@ -77,7 +77,7 @@ export default function DriverForm({ point, valueButton }) {
                     name='cpf'
                     type='number'
                     value={data.cpf}
-                    className='mt-1 block w-full'
+                    className={`mt-1 block w-full ${valueButton === 'Editar' ? 'cursor-not-allowed' : ''}`}
                     autoComplete='cpf'
                     onChange={(e) => {
                         const newCpf = e.target.value
@@ -89,6 +89,7 @@ export default function DriverForm({ point, valueButton }) {
                             errors.cpf = null;
                     }}
                     required
+                    disabled={valueButton === 'Editar' ? true : false}
                     ref={cpfRef}
                 />
 
@@ -103,10 +104,11 @@ export default function DriverForm({ point, valueButton }) {
                     name='cnh'
                     type='number'
                     value={data.cnh}
-                    className='mt-1 block w-full'
+                    className={`mt-1 block w-full ${valueButton === 'Editar' ? 'cursor-not-allowed' : ''}`}
                     autoComplete='cnh'
                     onChange={(e) => setData('cnh', e.target.value)}
                     required
+                    disabled={valueButton === 'Editar' ? true : false}
                 />
 
                 <InputError message={errors.cnh} className='mt-2' />
@@ -239,7 +241,7 @@ export default function DriverForm({ point, valueButton }) {
                         type='radio'
                         value='house'
                         onChange={e => setData('type_residence', e.target.value)}
-                        defaultChecked
+                        checked={data.type_residence === 'house'}
                     />
                     <InputLabel className='cursor-pointer' htmlFor='house' value='Casa' />
                 </div>
@@ -251,6 +253,7 @@ export default function DriverForm({ point, valueButton }) {
                         type='radio'
                         value='buildings'
                         onChange={e => setData('type_residence', e.target.value)}
+                        checked={data.type_residence === 'buildings'}
                     />
                     <InputLabel className='cursor-pointer' htmlFor='buildings' value='Edifício' />
                 </div>

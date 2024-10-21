@@ -3,8 +3,7 @@ import Icon from '@/Components/Icon';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function EditDriver() {
-
+export default function EditDriver({ driver }) {
     return (
         <AuthenticatedLayout
             header={
@@ -23,7 +22,7 @@ export default function EditDriver() {
                                 className='fa-solid fa-address-card text-[45px] text-[blue]'
                             />
                         </div>
-                        <DriverForm point={''} valueButton={'Editar'} />
+                        <DriverForm driver={driver} point={'driver.update'} valueButton={'Editar'} />
                     </div>
                 </div>
             </div>

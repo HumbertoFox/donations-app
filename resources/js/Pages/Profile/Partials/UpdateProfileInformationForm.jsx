@@ -2,6 +2,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { getCheckedCpf } from '@/utils/cpfValidation';
 import { checkedZipCode } from '@/utils/viaCep';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
@@ -16,22 +17,23 @@ export default function UpdateProfileInformation({
     const zipCodeRef = useRef(null);
     const numberResidenceRef = useRef(null);
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
-        useForm({
-            name: user.name,
-            phone: user.phone.phone,
-            email: user.email,
-            zipcode: user.address.zipcode.zipcode,
-            street: user.address.zipcode.street,
-            district: user.address.zipcode.district,
-            city: user.address.zipcode.city,
-            number_residence: user.address.number_residence,
-            type_residence: user.address.type_residence,
-            building: user.address.building,
-            block: user.address.block,
-            livingapartmentroom: user.address.livingapartmentroom,
-            reference_point: user.address.reference_point
-        });
+    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+        name: user.name ?? '',
+        cpf: user.cpf?.cpf ?? '',
+        birthdate: user.cpf?.birthdate ?? '',
+        phone: user.phone?.phone ?? '',
+        email: user.email ?? '',
+        zipcode: user.address?.zipcode?.zipcode ?? '',
+        street: user.address?.zipcode?.street ?? '',
+        district: user.address?.zipcode?.district ?? '',
+        city: user.address?.zipcode?.city ?? '',
+        number_residence: user.address?.number_residence ?? '',
+        type_residence: user.address?.type_residence ?? '',
+        building: user.address?.building ?? '',
+        block: user.address?.block ?? '',
+        livingapartmentroom: user.address?.livingapartmentroom ?? '',
+        reference_point: user.address?.reference_point ?? ''
+    });
 
     const submit = (e) => {
         e.preventDefault();
@@ -72,6 +74,49 @@ export default function UpdateProfileInformation({
                     />
 
                     <InputError className="mt-2" message={errors.name} />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="cpf" value="CPF" />
+
+                    <TextInput
+                        id="cpf"
+                        type="number"
+                        name="cpf"
+                        value={data.cpf}
+                        className="mt-1 block w-full cursor-not-allowed"
+                        autoComplete="cpf"
+                        onChange={(e) => {
+                            const newCpf = e.target.value
+                            setData('cpf', newCpf);
+                            !getCheckedCpf(newCpf)
+                                ?
+                                errors.cpf = 'CPF Inválido!'
+                                :
+                                errors.cpf = null;
+                        }}
+                        required
+                        disabled
+                    />
+
+                    <InputError message={errors.cpf} className="mt-2" />
+                </div>
+
+                <div className='mt-4'>
+                    <InputLabel htmlFor='birthdate' value='Data de Nascimento' />
+
+                    <TextInput
+                        id='birthdate'
+                        name='birthdate'
+                        type={'date'}
+                        value={data.birthdate}
+                        className='mt-1 block w-full'
+                        autoComplete='birthdate'
+                        onChange={(e) => setData('birthdate', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.birthdate} className='mt-2' />
                 </div>
 
                 <div>
@@ -183,7 +228,7 @@ export default function UpdateProfileInformation({
                             type='radio'
                             value='house'
                             onChange={e => setData('type_residence', e.target.value)}
-                            defaultChecked
+                            checked={data.type_residence === 'house'}
                         />
                         <InputLabel className='cursor-pointer' htmlFor='house' value='Casa' />
                     </div>
@@ -195,6 +240,7 @@ export default function UpdateProfileInformation({
                             type='radio'
                             value='buildings'
                             onChange={e => setData('type_residence', e.target.value)}
+                            checked={data.type_residence === 'buildings'}
                         />
                         <InputLabel className='cursor-pointer' htmlFor='buildings' value='Edifício' />
                     </div>

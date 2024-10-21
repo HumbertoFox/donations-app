@@ -48,7 +48,7 @@ class VehicleController extends Controller
         ]);
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
         $vehicle = Vehicle::findOrFail($id);
         return Inertia::render('Vehicle/EditVehicle', [

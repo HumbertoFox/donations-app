@@ -17,6 +17,7 @@ class ProfileController extends Controller
     public function edit(Request $request): Response
     {
         $user = $request->user();
+        $cpf = $user->cpf;
         $address = $user->address;
         $zipcode = $address->zipcode;
         $phone = $user->phone;
@@ -24,6 +25,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'cpf' => $cpf,
             'address' => $address,
             'zipcode' => $zipcode,
             'phone' => $phone
@@ -35,6 +37,13 @@ class ProfileController extends Controller
         $user = $request->user();
 
         $user->fill($request->validated());
+
+        $user->cpf()->update(
+            [
+                'name' => $request->input('name'),
+                'birthdate' => $request->input('birthdate')
+            ]
+        );
 
         $user->phone()->updateOrCreate(
             ['id' => $user->phone_id],

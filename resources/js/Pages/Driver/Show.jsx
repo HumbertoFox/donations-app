@@ -1,7 +1,7 @@
 import Icon from '@/Components/Icon';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { formatCpf } from '@/utils/cpfFormat';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function ShowDriver({ drivers }) {
@@ -54,12 +54,14 @@ export default function ShowDriver({ drivers }) {
                                             <td>{formatCpf(driver.cnh.cpf.cpf)}</td>
                                             <td>{driver.cnh.cpf.name}</td>
                                             <td className='flex justify-center items-center my-1'>
-                                                <Icon
-                                                    title={`Editar ${driver.cnh.id}`}
-                                                    className={`${hoveredIcon[driver.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-address-card'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
-                                                    onMouseEnter={() => handleMouseEnter(driver.id)}
-                                                    onMouseLeave={() => handleMouseLeave(driver.id)}
-                                                />
+                                                <Link href={`/driver/${driver.id}/edit`}>
+                                                    <Icon
+                                                        title={`Editar ${driver.cnh.id}`}
+                                                        className={`${hoveredIcon[driver.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-address-card'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                        onMouseEnter={() => handleMouseEnter(driver.id)}
+                                                        onMouseLeave={() => handleMouseLeave(driver.id)}
+                                                    />
+                                                </Link>
                                             </td>
                                         </tr>
                                     ))}

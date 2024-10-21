@@ -226,7 +226,7 @@ export default function Register() {
                             type='radio'
                             value='house'
                             onChange={e => setData('type_residence', e.target.value)}
-                            defaultChecked
+                            checked={data.type_residence === 'house'}
                         />
                         <InputLabel className='cursor-pointer' htmlFor='house' value='Casa' />
                     </div>
@@ -238,6 +238,7 @@ export default function Register() {
                             type='radio'
                             value='buildings'
                             onChange={e => setData('type_residence', e.target.value)}
+                            checked={data.type_residence === 'buildings'}
                         />
                         <InputLabel className='cursor-pointer' htmlFor='buildings' value='Edifício' />
                     </div>
