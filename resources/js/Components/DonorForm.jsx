@@ -2,6 +2,7 @@ import { checkedZipCode } from '@/utils/viaCep';
 import { useForm } from '@inertiajs/react'
 import { useRef } from 'react';
 import PrimaryButton from './PrimaryButton';
+import Swal from 'sweetalert2';
 
 export default function DonorForm({ donor = {}, point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -31,7 +32,31 @@ export default function DonorForm({ donor = {}, point, valueButton }) {
         e.preventDefault();
 
         post(route(point, donor.id), {
-            onSuccess: () => reset()
+            onSuccess: () => {
+                reset();
+                if (point === 'donor.update') {
+                    Swal.fire({
+                        title: 'Sucesso!',
+                        text: 'As informações do doador foram atualizadas.',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                }
+            },
+            onError: (error) => {
+                Object.keys(error).forEach((key) => {
+                    setData(key, error[key]);
+                });
+
+                Swal.fire({
+                    title: 'Erro!',
+                    text: 'Ocorreu um erro ao atualizar as informações.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         });
     };
 
