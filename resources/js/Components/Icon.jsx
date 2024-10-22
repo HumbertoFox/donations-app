@@ -1,10 +1,12 @@
-import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
-import '@fortawesome/fontawesome-free/scss/regular.scss';
-import '@fortawesome/fontawesome-free/scss/solid.scss';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+library.add(fas, far);
 
 export default function Icon(props) {
     return (
-        <i
+        <FontAwesomeIcon
             {...props}
         />
     );

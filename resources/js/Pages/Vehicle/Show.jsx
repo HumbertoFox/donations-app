@@ -55,9 +55,10 @@ export default function ShowVehicle({ vehicles }) {
                                         <td className='flex justify-center items-center my-1'>
                                             <Link href={`/vehicle/${vehicle.id}/edit`}>
                                                 <Icon
+                                                    icon={hoveredIcon[vehicle.id] ? 'fa-solid fa-truck' : 'fa-solid fa-truck-medical'}
                                                     title={`Editar ${vehicle.plate}`}
                                                     aria-label={`Editar ${vehicle.plate}`}
-                                                    className={`${hoveredIcon[vehicle.id] ? 'fa-solid fa-truck' : 'fa-solid fa-truck-medical'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
                                                     onMouseEnter={() => handleMouseEnter(vehicle.id)}
                                                     onMouseLeave={() => handleMouseLeave(vehicle.id)}
                                                 />

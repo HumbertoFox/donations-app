@@ -52,8 +52,9 @@ export default function ShowHelper({ helpers }) {
                                         <td className='flex justify-center items-center my-1'>
                                             <Link href={`/helper/${helper.id}/edit`}>
                                                 <Icon
+                                                    icon={hoveredIcon[helper.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-id-card'}
                                                     title={`Editar ${helper.cpf.name}`}
-                                                    className={`${hoveredIcon[helper.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-id-card'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
                                                     onMouseEnter={() => handleMouseEnter(helper.id)}
                                                     onMouseLeave={() => handleMouseLeave(helper.id)}
                                                 />

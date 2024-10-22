@@ -1,8 +1,6 @@
+import Icon from '@/Components/Icon';
 import { useEffect, useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
-import '@fortawesome/fontawesome-free/scss/regular.scss';
-import '@fortawesome/fontawesome-free/scss/solid.scss';
 import { Link } from '@inertiajs/react';
 
 const classLinks = 'flex items-center p-2.5 gap-[15px] duration-[400ms] text-black hover:bg-[#79D1FF] hover:text-white';
@@ -40,7 +38,7 @@ export default function SideBar() {
                             aria-label={title}
                             role='menuitem'
                         >
-                            <i className={`${icon} text-[2rem]`} />
+                            <Icon icon={icon} className='text-[2rem]' />
                             <span className="text-sm max-[1080px]:hidden">{title}</span>
                         </Link>
                     </li>
@@ -51,7 +49,7 @@ export default function SideBar() {
                         href={route('logout')}
                         method='post'
                     >
-                        <i className="fa-solid fa-right-from-bracket text-[2rem] rotate-180" />
+                        <Icon icon='fa-solid fa-right-from-bracket' className="text-[2rem] rotate-180" />
                         <span className="text-sm max-[1080px]:hidden">Sair do Sistema</span>
                     </Link>
                 </li>

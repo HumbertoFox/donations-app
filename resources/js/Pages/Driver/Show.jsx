@@ -56,8 +56,9 @@ export default function ShowDriver({ drivers }) {
                                             <td className='flex justify-center items-center my-1'>
                                                 <Link href={`/driver/${driver.id}/edit`}>
                                                     <Icon
+                                                        icon={hoveredIcon[driver.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-address-card'}
                                                         title={`Editar ${driver.cnh.id}`}
-                                                        className={`${hoveredIcon[driver.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-address-card'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                        className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
                                                         onMouseEnter={() => handleMouseEnter(driver.id)}
                                                         onMouseLeave={() => handleMouseLeave(driver.id)}
                                                     />

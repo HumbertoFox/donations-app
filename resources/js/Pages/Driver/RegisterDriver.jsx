@@ -19,7 +19,8 @@ export default function RegisterDriver() {
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <div className='w-full flex justify-center pb-4 sm:pb-8'>
                             <Icon
-                                className='fa-solid fa-address-card text-[45px] text-[blue]'
+                                icon='fa-solid fa-address-card'
+                                className='text-[45px] text-[blue]'
                             />
                         </div>
                         <DriverForm point={'driver.register'} valueButton={'Cadastrar'} />

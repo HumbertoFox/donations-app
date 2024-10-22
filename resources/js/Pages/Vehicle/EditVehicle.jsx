@@ -20,7 +20,8 @@ export default function EditVehicle({ vehicle }) {
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <div className='w-full flex justify-center pb-4 sm:pb-8'>
                             <Icon
-                                className='fa-solid fa-truck text-[45px] text-[blue]'
+                                icon='fa-solid fa-truck'
+                                className='text-[45px] text-[blue]'
                             />
                         </div>
                         <VehicleForm vehicle={vehicle} point={'vehicle.update'} valueButton={'Editar'} />

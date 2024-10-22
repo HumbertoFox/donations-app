@@ -48,9 +48,10 @@ export default function ShowDonors({ donors }) {
                                         <td className='flex justify-center items-center my-1'>
                                             <Link href={`/donor/${donor.id}/edit`}>
                                                 <Icon
+                                                    icon={hoveredIcon[donor.id] ? 'fa-solid fa-user-pen' : 'fa-solid fa-user-check'}
                                                     title={`Editar ${donor.name}`}
                                                     aria-label={`Editar ${donor.name}`}
-                                                    className={`${hoveredIcon[donor.id] ? 'fa-solid fa-user-pen' : 'fa-solid fa-user-check'} text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600`}
+                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
                                                     onMouseEnter={() => handleMouseEnter(donor.id)}
                                                     onMouseLeave={() => handleMouseLeave(donor.id)}
                                                 />
