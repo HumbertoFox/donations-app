@@ -1,5 +1,6 @@
 import Icon from '@/Components/Icon';
 import { Head, Link } from '@inertiajs/react';
+import { formatPhone } from '@/utils/phoneFormat';
 import { formatCep } from '@/utils/cepFormat';
 import { useState } from 'react';
 import SideBar from '@/Layouts/Sidebar';
@@ -7,13 +8,14 @@ import SideBar from '@/Layouts/Sidebar';
 export default function ShowDonors({ donors }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: true }));
+    const handleMouseEnter = (id, action) => {
+        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
     };
 
-    const handleMouseLeave = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: false }));
+    const handleMouseLeave = (id, action) => {
+        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
     };
+
     return (
         <div className="max-w-[1440px] flex justify-start items-start">
             <Head title='Doadores' />
@@ -43,17 +45,27 @@ export default function ShowDonors({ donors }) {
                                         <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
                                         <td>{donor.id}</td>
                                         <td>{donor.name}</td>
-                                        <td>{donor.phone?.phone}</td>
+                                        <td>{formatPhone(donor.phone?.phone)}</td>
                                         <td>{formatCep(donor.address?.zipcode)}</td>
-                                        <td className='flex justify-center items-center my-1'>
+                                        <td className='flex justify-evenly items-center my-1'>
                                             <Link href={`/donor/${donor.id}/edit`}>
                                                 <Icon
-                                                    icon={hoveredIcon[donor.id] ? 'fa-solid fa-user-pen' : 'fa-solid fa-user-check'}
+                                                    icon={hoveredIcon[`${donor.id}-edit`] ? 'fa-solid fa-user-pen' : 'fa-solid fa-user-gear'}
                                                     title={`Editar ${donor.name}`}
                                                     aria-label={`Editar ${donor.name}`}
                                                     className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
-                                                    onMouseEnter={() => handleMouseEnter(donor.id)}
-                                                    onMouseLeave={() => handleMouseLeave(donor.id)}
+                                                    onMouseEnter={() => handleMouseEnter(donor.id, 'edit')}
+                                                    onMouseLeave={() => handleMouseLeave(donor.id, 'edit')}
+                                                />
+                                            </Link>
+                                            <Link href={`/registerdonation/${donor.id}/show`}>
+                                                <Icon
+                                                    icon={hoveredIcon[`${donor.id}-show`] ? 'fa-solid fa-person-circle-check' : 'fa-solid fa-person-circle-question'}
+                                                    title={`Doação de ${donor.name}`}
+                                                    aria-label={`Doação de ${donor.name}`}
+                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-green-600'
+                                                    onMouseEnter={() => handleMouseEnter(donor.id, 'show')}
+                                                    onMouseLeave={() => handleMouseLeave(donor.id, 'show')}
                                                 />
                                             </Link>
                                         </td>

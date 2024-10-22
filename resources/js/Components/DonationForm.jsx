@@ -1,9 +1,9 @@
 import { useForm } from '@inertiajs/react';
 import PrimaryButton from './PrimaryButton';
 
-export default function DonationForm({ point, valueButton }) {
+export default function DonationForm({ donor = {}, point, valueButton }) {
     const initialData = {
-        donorcode: '',
+        donorcode: donor.id ?? '',
         donationcode: ''
     };
 

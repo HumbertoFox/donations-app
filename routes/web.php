@@ -40,7 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/donor/{id}', [DonorController::class, 'update'])->name('donor.update');
     Route::get('/donors', [DonorController::class, 'index'])->name('menu.donors');
 
-    Route::get('/registerdonation', [DonationController::class, 'register'])->name('menu.registerdonation');
+    Route::get('/registerdonation/{id}/show', [DonationController::class, 'register'])->name('menu.registerdonation');
+    Route::post('/donation/store', [DonationController::class, 'store'])->name('donation.register');
     Route::get('/editdonation', [DonationController::class, 'edit'])->name('menu.editdonation');
 
     Route::get('/report', [ReportController::class, 'index'])->name('menu.report');

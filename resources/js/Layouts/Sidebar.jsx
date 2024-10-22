@@ -6,10 +6,10 @@ import { Link } from '@inertiajs/react';
 const classLinks = 'flex items-center p-2.5 gap-[15px] duration-[400ms] text-black hover:bg-[#79D1FF] hover:text-white';
 
 const menuItems = [
-    { title: 'Cadastrar Doação', icon: 'fa-solid fa-pen-to-square', route: route('menu.registerdonation'), url: 'menu.registerdonation' },
+    { title: 'Cadastrar Doação', icon: 'fa-solid fa-pen-to-square', route: route('menu.donors'), url: 'menu.registerdonation' },
     { title: 'Cadastrar Doador', icon: 'fa-solid fa-user-plus', route: route('menu.registerdonor'), url: 'menu.registerdonor' },
     { title: 'Editar Doação', icon: 'fa-regular fa-pen-to-square', route: route('menu.editdonation'), url: 'menu.editdonation' },
-    { title: 'Editar Doador', icon: 'fa-solid fa-user-pen', route: route('menu.donors'), url: 'menu.donors' },
+    { title: 'Editar Doador', icon: 'fa-solid fa-user-pen', route: route('menu.donors'), url: 'donor.edit' },
     { title: 'Agendar Coleta', icon: 'fa-solid fa-file-circle-plus', route: route('menu.schedulecollection'), url: 'menu.schedulecollection' },
     { title: 'Confirmar Coleta', icon: 'fa-solid fa-file-circle-check', route: route('menu.confirmcollection'), url: 'menu.confirmcollection' },
     { title: 'Relatório', icon: 'fa-solid fa-file-lines', route: route('menu.report'), url: 'menu.report' },
@@ -53,6 +53,7 @@ export default function SideBar() {
                         <span className="text-sm max-[1080px]:hidden">Sair do Sistema</span>
                     </Link>
                 </li>
+                
             </ul>
         </nav>
     );
