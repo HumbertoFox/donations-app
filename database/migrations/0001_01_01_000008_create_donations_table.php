@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('donor_id')->constrained('donors');
             $table->foreignId('user_id')->constrained('users');
-            $table->enum('donation_type', ['money', 'items']);
-            $table->decimal('amount', 10, 2)->nullable();
-            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

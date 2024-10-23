@@ -1,5 +1,7 @@
 import { useForm } from '@inertiajs/react';
 import PrimaryButton from './PrimaryButton';
+import { useState } from 'react';
+import DangerButton from './DangerButton';
 
 export default function DonationForm({ donor = {}, point, valueButton }) {
     const initialData = {
@@ -7,12 +9,8 @@ export default function DonationForm({ donor = {}, point, valueButton }) {
         donationcode: ''
     };
 
-    for (let i = 1; i <= 14; i++) {
-        initialData[`object${i}`] = '';
-        initialData[`quant${i}`] = '';
-    }
-
     const { data, setData, post, processing, errors } = useForm(initialData);
+    const [itemCount, setItemCount] = useState(1);
 
     const createInputsFields = (count, startIndex) => (
         Array.from({ length: count }, (_, index) => (
@@ -24,6 +22,7 @@ export default function DonationForm({ donor = {}, point, valueButton }) {
                         type='text'
                         value={data[`object${startIndex + index}`]}
                         onChange={e => setData(`object${startIndex + index}`, e.target.value)}
+                        required
                     />
                     {errors[`object${startIndex + index}`] && <div>{errors[`object${startIndex + index}`]}</div>}
                 </label>
@@ -35,12 +34,25 @@ export default function DonationForm({ donor = {}, point, valueButton }) {
                         type='text'
                         value={data[`quant${startIndex + index}`]}
                         onChange={e => setData(`quant${startIndex + index}`, e.target.value)}
+                        required
                     />
                     {errors[`quant${startIndex + index}`] && <div>{errors[`quant${startIndex + index}`]}</div>}
                 </label>
             </div>
         ))
     );
+
+    const addItem = () => {
+        if (itemCount < 20) {
+            setItemCount(itemCount + 1);
+        };
+    };
+
+    const removeItem = () => {
+        if (itemCount > 1) {
+            setItemCount(itemCount - 1);
+        };
+    };
 
     function submit(e) {
         e.preventDefault();
@@ -84,38 +96,25 @@ export default function DonationForm({ donor = {}, point, valueButton }) {
 
                 <div className='flex gap-[5px] duration-[400ms] max-xl:flex-wrap'>
                     <div className='w-full flex flex-col gap-[5px] duration-[400ms]'>
-                        <div className='w-full flex gap-[5px] max-md:flex-col'>
-                            <label className='flex flex-col' htmlFor='object1'>Objeto 1
-                                <input
-                                    id='object1'
-                                    className='rounded py-0.5'
-                                    type='text'
-                                    value={data.object1}
-                                    onChange={e => setData('object1', e.target.value)}
-                                    required
-                                />
-                                {errors.object1 && <div>{errors.object1}</div>}
-                            </label>
-
-                            <label className='flex flex-col' htmlFor='quant1'>Qant/Caixa/Sacola
-                                <input
-                                    id='quant1'
-                                    className='w-[150px] rounded py-0.5 max-md:w-full'
-                                    type='text'
-                                    value={data.quant1}
-                                    onChange={e => setData('quant1', e.target.value)}
-                                    required
-                                />
-                                {errors.quant1 && <div>{errors.quant1}</div>}
-                            </label>
-                        </div>
-
-                        {createInputsFields(6, 2)}
+                        {createInputsFields(Math.ceil(itemCount / 2), 1)}
                     </div>
-
                     <div className='w-full flex flex-col gap-[5px] duration-[400ms]'>
-                        {createInputsFields(7, 8)}
+                        {createInputsFields(Math.floor(itemCount / 2), Math.ceil(itemCount / 2) + 1)}
                     </div>
+                </div>
+
+                <div className='flex justify-evenly mt-2'>
+                    {itemCount < 20 && (
+                        <PrimaryButton type="button" onClick={addItem} className='bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 active:bg-blue-600'>
+                            Adicionar Item
+                        </PrimaryButton>
+                    )}
+
+                    {itemCount > 1 && (
+                        <DangerButton type="button" onClick={removeItem}>
+                            Remover Último Item
+                        </DangerButton>
+                    )}
                 </div>
             </fieldset>
             <div className='flex justify-around py-4 duration-[400ms]'>

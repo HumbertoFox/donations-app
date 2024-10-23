@@ -93,6 +93,8 @@ class DriverController extends Controller
                 'user_id' => $userId
             ]
         );
+
+        session()->flash('success', 'Motorista Cadastrado com Sucesso!');
     }
 
     public function index()
@@ -186,5 +188,7 @@ class DriverController extends Controller
                 'address_id' => $address->id,
             ]
         );
+
+        session()->flash('success', 'Motorista Atualizado com Sucesso!');
     }
 }

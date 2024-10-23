@@ -38,6 +38,8 @@ class VehicleController extends Controller
                 'user_id' => $userId
             ]
         );
+
+        session()->flash('success', 'Veículo cadastrado com sucesso!');
     }
 
     public function index()
@@ -67,5 +69,7 @@ class VehicleController extends Controller
 
         $vehicle = Vehicle::findOrFail($id);
         $vehicle->update($validatedData);
+
+        session()->flash('success', 'Veículo Atualizado com sucesso!');
     }
 }

@@ -84,6 +84,8 @@ class HelperController extends Controller
                 'user_id' => $userId
             ]
         );
+
+        session()->flash('success', 'Ajudante Cadastrado com Sucesso!');
     }
 
     public function index()
@@ -174,5 +176,7 @@ class HelperController extends Controller
                 'address_id' => $address->id,
             ]
         );
+
+        session()->flash('success', 'Ajudante Atualizado com Sucesso!');
     }
 }

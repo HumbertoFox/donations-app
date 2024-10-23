@@ -93,7 +93,7 @@ class DonorController extends Controller
             ]
         );
 
-        session()->flash('success', 'Doador ' . $donor->name . ' cadastrado com sucesso!');
+        session()->flash('success', 'Doador ' . $donor->name . ' Cadastrado com Sucesso!');
         session()->flash('donor_id', $donor->id);
     }
 
@@ -203,6 +203,6 @@ class DonorController extends Controller
             ]
         );
 
-        session()->flash('success', 'Doador atualizado com sucesso!');
+        session()->flash('success', 'Doador Atualizado com Sucesso!');
     }
 }
