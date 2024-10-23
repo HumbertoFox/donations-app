@@ -1,6 +1,6 @@
 import { checkedZipCode } from '@/utils/viaCep';
 import { useForm } from '@inertiajs/react'
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import PrimaryButton from './PrimaryButton';
 import Swal from 'sweetalert2';
 
@@ -25,31 +25,38 @@ export default function DonorForm({ donor = {}, point, valueButton }) {
         reference_point: donor.address?.reference_point ?? ''
     });
 
+    const [clickedButton, setClickedButton] = useState(null);
     const zipCodeRef = useRef(null);
     const numberResidenceRef = useRef(null);
 
-    function submit(e) {
+    async function submit(e) {
         e.preventDefault();
 
         post(route(point, donor.id), {
-            onSuccess: () => {
-                reset();
-                if (point === 'donor.update') {
-                    Swal.fire({
-                        title: 'Sucesso!',
-                        text: 'As informações do doador foram atualizadas.',
-                        icon: 'success',
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        window.location.reload();
-                    });
-                }
+            onSuccess: ({ props }) => {
+
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: props.flash.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    switch (point) {
+                        case 'donor.update':
+                            window.location.reload();
+                            break;
+                        case 'menu.register':
+                            if (clickedButton === 'register') {
+                                reset();
+                            } else if (clickedButton === 'donation') {
+                                window.location.href = `/registerdonation/${props.flash.donor_id}/show`;
+
+                            };
+                            break;
+                    };
+                });
             },
             onError: (error) => {
-                Object.keys(error).forEach((key) => {
-                    setData(key, error[key]);
-                });
-
                 Swal.fire({
                     title: 'Erro!',
                     text: 'Ocorreu um erro ao atualizar as informações.',
@@ -337,12 +344,20 @@ export default function DonorForm({ donor = {}, point, valueButton }) {
             {valueButton && (
                 <div className='flex justify-around py-4 duration-[400ms]'>
                     {valueButton === 'Cadastrar' && (
-                        <PrimaryButton title='Cadastrar e Ir para Doação' disabled={processing}>
+                        <PrimaryButton
+                            title='Cadastrar e Ir para Doação'
+                            onClick={() => setClickedButton('donation')}
+                            disabled={processing}
+                        >
                             Cadastrar Ir
                         </PrimaryButton>
                     )}
 
-                    <PrimaryButton title={valueButton} disabled={processing}>
+                    <PrimaryButton
+                        title={valueButton}
+                        onClick={() => setClickedButton('register')}
+                        disabled={processing}
+                    >
                         {valueButton}
                     </PrimaryButton>
                 </div>

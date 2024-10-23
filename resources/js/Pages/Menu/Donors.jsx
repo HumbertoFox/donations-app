@@ -21,7 +21,7 @@ export default function ShowDonors({ donors }) {
             <Head title='Doadores' />
             <SideBar />
             <main className="relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]">
-                <div className='max-w-3xl p-1'>
+                <div className='w-full p-1'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <table className='w-full text-center'>
                             <thead>
@@ -53,7 +53,7 @@ export default function ShowDonors({ donors }) {
                                                     icon={hoveredIcon[`${donor.id}-edit`] ? 'fa-solid fa-user-pen' : 'fa-solid fa-user-gear'}
                                                     title={`Editar ${donor.name}`}
                                                     aria-label={`Editar ${donor.name}`}
-                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
+                                                    className='text-[25px] text-[blue] duration-500 cursor-pointer hover:text-orange-600'
                                                     onMouseEnter={() => handleMouseEnter(donor.id, 'edit')}
                                                     onMouseLeave={() => handleMouseLeave(donor.id, 'edit')}
                                                 />
@@ -63,7 +63,7 @@ export default function ShowDonors({ donors }) {
                                                     icon={hoveredIcon[`${donor.id}-show`] ? 'fa-solid fa-person-circle-check' : 'fa-solid fa-person-circle-question'}
                                                     title={`Doação de ${donor.name}`}
                                                     aria-label={`Doação de ${donor.name}`}
-                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-green-600'
+                                                    className='text-[25px] text-[blue] duration-500 cursor-pointer hover:text-green-600'
                                                     onMouseEnter={() => handleMouseEnter(donor.id, 'show')}
                                                     onMouseLeave={() => handleMouseLeave(donor.id, 'show')}
                                                 />

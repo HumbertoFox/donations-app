@@ -83,7 +83,7 @@ class DonorController extends Controller
             ]
         );
 
-        Donor::create(
+        $donor = Donor::create(
             [
                 'name' => $request->name,
                 'phone_id' => $phone->id,
@@ -92,6 +92,9 @@ class DonorController extends Controller
                 'user_id' => $userId
             ]
         );
+
+        session()->flash('success', 'Doador ' . $donor->name . ' cadastrado com sucesso!');
+        session()->flash('donor_id', $donor->id);
     }
 
     public function index()
@@ -199,5 +202,7 @@ class DonorController extends Controller
                 'address_id' => $address->id,
             ]
         );
+
+        session()->flash('success', 'Doador atualizado com sucesso!');
     }
 }
