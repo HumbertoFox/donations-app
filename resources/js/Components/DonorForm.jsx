@@ -29,12 +29,11 @@ export default function DonorForm({ donor = {}, point, valueButton }) {
     const zipCodeRef = useRef(null);
     const numberResidenceRef = useRef(null);
 
-    async function submit(e) {
+    const submit = async (e) => {
         e.preventDefault();
 
         post(route(point, donor.id), {
             onSuccess: ({ props }) => {
-
                 Swal.fire({
                     title: 'Sucesso!',
                     text: props.flash.success,
@@ -50,18 +49,9 @@ export default function DonorForm({ donor = {}, point, valueButton }) {
                                 reset();
                             } else if (clickedButton === 'donation') {
                                 window.location.href = `/registerdonation/${props.flash.donor_id}/show`;
-
                             };
                             break;
                     };
-                });
-            },
-            onError: (error) => {
-                Swal.fire({
-                    title: 'Erro!',
-                    text: 'Ocorreu um erro ao atualizar as informações.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
                 });
             }
         });

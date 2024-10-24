@@ -12,7 +12,7 @@ class Vehicle extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'chassi',
+        'renavam',
         'plate',
         'km',
         'model',

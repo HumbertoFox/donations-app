@@ -18,7 +18,7 @@ class VehicleController extends Controller
     {
         $request->validate(
             [
-                'chassi' => 'required|string|max:100|unique:vehicles,chassi',
+                'renavam' => 'required|string|max:100|unique:vehicles,renavam',
                 'plate' => 'required|string|uppercase|max:10|unique:vehicles,plate',
                 'km' => 'required|string|min:0',
                 'model' => 'required|string|uppercase|max:150',
@@ -30,7 +30,7 @@ class VehicleController extends Controller
 
         Vehicle::create(
             [
-                'chassi' => $request->chassi,
+                'renavam' => $request->renavam,
                 'plate' => $request->plate,
                 'km' => $request->km,
                 'model' => $request->model,
@@ -61,7 +61,7 @@ class VehicleController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'chassi' => 'required|string|max:100',
+            'renavam' => 'required|string|max:100',
             'plate' => 'required|string|uppercase|max:50',
             'model' => 'required|string|uppercase|max:150',
             'automaker' => 'required|string|uppercase|max:100'

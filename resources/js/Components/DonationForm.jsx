@@ -2,14 +2,20 @@ import { useForm } from '@inertiajs/react';
 import PrimaryButton from './PrimaryButton';
 import { useState } from 'react';
 import DangerButton from './DangerButton';
+import Swal from 'sweetalert2';
 
 export default function DonationForm({ donor = {}, point, valueButton }) {
     const initialData = {
-        donorcode: donor.id ?? '',
+        donorcode: donor ?? '',
         donationcode: ''
     };
 
-    const { data, setData, post, processing, errors } = useForm(initialData);
+    for (let i = 1; i <= 20; i++) {
+        initialData[`object${i}`] = '';
+        initialData[`quant${i}`] = '';
+    };
+
+    const { data, setData, post, processing, errors, reset } = useForm(initialData);
     const [itemCount, setItemCount] = useState(1);
 
     const createInputsFields = (count, startIndex) => (
@@ -54,9 +60,22 @@ export default function DonationForm({ donor = {}, point, valueButton }) {
         };
     };
 
-    function submit(e) {
+    const submit = async (e) => {
         e.preventDefault();
-        console.log(data);
+
+        post(route(point), {
+            onSuccess: ({ props }) => {
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: props.flash.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    reset();
+                    window.location.href = `/donors`;
+                });
+            }
+        });
     };
 
     return (

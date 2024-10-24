@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cnhs', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->string('cnh')->unique();
-            $table->foreignId('cpf_id')->constrained('cpfs');
+            $table->string('item')->unique();
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cnhs');
+        Schema::dropIfExists('items');
     }
 };

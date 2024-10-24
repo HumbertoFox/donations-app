@@ -33,4 +33,9 @@ class Donor extends Model
     {
         return $this->hasOne(Cnpj::class, 'id', 'cnpj_id')->withDefault();
     }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

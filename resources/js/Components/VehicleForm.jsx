@@ -3,21 +3,35 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
+import Swal from 'sweetalert2';
 
 export default function VehicleForm({ vehicle = {}, point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         model: vehicle.model ?? '',
         automaker: vehicle.automaker ?? '',
-        chassi: vehicle.chassi ?? '',
+        renavam: vehicle.renavam ?? '',
         plate: vehicle.plate ?? '',
         km: vehicle.km ?? ''
     });
 
-    const submit = (e) => {
+    const submit = async (e) => {
         e.preventDefault();
 
         post(route(point, vehicle.id), {
-            onSuccess: () => reset()
+            onSuccess: ({ props }) => {
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: props.flash.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    point === 'vehicle.update'
+                    ?
+                    window.location.reload()
+                    :
+                    reset();
+                });
+            }
         });
     };
 
@@ -57,19 +71,19 @@ export default function VehicleForm({ vehicle = {}, point, valueButton }) {
             </div>
 
             <div className='mt-4'>
-                <InputLabel htmlFor='chassi' value='Chassi' />
+                <InputLabel htmlFor='renavam' value='Renavam' />
 
                 <TextInput
-                    id='chassi'
-                    name='chassi'
-                    value={data.chassi}
+                    id='renavam'
+                    name='renavam'
+                    value={data.renavam}
                     className='mt-1 block w-full'
-                    autoComplete='chassi'
-                    onChange={(e) => setData('chassi', e.target.value)}
+                    autoComplete='renavam'
+                    onChange={(e) => setData('renavam', e.target.value)}
                     required
                 />
 
-                <InputError message={errors.chassi} className='mt-2' />
+                <InputError message={errors.renavam} className='mt-2' />
             </div>
 
             <div className='mt-4'>

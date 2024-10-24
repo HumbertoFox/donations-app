@@ -31,7 +31,7 @@ export default function ShowVehicle({ vehicles }) {
                                 <tr className='border-b-[1px] border-gray-600'>
                                     <th>Nº</th>
                                     <th>Cód.</th>
-                                    <th>Chassi</th>
+                                    <th>Renavam</th>
                                     <th>Placa</th>
                                     <th>Modelo</th>
                                     <th>Montadora</th>
@@ -48,7 +48,7 @@ export default function ShowVehicle({ vehicles }) {
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
                                         <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
                                         <td>{vehicle.id}</td>
-                                        <td>{vehicle.chassi}</td>
+                                        <td>{vehicle.renavam}</td>
                                         <td>{vehicle.plate}</td>
                                         <td>{vehicle.model}</td>
                                         <td>{vehicle.automaker}</td>

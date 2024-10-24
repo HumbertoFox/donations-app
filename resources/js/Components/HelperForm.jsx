@@ -6,6 +6,7 @@ import { getCheckedCpf } from '@/utils/cpfValidation';
 import { checkedZipCode } from '@/utils/viaCep';
 import { useForm } from '@inertiajs/react';
 import { useRef } from 'react';
+import Swal from 'sweetalert2';
 
 export default function HelperForm({ helper = {}, point, valueButton }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -38,7 +39,20 @@ export default function HelperForm({ helper = {}, point, valueButton }) {
         };
 
         post(route(point, helper.id), {
-            onSuccess: () => reset()
+            onSuccess: ({ props }) => {
+                Swal.fire({
+                    title: 'Sucesso!',
+                    text: props.flash.success,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    point === 'helper.update'
+                    ?
+                    window.location.reload()
+                    :
+                    reset();
+                });
+            }
         });
     };
 

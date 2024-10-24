@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('donation_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('donation_id')->constrained('donations');
-            $table->string('object');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('item_id')->constrained('items');
             $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
