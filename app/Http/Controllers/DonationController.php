@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Donation;
+use App\Models\Donation_item;
 use App\Models\Donor;
 use App\Models\Item;
 use Illuminate\Http\Request;
@@ -73,8 +74,17 @@ class DonationController extends Controller
         }
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return Inertia::render('Menu/EditDonation');
+        $donation = Donation::with(['donation_items.item'])->findOrFail($id);
+        $donor = Donor::findOrFail($donation->donor_id);
+
+        return Inertia::render('Menu/EditDonation', [
+            'donation' => $donation,
+            'donor' => $donor,
+            'phone' => $donor->phone,
+            'address' => $donor->address->zipcode,
+            'donation_item' => $donation->donation_items
+        ]);
     }
 }

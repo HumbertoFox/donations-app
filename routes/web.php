@@ -34,15 +34,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/agenda', [AgendaController::class, 'show'])->name('menu.agenda');
 
-    Route::get('/registerdonor', [DonorController::class, 'register'])->name('menu.registerdonor');
-    Route::post('/donor/store', [DonorController::class, 'store'])->name('menu.register');
+    Route::get('/registerdonor', [DonorController::class, 'register'])->name('donor.register');
+    Route::post('/donor/store', [DonorController::class, 'store'])->name('donor.store');
     Route::get('/donor/{id}/edit', [DonorController::class, 'edit'])->name('donor.edit');
     Route::post('/donor/{id}', [DonorController::class, 'update'])->name('donor.update');
     Route::get('/donors', [DonorController::class, 'index'])->name('menu.donors');
 
-    Route::get('/registerdonation/{id}/show', [DonationController::class, 'register'])->name('menu.registerdonation');
-    Route::post('/donation/store', [DonationController::class, 'store'])->name('donation.register');
-    Route::get('/editdonation', [DonationController::class, 'edit'])->name('menu.editdonation');
+    Route::get('/donation/{id}/register', [DonationController::class, 'register'])->name('donation.register');
+    Route::post('/donation/store', [DonationController::class, 'store'])->name('donation.store');
+    Route::get('/donation/{id}/edit', [DonationController::class, 'edit'])->name('donation.edit');
 
     Route::get('/report', [ReportController::class, 'index'])->name('menu.report');
 

@@ -26,7 +26,7 @@ class Donation extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function donation_item(): HasMany
+    public function donation_items(): HasMany
     {
         return $this->hasMany(Donation_item::class, 'donation_id');
     }

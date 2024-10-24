@@ -44,11 +44,11 @@ export default function DonorForm({ donor = {}, point, valueButton }) {
                         case 'donor.update':
                             window.location.reload();
                             break;
-                        case 'menu.register':
+                        case 'donor.store':
                             if (clickedButton === 'register') {
                                 reset();
                             } else if (clickedButton === 'donation') {
-                                window.location.href = `/registerdonation/${props.flash.donor_id}/show`;
+                                window.location.href = `/donation/${props.flash.donor_id}/register`;
                             };
                             break;
                     };

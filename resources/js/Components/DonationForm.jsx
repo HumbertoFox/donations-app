@@ -4,13 +4,19 @@ import { useState } from 'react';
 import DangerButton from './DangerButton';
 import Swal from 'sweetalert2';
 
-export default function DonationForm({ donor = {}, point, valueButton }) {
+export default function DonationForm({ donation = {}, point, valueButton }) {
     const initialData = {
-        donorcode: donor ?? '',
-        donationcode: ''
+        donorcode: donation.donor_id ?? '',
+        donationcode: donation.id ?? ''
     };
+    
+    donation.donation_items?.forEach((item, index) => {
+        initialData[`object${index + 1}`] = item.item.item;
+        initialData[`quant${index + 1}`] = item.quantity;
+    });
 
-    for (let i = 1; i <= 20; i++) {
+
+    for (let i = donation.donation_items?.length + 1; i <= 20; i++) {
         initialData[`object${i}`] = '';
         initialData[`quant${i}`] = '';
     };

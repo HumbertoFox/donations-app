@@ -58,7 +58,7 @@ export default function ShowDonors({ donors }) {
                                                     onMouseLeave={() => handleMouseLeave(donor.id, 'edit')}
                                                 />
                                             </Link>
-                                            <Link href={`/registerdonation/${donor.id}/show`}>
+                                            <Link href={`/donation/${donor.id}/register`}>
                                                 <Icon
                                                     icon={hoveredIcon[`${donor.id}-show`] ? 'fa-solid fa-person-circle-check' : 'fa-solid fa-person-circle-question'}
                                                     title={`Doação de ${donor.name}`}

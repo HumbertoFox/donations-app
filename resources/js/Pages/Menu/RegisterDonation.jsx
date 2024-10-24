@@ -15,7 +15,7 @@ export default function RegisterDonation({ donor }) {
                     <div className='duration-[400ms]'>
                         <DonorForm donor={donor} point={null} valueButton={null} />
                     </div>
-                    <DonationForm donor={donor.id} point={'donation.register'} valueButton={'Cadastrar'} />
+                    <DonationForm donor={donor.id} point={'donation.store'} valueButton={'Cadastrar'} />
                 </div>
             </main>
         </div>
