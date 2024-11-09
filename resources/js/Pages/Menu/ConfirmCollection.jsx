@@ -13,14 +13,8 @@ import { Toast } from '@/utils/sweetAlert';
 export default function ConfirmCollection({ records, flash }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id, action) => {
-        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
-    };
-
-    const handleMouseLeave = (id, action) => {
-        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
-    };
-
+    const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
+    const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
     const showRecordDetails = (record) => {
         Swal.fire({
             title: `Detalhes da Doação - Cód. ${record.id}`,
@@ -64,7 +58,7 @@ export default function ConfirmCollection({ records, flash }) {
             confirmButtonText: 'Ok',
         });
     };
-
+    
     const showRecordDetailsDonor = (record) => {
         Swal.fire({
             title: `Detalhes do Doador - Cód. ${record.donor.id}`,
@@ -99,10 +93,9 @@ export default function ConfirmCollection({ records, flash }) {
     }, [flash]);
 
     return (
-        <div className='max-w-[1440px] flex justify-start items-start'>
-            <Head title='BetoFoxNet_Info' />
-            <SideBar />
-            <main className='relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]'>
+        <div className='max-w-full'>
+            <Head title='Conformar Coleta' />
+            <SideBar>
                 <div className='w-full p-1'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <table className='w-full text-center'>
@@ -198,7 +191,7 @@ export default function ConfirmCollection({ records, flash }) {
                         {records.data.length > 10 && <Pagination links={records.links} currentPage={records.currentPage} />}
                     </div>
                 </div>
-            </main>
+            </SideBar>
         </div>
     );
 }

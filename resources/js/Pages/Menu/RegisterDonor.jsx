@@ -4,12 +4,11 @@ import { Head } from '@inertiajs/react';
 
 export default function RegisterDonor() {
     return (
-        <div className='max-w-[1440px] flex justify-start items-start'>
-            <Head title='BetoFoxNet_Info' />
-            <SideBar />
-            <main className='relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]'>
+        <div className='max-w-full'>
+            <Head title='Cadastrar Doador' />
+            <SideBar>
                 <DonorForm point={'donor.store'} valueButton={'Cadastrar'} />
-            </main>
+            </SideBar>
         </div>
     );
 }

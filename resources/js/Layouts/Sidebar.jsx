@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 
-const classLinks = 'flex items-center p-2.5 gap-[15px] duration-[400ms] text-black hover:bg-[#79D1FF] hover:text-white';
+const classLinks = 'flex items-center p-2.5 gap-[15px] duration-500 text-black hover:bg-[#79D1FF] hover:text-white ease-in-out';
 
 const menuItems = [
     { title: 'Cadastrar Doação', icon: 'fa-solid fa-pen-to-square', route: route('menu.donors'), url: 'donation.register' },
@@ -16,7 +16,7 @@ const menuItems = [
     { title: 'Agenda', icon: 'fa-solid fa-calendar-days', route: route('menu.agenda'), url: 'menu.agenda' }
 ];
 
-export default function SideBar() {
+export default function SideBar({ children }) {
     const [isUrlCurrent, setIsUrlCurrent] = useState('');
 
     useEffect(() => {
@@ -25,36 +25,44 @@ export default function SideBar() {
     }, []);
 
     return (
-        <nav className='w-[200px] h-full flex flex-col fixed border-r-[3px] border-[#79D1FF] bg-[#AAF998] duration-[400ms] overflow-hidden max-[1080px]:w-[70px]'>
-            <Link className="max-w-[150px] mx-auto duration-[400ms]" href={'/dashboard'}>
-                <ApplicationLogo />
-            </Link>
-            <ul>
+        <div className='max-w-[1440px] h-dvh flex justify-start items-start'>
 
-                {menuItems.map(({ title, icon, route, url }, index) => (
-                    <li key={index} title={title}>
-                        <Link className={`${classLinks} ${isUrlCurrent === url && 'bg-[#79D1FF] text-black hover:text-white'}`}
-                            href={route}
-                            aria-label={title}
-                            role='menuitem'
+            <nav className='w-[200px] h-full flex flex-col fixed border-r-[3px] border-[#79D1FF] bg-[#AAF998] duration-500 overflow-hidden max-[1080px]:w-[70px] ease-in-out'>
+                <Link className='max-w-[110px] mx-auto duration-500 ease-in-out' href={'/dashboard'}>
+                    <ApplicationLogo />
+                </Link>
+
+                <ul>
+
+                    {menuItems.map(({ title, icon, route, url }, index) => (
+                        <li key={index} title={title}>
+                            <Link className={`${classLinks} ${isUrlCurrent === url && 'bg-[#79D1FF] text-black hover:text-white'}`}
+                                href={route}
+                                aria-label={title}
+                                role='menuitem'
+                            >
+                                <Icon icon={icon} className='text-[2rem]' />
+                                <span className='text-sm max-[1080px]:hidden'>{title}</span>
+                            </Link>
+                        </li>
+                    ))}
+
+                    <li className='duration-500 mt-4 ease-in-out' title='Sair/Logout'>
+                        <Link
+                            className='flex items-center p-2.5 gap-[15px] duration-500 hover:text-red-600 active:bg-[#79D1FF] ease-in-out'
+                            href={route('logout')}
+                            method='post'
                         >
-                            <Icon icon={icon} className='text-[2rem]' />
-                            <span className="text-sm max-[1080px]:hidden">{title}</span>
+                            <Icon icon='fa-solid fa-right-from-bracket' className='text-[2rem] rotate-180' />
+                            <span className='text-sm max-[1080px]:hidden'>Sair do Sistema</span>
                         </Link>
                     </li>
-                ))}
+                </ul>
+            </nav>
 
-                <li className="duration-[400ms] mt-4" title='Sair/Logout'>
-                    <Link className="flex items-center p-2.5 gap-[15px] duration-[400ms] hover:text-red-600 active:bg-[#79D1FF]"
-                        href={route('logout')}
-                        method='post'
-                    >
-                        <Icon icon='fa-solid fa-right-from-bracket' className="text-[2rem] rotate-180" />
-                        <span className="text-sm max-[1080px]:hidden">Sair do Sistema</span>
-                    </Link>
-                </li>
-                
-            </ul>
-        </nav>
+            <main className='relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-500 ease-in-out'>
+                {children}
+            </main>
+        </div>
     );
 }

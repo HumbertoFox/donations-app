@@ -46,11 +46,10 @@ export default function Agenda({ records }) {
     });
 
     return (
-        <div className='max-w-[1440px] flex justify-start items-start'>
-            <Head title='BetoFoxNet_Info' />
-            <SideBar />
-            <main className='relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]'>
-                <div className='duration-[400ms]'>
+        <div className='max-w-full'>
+            <Head title='Agenda' />
+            <SideBar>
+                <div className='duration-500 ease-in-out'>
                     <Calendar
                         className='p-1 min-h-screen'
                         localizer={localizer}
@@ -62,7 +61,7 @@ export default function Agenda({ records }) {
                         components={{ toolbar: CustomToolbar }}
                     />
                 </div>
-            </main>
+            </SideBar>
         </div>
     );
 }

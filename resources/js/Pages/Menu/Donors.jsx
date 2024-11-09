@@ -9,19 +9,13 @@ import Pagination from '@/Components/Pagination';
 export default function ShowDonors({ donors }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id, action) => {
-        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
-    };
-
-    const handleMouseLeave = (id, action) => {
-        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
-    };
+    const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
+    const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
 
     return (
-        <div className='max-w-[1440px] flex justify-start items-start'>
+        <div className='max-w-full'>
             <Head title='Doadores' />
-            <SideBar />
-            <main className='relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]'>
+            <SideBar>
                 <div className='w-full p-1'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <table className='w-full text-center'>
@@ -79,7 +73,7 @@ export default function ShowDonors({ donors }) {
                         {donors.data.length > 10 && <Pagination links={donors.links} currentPage={donors.currentPage} />}
                     </div>
                 </div>
-            </main>
+            </SideBar>
         </div>
     );
 }

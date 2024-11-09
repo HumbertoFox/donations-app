@@ -12,27 +12,15 @@ export default function ScheduleCollection({ donations }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
     const [hoveredDaysIndex, setHoveredDaysIndex] = useState(null);
 
-    const handleMouseEnter = (id, action) => {
-        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
-    };
-
-    const handleMouseLeave = (id, action) => {
-        setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
-    };
-
-    const handleMouseEnterDays = (index) => {
-        setHoveredDaysIndex(index);
-    };
-
-    const handleMouseLeaveDays = () => {
-        setHoveredDaysIndex(null);
-    };
+    const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
+    const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
+    const handleMouseEnterDays = (index) => setHoveredDaysIndex(index);
+    const handleMouseLeaveDays = () => setHoveredDaysIndex(null);
 
     return (
-        <div className='max-w-[1440px] flex justify-start items-start'>
-            <Head title='BetoFoxNet_Info' />
-            <SideBar />
-            <main className='relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]'>
+        <div className='max-w-full'>
+            <Head title='Doações' />
+            <SideBar>
                 <div className='w-full p-1'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <table className='w-full text-center'>
@@ -103,7 +91,7 @@ export default function ScheduleCollection({ donations }) {
                         {donations.data.length > 10 && <Pagination links={donations.links} currentPage={donations.currentPage} />}
                     </div>
                 </div>
-            </main>
+            </SideBar>
         </div>
     );
 }

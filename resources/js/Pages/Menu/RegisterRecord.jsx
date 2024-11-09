@@ -6,6 +6,9 @@ import { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function RegisterRecord({ user, donor, donation, vehicles, drivers, helpers }) {
+    const [selectedHelperone, setSelectedHelperone] = useState('');
+    const [showSecondSelect, setShowSecondSelect] = useState(false);
+
     const { data, setData, post, processing, errors } = useForm({
         donorcode: donor?.id ?? '',
         donationcode: donation?.id ?? '',
@@ -18,9 +21,6 @@ export default function RegisterRecord({ user, donor, donation, vehicles, driver
     });
 
     const today = new Date().toISOString().split('T')[0];
-
-    const [selectedHelperone, setSelectedHelperone] = useState('');
-    const [showSecondSelect, setShowSecondSelect] = useState(false);
 
     const handleHelperoneChange = (e) => {
         const value = e.target.value;
@@ -48,10 +48,9 @@ export default function RegisterRecord({ user, donor, donation, vehicles, driver
     const filteredHelpers = helpers?.filter(helper => helper.id !== Number(selectedHelperone));
 
     return (
-        <div className='max-w-[1440px] flex justify-start items-start'>
-            <Head title='BetoFoxNet_Info' />
-            <SideBar />
-            <main className='relative left-[200px] w-calc-sidebarfull max-[1080px]:w-calc-sidebarmin min-h-screen bg-gray-100 max-[1080px]:left-[70px] duration-[400ms]'>
+        <div className='max-w-full'>
+            <Head title='Agendar Coleta' />
+            <SideBar>
                 <div className='flex flex-col duration-[400ms] p-1'>
                     <form className='flex flex-col gap-2 pb-5' onSubmit={submit}>
                         <div className='flex flex-wrap gap-2'>
@@ -203,7 +202,7 @@ export default function RegisterRecord({ user, donor, donation, vehicles, driver
                         ))}
                     </>
                 </div>
-            </main>
+            </SideBar>
         </div>
     );
 }
