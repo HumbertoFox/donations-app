@@ -65,7 +65,7 @@ export default function ShowVehicle({ vehicles }) {
                                 ))}
                             </tbody>
                         </table>
-                        {vehicles.data.length > 10 && <Pagination links={vehicles.links} currentPage={vehicles.currentPage} />}
+                        {vehicles.per_page > 9 && <Pagination links={vehicles.links} currentPage={vehicles.currentPage} />}
                     </div>
                 </div>
             </div>

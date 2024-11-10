@@ -63,7 +63,7 @@ export default function ShowDriver({ drivers }) {
                                 ))}
                             </tbody>
                         </table>
-                        {drivers.data.length > 10 && <Pagination links={drivers.links} currentPage={drivers.currentPage} />}
+                        {drivers.per_page > 9 && <Pagination links={drivers.links} currentPage={drivers.currentPage} />}
                     </div>
                 </div>
             </div>

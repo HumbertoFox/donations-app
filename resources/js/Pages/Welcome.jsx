@@ -2,6 +2,8 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
+    const currentYear = new Date().getFullYear();
+
     return (
         <>
             <Head title="BetoFoxNet_Info" />
@@ -51,6 +53,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </main>
 
                 <footer className="py-16 text-center text-sm text-black dark:text-white/70">
+                    <p>® <a href="https://betofoxnet-info.vercel.app/" target="_blank" rel="">BetoFoxNet_Info</a> - Desde 2015 à {currentYear}.</p>
                     Laravel v{laravelVersion} (PHP v{phpVersion})
                 </footer>
             </div>
