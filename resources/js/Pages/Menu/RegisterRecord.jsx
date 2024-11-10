@@ -1,4 +1,4 @@
-import PrimaryButton from '@/Components/PrimaryButton';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import TablePrint from '@/Components/TablePrint';
 import SideBar from '@/Layouts/Sidebar';
 import { Toast } from '@/utils/sweetAlert';

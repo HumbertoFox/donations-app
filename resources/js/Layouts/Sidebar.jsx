@@ -1,6 +1,6 @@
 import Icon from '@/Components/Icon';
-import { useEffect, useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import { useEffect, useState } from 'react';
 import { Link } from '@inertiajs/react';
 
 const classLinks = 'flex items-center p-2.5 gap-[15px] duration-500 text-black hover:bg-[#79D1FF] hover:text-white ease-in-out';

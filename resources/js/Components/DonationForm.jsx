@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 import { Toast } from '@/utils/sweetAlert';
-import DangerButton from './DangerButton';
-import PrimaryButton from './PrimaryButton';
+import DangerButton from './Buttons/DangerButton';
+import PrimaryButton from './Buttons/PrimaryButton';
 
 export default function DonationForm({ donor = {}, donation = {}, point, valueButton }) {
     const initialData = {

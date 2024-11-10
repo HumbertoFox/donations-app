@@ -2,7 +2,7 @@ import { checkedZipCode } from '@/utils/viaCep';
 import { useForm } from '@inertiajs/react'
 import { useRef, useState } from 'react';
 import { Toast } from '@/utils/sweetAlert';
-import PrimaryButton from './PrimaryButton';
+import PrimaryButton from './Buttons/PrimaryButton';
 
 export default function DonorForm({ donor = {}, point, valueButton }) {
     const { data, setData, post, put, processing, errors, reset } = useForm({

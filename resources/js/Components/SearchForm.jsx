@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react'
-import PrimaryButton from './PrimaryButton';
+import PrimaryButton from './Buttons/PrimaryButton';
 
 export default function SearchForm({ point, legend, labelText, valueButton }) {
     const { data, setData, post, processing, errors } = useForm({

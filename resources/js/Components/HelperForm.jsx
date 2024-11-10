@@ -1,6 +1,6 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { calculateAge } from '@/utils/calcAge';
 import { getCheckedCpf } from '@/utils/cpfValidation';
