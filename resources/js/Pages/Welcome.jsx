@@ -7,7 +7,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Head title="BetoFoxNet_Info" />
-            <div className="relative w-full min-h-screen max-w-2xl lg:max-w-7xl flex justify-between flex-col mx-auto">
+            <div className="relative w-full min-h-screen max-w-2xl lg:max-w-7xl flex flex-col justify-between mx-auto">
                 <header>
                     <nav className="mx-3 flex flex-1 justify-end">
                         {auth.user ? (
@@ -36,23 +36,21 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </nav>
                 </header>
 
-                <h1 className="text-center text-3xl font-bold">Bem-vindo ao Programa de Gestão de Doações</h1>
+                <h1 className="text-center text-2xl font-bold">Bem-vindo ao Programa de Gestão de Doações</h1>
 
-                <main className="w-full min-h-full p-[10px] text-center">
-                    <div className="flex justify-between">
-                        <a href={'https://betofoxnet-info.vercel.app/'} target="_blank" rel="">
-                            <ApplicationLogo />
-                        </a>
-                        <a href={'https://betofoxnet-info.vercel.app/'} target="_blank" rel="">
-                            <ApplicationLogo className="bg-cyan-300 rounded-full" />
-                        </a>
-                        <a href={'https://betofoxnet-info.vercel.app/'} target="_blank" rel="">
-                            <ApplicationLogo />
-                        </a>
-                    </div>
-                </main>
+                <div className="w-full min-h-full flex items-center p-[10px] text-center">
+                    <a href={'https://betofoxnet-info.vercel.app/'} target="_blank" rel="">
+                        <ApplicationLogo />
+                    </a>
+                    <a href={'https://betofoxnet-info.vercel.app/'} target="_blank" rel="">
+                        <ApplicationLogo className="bg-cyan-300 rounded-full" />
+                    </a>
+                    <a href={'https://betofoxnet-info.vercel.app/'} target="_blank" rel="">
+                        <ApplicationLogo />
+                    </a>
+                </div>
 
-                <footer className="py-16 text-center text-sm text-black dark:text-white/70">
+                <footer className="text-center text-sm text-black dark:text-white/70">
                     <p>® <a href="https://betofoxnet-info.vercel.app/" target="_blank" rel="">BetoFoxNet_Info</a> - Desde 2015 à {currentYear}.</p>
                     Laravel v{laravelVersion} (PHP v{phpVersion})
                 </footer>
