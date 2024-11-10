@@ -7,13 +7,8 @@ import { useState } from 'react';
 export default function ShowVehicle({ vehicles }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: true }));
-    };
-
-    const handleMouseLeave = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: false }));
-    };
+    const handleMouseEnter = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: true }));
+    const handleMouseLeave = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: false }));
 
     return (
         <AuthenticatedLayout

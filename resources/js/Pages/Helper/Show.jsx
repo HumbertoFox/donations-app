@@ -8,13 +8,9 @@ import { formatCpf } from '@/utils/cpfFormat';
 export default function ShowHelper({ helpers }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: true }));
-    };
+    const handleMouseEnter = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: true }));
+    const handleMouseLeave = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: false }));
 
-    const handleMouseLeave = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: false }));
-    };
     return (
         <AuthenticatedLayout
             header={
@@ -53,7 +49,7 @@ export default function ShowHelper({ helpers }) {
                                         <td className='flex justify-center items-center my-1'>
                                             <Link href={`/helper/${helper.id}/edit`}>
                                                 <Icon
-                                                    icon={hoveredIcon[helper.id] ? 'fa-solid fa-address-card' : 'fa-regular fa-id-card'}
+                                                    icon={hoveredIcon[helper.id] ? 'fa-solid fa-id-card' : 'fa-regular fa-id-card'}
                                                     title={`Editar ${helper.cpf?.name}`}
                                                     className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
                                                     onMouseEnter={() => handleMouseEnter(helper.id)}
