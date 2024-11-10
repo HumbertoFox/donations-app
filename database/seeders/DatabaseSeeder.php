@@ -2,24 +2,26 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
+use App\Models\Cpf;
+use App\Models\Phone;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Humberto Ribeiro',
-            'phone' => '81988075408',
-            'email' => 'humbertobetofoxnet.info@gmail.com',
-            'password' => 'Breeze@Laravel'
+            'cpf_id' => Cpf::factory()->create()->id,
+            'phone_id' => Phone::factory()->create()->id,
+            'address_id' => Address::factory()->create()->id,
+            'email' => 'betofoxnet.info@betofoxnet.com.br',
+            'password' => Hash::make('Betofoxnet@Laravel'),
         ]);
     }
 }
