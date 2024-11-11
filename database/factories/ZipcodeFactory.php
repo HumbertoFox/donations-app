@@ -12,7 +12,7 @@ class ZipcodeFactory extends Factory
     public function definition(): array
     {
         return [
-            'zipcode' => $this->faker->unique()->postcode(),
+            'zipcode' => $this->faker->unique()->numerify('########'),
             'city' => $this->faker->city(),
             'district' => $this->faker->word(),
             'street' => $this->faker->streetName(),

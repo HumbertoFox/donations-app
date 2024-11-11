@@ -18,4 +18,11 @@ class PhoneFactory extends Factory
             'email' => $this->faker->optional()->safeEmail(),
         ];
     }
+
+    public function withEmail(): self
+    {
+        return $this->state([
+            'email' => $this->faker->safeEmail(),
+        ]);
+    }
 }
