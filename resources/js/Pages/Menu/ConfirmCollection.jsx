@@ -188,7 +188,7 @@ export default function ConfirmCollection({ records, flash }) {
                                 })}
                             </tbody>
                         </table>
-                        {records.per_page > 9 && <Pagination links={records.links} currentPage={records.currentPage} />}
+                        {records.per_page > 9 && <Pagination links={records.links} currentPage={records.current_page} />}
                     </div>
                 </div>
             </SideBar>

@@ -73,7 +73,7 @@ export default function ShowUsers({ users }) {
                                 ))}
                             </tbody>
                         </table>
-                        {users.per_page > 9 && <Pagination links={users.links} currentPage={users.currentPage} />}
+                        {users.per_page > 9 && <Pagination links={users.links} currentPage={users.current_page} />}
                     </div>
                 </div>
             </div>

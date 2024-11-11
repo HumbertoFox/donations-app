@@ -70,7 +70,7 @@ export default function ShowDonors({ donors }) {
                                 ))}
                             </tbody>
                         </table>
-                        {donors.per_page > 9 && <Pagination links={donors.links} currentPage={donors.currentPage} />}
+                        {donors.per_page > 9 && <Pagination links={donors.links} currentPage={donors.current_page} />}
                     </div>
                 </div>
             </SideBar>
