@@ -102,7 +102,7 @@ class DriverController extends Controller
     {
         $drivers = Driver::with('cnh.cpf')->paginate(10);
 
-        return Inertia::render('Driver/Show', [
+        return Inertia::render('Driver/ShowDriver', [
             'drivers' => $drivers
         ]);
     }

@@ -7,16 +7,11 @@ import { formatPhone } from '@/utils/phoneFormat';
 import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function ShowUsers({ users }) {
+export default function Index({ users }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: true }));
-    };
-
-    const handleMouseLeave = (id) => {
-        setHoveredIcon((prev) => ({ ...prev, [id]: false }));
-    };
+    const handleMouseEnter = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: true }));
+    const handleMouseLeave = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: false }));
 
     return (
         <AuthenticatedLayout
@@ -54,11 +49,11 @@ export default function ShowUsers({ users }) {
                                         <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
                                         <td>{user.id}</td>
                                         <td>{user.name}</td>
-                                        <td>{formatCpf(user.cpf?.cpf)}</td>
-                                        <td>{formatPhone(user.phone?.phone)}</td>
-                                        <td>{formatCep(user.address?.zipcode?.zipcode)}</td>
+                                        <td>{formatCpf(user.cpf.cpf)}</td>
+                                        <td>{formatPhone(user.phone.phone)}</td>
+                                        <td>{formatCep(user.address.zipcode.zipcode)}</td>
                                         <td className='flex justify-center items-center my-1'>
-                                            <Link href={``}>
+                                            <Link href={route('profile.all')}>
                                                 <Icon
                                                     icon={hoveredIcon[user.id] ? 'fa-solid fa-user-gear' : 'fa-solid fa-user-pen'}
                                                     title={`Editar ${user.name}`}
@@ -73,7 +68,12 @@ export default function ShowUsers({ users }) {
                                 ))}
                             </tbody>
                         </table>
-                        {users.per_page > 9 && <Pagination links={users.links} currentPage={users.current_page} />}
+                        {users.per_page > 9 && (
+                            <Pagination
+                                links={users.links}
+                                currentPage={users.current_page}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

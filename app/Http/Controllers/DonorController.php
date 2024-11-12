@@ -104,6 +104,7 @@ class DonorController extends Controller
             'phone',
             'address.zipcode'
         ])
+            ->orderBy('id', 'desc')
             ->paginate(10);
 
         return Inertia::render('Menu/Donors', [

@@ -46,7 +46,7 @@ class VehicleController extends Controller
     public function index(): Response
     {
         $vehicles = Vehicle::paginate(10);
-        return Inertia::render('Vehicle/Show', [
+        return Inertia::render('Vehicle/ShowVehicle', [
             'vehicles' => $vehicles
         ]);
     }

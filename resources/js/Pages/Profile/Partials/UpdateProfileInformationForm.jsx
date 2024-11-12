@@ -18,21 +18,21 @@ export default function UpdateProfileInformation({
     const numberResidenceRef = useRef(null);
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        name: user.name ?? '',
-        cpf: user.cpf?.cpf ?? '',
-        birthdate: user.cpf?.birthdate ?? '',
-        phone: user.phone?.phone ?? '',
-        email: user.email ?? '',
-        zipcode: user.address?.zipcode?.zipcode ?? '',
-        street: user.address?.zipcode?.street ?? '',
-        district: user.address?.zipcode?.district ?? '',
-        city: user.address?.zipcode?.city ?? '',
-        number_residence: user.address?.number_residence ?? '',
-        type_residence: user.address?.type_residence ?? '',
-        building: user.address?.building ?? '',
-        block: user.address?.block ?? '',
-        livingapartmentroom: user.address?.livingapartmentroom ?? '',
-        reference_point: user.address?.reference_point ?? ''
+        name: user?.name ?? '',
+        cpf: user?.cpf?.cpf ?? '',
+        birthdate: user?.cpf?.birthdate ?? '',
+        phone: user?.phone?.phone ?? '',
+        email: user?.email ?? '',
+        zipcode: user?.address?.zipcode?.zipcode ?? '',
+        street: user?.address?.zipcode?.street ?? '',
+        district: user?.address?.zipcode?.district ?? '',
+        city: user?.address?.zipcode?.city ?? '',
+        number_residence: user?.address?.number_residence ?? '',
+        type_residence: user?.address?.type_residence ?? '',
+        building: user?.address?.building ?? '',
+        block: user?.address?.block ?? '',
+        livingapartmentroom: user?.address?.livingapartmentroom ?? '',
+        reference_point: user?.address?.reference_point ?? ''
     });
 
     const submit = (e) => {

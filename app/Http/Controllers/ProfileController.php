@@ -17,10 +17,15 @@ class ProfileController extends Controller
 {
     public function index(): Response
     {
-        $users = User::with(['cpf', 'phone', 'address.zipcode'])
+        $users = User::with([
+            'cpf',
+            'phone',
+            'address.zipcode',
+        ])
+            ->where('id', '!=', Auth::user()->id)
             ->paginate(10);
 
-        return Inertia::render('User/Users', [
+        return Inertia::render('Profile/Index', [
             'users' => $users
         ]);
     }

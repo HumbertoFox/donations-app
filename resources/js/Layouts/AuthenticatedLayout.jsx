@@ -30,8 +30,8 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </NavLink>
 
                                 <NavLink
-                                    href={route('user.users')}
-                                    active={route().current('user.users')}
+                                    href={route('profile.all')}
+                                    active={route().current('profile.all')}
                                 >
                                     Usuários
                                 </NavLink>

@@ -4,8 +4,8 @@ import { Head, Link } from '@inertiajs/react';
 
 const linksItems = [
     { href: route('menu.agenda'), icon: 'fa-solid fa-house', title: 'Início', hover: 'hover:text-[blue]' },
-    { href: '', icon: 'fa-solid fa-user-plus', title: 'Cadastrar Usuário', hover: 'hover:text-[blue]' },
-    { href: route('user.users'), icon: 'fa-solid fa-users-gear', title: 'Usuários Cadastrados', hover: 'hover:text-[orange]' },
+    { href: route('register'), icon: 'fa-solid fa-user-plus', title: 'Cadastrar Usuário', hover: 'hover:text-[blue]' },
+    { href: route('profile.all'), icon: 'fa-solid fa-users-gear', title: 'Usuários Cadastrados', hover: 'hover:text-[orange]' },
     { href: route('vehicle.register'), icon: 'fa-solid fa-truck-medical', title: 'Cadastrar Veículo', hover: 'hover:text-[blue]' },
     { href: route('vehicle.all'), icon: 'fa-solid fa-truck', title: 'Veículos Cadastrados', hover: 'hover:text-[orange]' },
     { href: route('driver.register'), icon: 'fa-solid fa-address-card', title: 'Cadastrar Motorista', hover: 'hover:text-[blue]' },

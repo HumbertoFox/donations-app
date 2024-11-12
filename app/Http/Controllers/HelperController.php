@@ -92,7 +92,7 @@ class HelperController extends Controller
     public function index(): Response
     {
         $helpers = Helper::with('cpf')->paginate(10);
-        return Inertia::render('Helper/Show', [
+        return Inertia::render('Helper/ShowHelper', [
             'helpers' => $helpers
         ]);
     }
