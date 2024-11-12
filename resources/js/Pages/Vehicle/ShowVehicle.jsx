@@ -43,7 +43,9 @@ export default function ShowVehicle({ vehicles }) {
                                 )}
                                 {vehicles.data.map((vehicle, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
-                                        <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
+                                        <td className='border-r-[1px] border-gray-400'>
+                                            {index + 1 + (vehicles.current_page - 1) * vehicles.per_page}
+                                        </td>
                                         <td>{vehicle.id}</td>
                                         <td>{vehicle.renavam}</td>
                                         <td>{vehicle.plate}</td>
@@ -65,7 +67,12 @@ export default function ShowVehicle({ vehicles }) {
                                 ))}
                             </tbody>
                         </table>
-                        {vehicles.per_page > 9 && <Pagination links={vehicles.links} currentPage={vehicles.current_page} />}
+                        {vehicles.per_page > 9 && (
+                            <Pagination
+                                links={vehicles.links}
+                                currentPage={vehicles.current_page}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

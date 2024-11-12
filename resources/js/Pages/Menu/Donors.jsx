@@ -38,7 +38,9 @@ export default function ShowDonors({ donors }) {
                                 )}
                                 {donors.data.map((donor, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
-                                        <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
+                                        <td className='border-r-[1px] border-gray-400'>
+                                            {index + 1 + (donors.current_page - 1) * donors.per_page}
+                                        </td>
                                         <td>{donor.id}</td>
                                         <td>{donor.name}</td>
                                         <td>{formatPhone(donor.phone?.phone)}</td>
@@ -70,7 +72,12 @@ export default function ShowDonors({ donors }) {
                                 ))}
                             </tbody>
                         </table>
-                        {donors.per_page > 9 && <Pagination links={donors.links} currentPage={donors.current_page} />}
+                        {donors.per_page > 9 && (
+                            <Pagination
+                                links={donors.links}
+                                currentPage={donors.current_page}
+                            />
+                        )}
                     </div>
                 </div>
             </SideBar>

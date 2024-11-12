@@ -46,7 +46,9 @@ export default function Index({ users }) {
                                 )}
                                 {users.data.map((user, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
-                                        <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
+                                        <td className='border-r-[1px] border-gray-400'>
+                                            {index + 1 + (users.current_page - 1) * users.per_page}
+                                        </td>
                                         <td>{user.id}</td>
                                         <td>{user.name}</td>
                                         <td>{formatCpf(user.cpf.cpf)}</td>

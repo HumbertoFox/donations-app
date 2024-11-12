@@ -48,7 +48,9 @@ export default function ScheduleCollection({ donations }) {
                                     const dayIcon = days <= 5 ? 'fa-solid fa-heart-circle-check' : days <= 10 ? 'fa-solid fa-heart-circle-exclamation' : 'fa-solid fa-heart-circle-xmark';
                                     return (
                                         <tr key={index} className='border-b-[1px] border-gray-400'>
-                                            <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
+                                            <td className='border-r-[1px] border-gray-400'>
+                                                {index + 1 + (donations.current_page - 1) * donations.per_page}
+                                            </td>
                                             <td>{donation.id}</td>
                                             <td>{donation.donor?.name}</td>
                                             <td>{formatPhone(donation.donor?.phone?.phone)}</td>
@@ -88,7 +90,12 @@ export default function ScheduleCollection({ donations }) {
                                 })}
                             </tbody>
                         </table>
-                        {donations.per_page > 9 && <Pagination links={donations.links} currentPage={donations.current_page} />}
+                        {donations.per_page > 9 && (
+                            <Pagination
+                                links={donations.links}
+                                currentPage={donations.current_page}
+                            />
+                        )}
                     </div>
                 </div>
             </SideBar>

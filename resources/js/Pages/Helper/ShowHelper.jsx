@@ -42,7 +42,9 @@ export default function ShowHelper({ helpers }) {
                                 )}
                                 {helpers.data.map((helper, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
-                                        <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
+                                        <td className='border-r-[1px] border-gray-400'>
+                                            {index + 1 + (helpers.current_page - 1) * helpers.per_page}
+                                        </td>
                                         <td>{helper.id}</td>
                                         <td>{formatCpf(helper.cpf?.cpf)}</td>
                                         <td>{helper.cpf?.name}</td>

@@ -58,7 +58,7 @@ export default function ConfirmCollection({ records, flash }) {
             confirmButtonText: 'Ok',
         });
     };
-    
+
     const showRecordDetailsDonor = (record) => {
         Swal.fire({
             title: `Detalhes do Doador - Cód. ${record.donor.id}`,
@@ -122,7 +122,9 @@ export default function ConfirmCollection({ records, flash }) {
                                 {records.data.map((record, index) => {
                                     return (
                                         <tr key={index} className='border-b-[1px] border-gray-400'>
-                                            <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
+                                            <td className='border-r-[1px] border-gray-400'>
+                                                {index + 1 + (records.current_page - 1) * records.per_page}
+                                            </td>
                                             <td
                                                 onClick={() => showRecordDetails(record)}
                                                 className='cursor-pointer hover:text-blue-500 duration-500'
@@ -188,7 +190,12 @@ export default function ConfirmCollection({ records, flash }) {
                                 })}
                             </tbody>
                         </table>
-                        {records.per_page > 9 && <Pagination links={records.links} currentPage={records.current_page} />}
+                        {records.per_page > 9 && (
+                            <Pagination
+                                links={records.links}
+                                currentPage={records.current_page}
+                            />
+                        )}
                     </div>
                 </div>
             </SideBar>

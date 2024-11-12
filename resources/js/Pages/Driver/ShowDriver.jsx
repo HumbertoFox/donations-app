@@ -43,7 +43,9 @@ export default function ShowDriver({ drivers }) {
                                 )}
                                 {drivers.data.map((driver, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
-                                        <td className='border-r-[1px] border-gray-400'>{index + 1}</td>
+                                        <td className='border-r-[1px] border-gray-400'>
+                                            {index + 1 + (drivers.current_page - 1) * drivers.per_page}
+                                        </td>
                                         <td>{driver.id}</td>
                                         <td>{driver.cnh?.cnh}</td>
                                         <td>{formatCpf(driver.cnh?.cpf?.cpf)}</td>
@@ -63,7 +65,12 @@ export default function ShowDriver({ drivers }) {
                                 ))}
                             </tbody>
                         </table>
-                        {drivers.per_page > 9 && <Pagination links={drivers.links} currentPage={drivers.current_page} />}
+                        {drivers.per_page > 9 && (
+                            <Pagination
+                                links={drivers.links}
+                                currentPage={drivers.current_page}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
