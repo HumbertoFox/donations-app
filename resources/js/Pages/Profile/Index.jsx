@@ -70,7 +70,7 @@ export default function Index({ users }) {
                                 ))}
                             </tbody>
                         </table>
-                        {users.per_page > 9 && (
+                        {users.last_page > 1 && (
                             <Pagination
                                 links={users.links}
                                 currentPage={users.current_page}

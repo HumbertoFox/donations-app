@@ -90,7 +90,7 @@ export default function ScheduleCollection({ donations }) {
                                 })}
                             </tbody>
                         </table>
-                        {donations.per_page > 9 && (
+                        {donations.last_page > 1 && (
                             <Pagination
                                 links={donations.links}
                                 currentPage={donations.current_page}

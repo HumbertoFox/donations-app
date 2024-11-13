@@ -63,7 +63,12 @@ export default function ShowHelper({ helpers }) {
                                 ))}
                             </tbody>
                         </table>
-                        {helpers.per_page > 9 && <Pagination links={helpers.links} currentPage={helpers.current_page} />}
+                        {helpers.last_page > 1 && (
+                            <Pagination
+                                links={helpers.links}
+                                currentPage={helpers.current_page}
+                            />
+                        )}
                     </div>
                 </div>
             </div>

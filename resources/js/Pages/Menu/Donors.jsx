@@ -142,7 +142,7 @@ export default function ShowDonors({ donors, filters }) {
                                 ))}
                             </tbody>
                         </table>
-                        {donors.per_page > 9 && (
+                        {donors.last_page > 1 && (
                             <Pagination
                                 links={donors.links}
                                 currentPage={donors.current_page}

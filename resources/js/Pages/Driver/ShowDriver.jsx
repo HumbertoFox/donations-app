@@ -65,7 +65,7 @@ export default function ShowDriver({ drivers }) {
                                 ))}
                             </tbody>
                         </table>
-                        {drivers.per_page > 9 && (
+                        {drivers.last_page > 1 && (
                             <Pagination
                                 links={drivers.links}
                                 currentPage={drivers.current_page}

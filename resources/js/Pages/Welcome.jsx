@@ -51,7 +51,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                 </div>
 
                 <footer className="text-center text-sm text-black dark:text-white/70">
-                    <p>® <a href="https://betofoxnet-info.vercel.app/" target="_blank" rel="">BetoFoxNet_Info</a> - Desde 2015 à {currentYear}.</p>
+                    <p>® <a href="https://betofoxnet-info.vercel.app/" target="_blank" rel="BetoFoxNet_Info">BetoFoxNet_Info</a> - Desde 2015 à {currentYear}.</p>
                     Laravel v{laravelVersion} (PHP v{phpVersion})
                 </footer>
             </div>
