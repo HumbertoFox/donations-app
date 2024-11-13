@@ -385,7 +385,10 @@ export default function DriverForm({ driver = {}, point, valueButton }) {
             </div>
 
             <div className='flex justify-around pt-4 sm:pt-8 duration-[400ms]'>
-                <PrimaryButton disabled={processing}>
+                <PrimaryButton
+                    type='submit'
+                    disabled={processing}
+                >
                     {valueButton}
                 </PrimaryButton>
             </div>

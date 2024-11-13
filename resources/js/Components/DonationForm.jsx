@@ -196,13 +196,20 @@ export default function DonationForm({ donor = {}, donation = {}, point, valueBu
                 {valueButton && (
                     <div className='flex justify-evenly mt-2'>
                         {itemCount < 20 && (
-                            <PrimaryButton type="button" onClick={addItem} className='bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 active:bg-blue-600'>
+                            <PrimaryButton
+                                type="button"
+                                onClick={addItem}
+                                className='bg-blue-500 hover:bg-blue-400 focus:bg-blue-400 active:bg-blue-600'
+                            >
                                 Adicionar Item
                             </PrimaryButton>
                         )}
 
                         {itemCount > 1 && (
-                            <DangerButton type="button" onClick={removeItem}>
+                            <DangerButton
+                                type='button'
+                                onClick={removeItem}
+                            >
                                 Remover Último Item
                             </DangerButton>
                         )}
@@ -213,6 +220,7 @@ export default function DonationForm({ donor = {}, donation = {}, point, valueBu
                 <div className='flex justify-around py-4 duration-[400ms]'>
                     {valueButton === 'Cadastrar' && (
                         <PrimaryButton
+                            type='submit'
                             title='Cadastrar e Ir para Agendar'
                             onClick={() => setClickedButton('schedule')}
                             disabled={processing}
@@ -222,6 +230,7 @@ export default function DonationForm({ donor = {}, donation = {}, point, valueBu
                     )}
 
                     <PrimaryButton
+                        type='submit'
                         title={valueButton}
                         onClick={() => setClickedButton('register')}
                         disabled={processing}

@@ -26,7 +26,7 @@ export default function RegisterVehicle({ flash }) {
         >
             <Head title='Veículo' />
 
-            <div className='py-12'>
+            <div className='py-3'>
                 <div className='mx-auto max-w-xl space-y-6 sm:px-6 lg:px-8'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <div className='w-full flex justify-center pb-4 sm:pb-8'>
@@ -35,7 +35,10 @@ export default function RegisterVehicle({ flash }) {
                                 className='text-[45px] text-[blue]'
                             />
                         </div>
-                        <VehicleForm point={'vehicle.store'} valueButton={'Cadastrar'} />
+                        <VehicleForm
+                            point={'vehicle.store'}
+                            valueButton={'Cadastrar'}
+                        />
                     </div>
                 </div>
             </div>

@@ -14,7 +14,7 @@ export default function EditDriver({ driver }) {
         >
             <Head title='Motorista' />
 
-            <div className='py-12'>
+            <div className='py-3'>
                 <div className='mx-auto max-w-xl space-y-6 sm:px-6 lg:px-8'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <div className='w-full flex justify-center pb-4 sm:pb-8'>
@@ -23,7 +23,11 @@ export default function EditDriver({ driver }) {
                                 className='text-[45px] text-[blue]'
                             />
                         </div>
-                        <DriverForm driver={driver} point={'driver.update'} valueButton={'Editar'} />
+                        <DriverForm
+                            driver={driver}
+                            point={'driver.update'}
+                            valueButton={'Editar'}
+                        />
                     </div>
                 </div>
             </div>

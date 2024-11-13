@@ -21,7 +21,7 @@ export default function ShowDriver({ drivers }) {
         >
             <Head title='Motoristas' />
 
-            <div className='py-12'>
+            <div className='py-3'>
                 <div className='mx-auto max-w-3xl space-y-6 sm:px-6 lg:px-8'>
                     <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
                         <table className='w-full text-center'>

@@ -26,10 +26,7 @@ export default function DeleteUserForm({ className = '' }) {
     });
 
     const togglePasswordVisibility = () => setIsVisibledPassword(!isVisibledPassword);
-
-    const confirmUserDeletion = () => {
-        setConfirmingUserDeletion(true);
-    };
+    const confirmUserDeletion = () => setConfirmingUserDeletion(true);
 
     const deleteUser = (e) => {
         e.preventDefault();

@@ -8,11 +8,11 @@ import { Head, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function ConfirmPassword() {
+    const [isVisibledPassword, setIsVisibledPassword] = useState(false);
+    
     const { data, setData, post, processing, errors, reset } = useForm({
         password: '',
     });
-
-    const [isVisibledPassword, setIsVisibledPassword] = useState(false);
 
     const togglePasswordVisibility = () => setIsVisibledPassword(!isVisibledPassword);
 
