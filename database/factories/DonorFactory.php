@@ -20,7 +20,7 @@ class DonorFactory extends Factory
         $cnpj = $this->faker->boolean(50) ? Cnpj::factory()->create() : null;
 
         return [
-            'name' => $this->faker->company,
+            'name' => $this->faker->name(),
             'phone_id' => Phone::factory()->withEmail(),
             'cnpj_id' => $cnpj ? $cnpj->id : null,
             'address_id' => Address::factory(),

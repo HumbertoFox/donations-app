@@ -19,10 +19,10 @@ class AddressFactory extends Factory
                 'zipcode_id' => Zipcode::factory(),
                 'type_residence' => $typeResidence,
                 'number_residence' => $this->faker->buildingNumber(),
-                'building' => $this->faker->word(),
+                'building' => $this->faker->company(),
                 'block' => $this->faker->word(),
-                'livingapartmentroom' => $this->faker->word(),
-                'reference_point' => $this->faker->word(),
+                'livingapartmentroom' => $this->faker->buildingNumber(),
+                'reference_point' => $this->faker->streetName(),
             ];
         }
 
@@ -33,7 +33,7 @@ class AddressFactory extends Factory
             'building' => null,
             'block' => null,
             'livingapartmentroom' => null,
-            'reference_point' => $this->faker->word(),
+            'reference_point' => $this->faker->streetName(),
         ];
     }
 }

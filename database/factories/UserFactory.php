@@ -16,9 +16,11 @@ class UserFactory extends Factory
 
     public function definition(): array
     {
+        $cpf = Cpf::factory()->create();
+
         return [
-            'name' => fake()->name(),
-            'cpf_id' => Cpf::factory(),
+            'name' => $cpf->name,
+            'cpf_id' => $cpf->id,
             'phone_id' => Phone::factory(),
             'email' => fake()->unique()->safeEmail(),
             'address_id' => Address::factory(),

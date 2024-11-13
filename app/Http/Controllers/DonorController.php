@@ -98,17 +98,37 @@ class DonorController extends Controller
         session()->flash('donor_id', $donor->id);
     }
 
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $donors = Donor::with([
-            'phone',
-            'address.zipcode'
-        ])
-            ->orderBy('id', 'desc')
+        $donors = Donor::with(['phone', 'address.zipcode'])
+            ->when($request->has('name'), function ($query) use ($request) {
+                $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($request->name) . '%']);
+            })
+            ->when($request->has('phone'), function ($query) use ($request) {
+                $query->whereHas('phone', function ($query) use ($request) {
+                    $query->where('phone', 'like', '%' . $request->phone . '%');
+                });
+            })
+            ->when($request->has('zipcode'), function ($query) use ($request) {
+                $query->whereHas('address.zipcode', function ($query) use ($request) {
+                    $query->where('zipcode', 'like', '%' . $request->zipcode . '%');
+                });
+            })
+            ->when($request->has('district'), function ($query) use ($request) {
+                $query->whereHas('address.zipcode', function ($query) use ($request) {
+                    $query->whereRaw('LOWER(district) LIKE ?', ['%' . strtolower($request->district) . '%']);
+                });
+            })
             ->paginate(10);
 
         return Inertia::render('Menu/Donors', [
             'donors' => $donors,
+            'filters' => [
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'zipcode' => $request->zipcode,
+                'district' => $request->district,
+            ],
         ]);
     }
 
