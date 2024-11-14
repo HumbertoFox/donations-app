@@ -15,7 +15,7 @@ export default function ShowDonors({ donors, filters }) {
         phone: filters?.phone || '',
         zipcode: filters?.zipcode || '',
         district: filters?.district || '',
-    })
+    });
 
     const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
     const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
@@ -23,8 +23,8 @@ export default function ShowDonors({ donors, filters }) {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        get(route('menu.donors'))
-    }
+        get(route('menu.donors'));
+    };
 
     return (
         <div className='max-w-full'>
@@ -87,6 +87,7 @@ export default function ShowDonors({ donors, filters }) {
                             </Link>
                         </div>
                     </form>
+                    <h2 className='text-center text-sm'>Lista de Doadores</h2>
                     <div className='bg-white p-4 shadow sm:rounded-lg'>
                         <table className='w-full text-center'>
                             <thead>
@@ -113,9 +114,9 @@ export default function ShowDonors({ donors, filters }) {
                                         </td>
                                         <td>{donor.id}</td>
                                         <td>{donor.name}</td>
-                                        <td>{formatPhone(donor.phone?.phone)}</td>
-                                        <td>{formatCep(donor.address?.zipcode?.zipcode)}</td>
-                                        <td>{donor.address?.zipcode?.district}</td>
+                                        <td>{formatPhone(donor.phone.phone)}</td>
+                                        <td>{formatCep(donor.address.zipcode.zipcode)}</td>
+                                        <td>{donor.address.zipcode.district}</td>
                                         <td className='flex justify-evenly items-center my-1'>
                                             <Link href={`/donor/${donor.id}/edit`}>
                                                 <Icon

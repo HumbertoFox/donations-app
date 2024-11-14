@@ -1,28 +1,96 @@
 import Icon from '@/Components/Icon';
 import SideBar from '@/Layouts/Sidebar';
 import Pagination from '@/Components/Pagination';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 import { formatPhone } from '@/utils/phoneFormat';
 import { formatCep } from '@/utils/cepFormat';
 import { formatDate } from '@/utils/dataFormat';
 import { daysSince } from '@/utils/Sincedays';
+import PrimaryButton from '@/Components/Buttons/PrimaryButton';
+import WarningButton from '@/Components/Buttons/WarningButton';
 
-export default function ScheduleCollection({ donations }) {
+export default function ScheduleCollection({ donations, filters }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
     const [hoveredDaysIndex, setHoveredDaysIndex] = useState(null);
+
+    const { data, setData, get } = useForm({
+        phone: '',
+        zipcode: '',
+        date_start: '',
+        date_end: '',
+    });
 
     const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
     const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
     const handleMouseEnterDays = (index) => setHoveredDaysIndex(index);
     const handleMouseLeaveDays = () => setHoveredDaysIndex(null);
 
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        get(route('menu.donations'));
+    };
+
     return (
         <div className='max-w-full'>
             <Head title='Doações' />
             <SideBar>
-                <div className='w-full p-1'>
-                    <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
+                <div className='flex flex-col gap-2 w-full p-1'>
+                    <form
+                        onSubmit={handleSearch}
+                        className='w-full flex flex-col gap-2 p-2 bg-white shadow sm:rounded-lg'
+                    >
+                        <div className='flex flex-col gap-2 md:flex-row'>
+                            <input
+                                type="number"
+                                value={data.phone}
+                                autoComplete='phone'
+                                placeholder='Telefone Doador'
+                                onChange={(e) => setData('phone', e.target.value)}
+                                className='px-2 py-0 text-sm md:w-1/4 rounded'
+                            />
+
+                            <input
+                                type="number"
+                                value={data.zipcode}
+                                autoComplete='zipcode'
+                                placeholder='CEP'
+                                onChange={(e) => setData('zipcode', e.target.value)}
+                                className='px-2 py-0 text-sm md:w-1/4 rounded'
+                            />
+
+                            <input
+                                type="date"
+                                value={data.date_start}
+                                onChange={(e) => setData('date_start', e.target.value)}
+                                className='px-2 py-0 text-sm md:w-1/4 rounded'
+                            />
+
+                            <input
+                                type="date"
+                                value={data.date_end}
+                                onChange={(e) => setData('date_end', e.target.value)}
+                                className='px-2 py-0 text-sm md:w-1/4 rounded'
+                            />
+                        </div>
+
+                        <div className='flex justify-center gap-2'>
+                            <PrimaryButton
+                                type="submit"
+                            >
+                                Pesquisar
+                            </PrimaryButton>
+
+                            <Link href={route('menu.donations')}>
+                                <WarningButton>
+                                    Limpar
+                                </WarningButton>
+                            </Link>
+                        </div>
+                    </form>
+                    <h2 className='text-center text-sm'>Lista de Doações</h2>
+                    <div className='bg-white p-4 shadow sm:rounded-lg'>
                         <table className='w-full text-center'>
                             <thead>
                                 <tr className='border-b-[1px] border-gray-600 cursor-default'>
@@ -44,8 +112,16 @@ export default function ScheduleCollection({ donations }) {
                                 )}
                                 {donations.data.map((donation, index) => {
                                     const days = daysSince(donation.created_at);
-                                    const dayClass = days <= 5 ? 'text-green-600' : days <= 10 ? 'text-orange-600' : 'text-red-600';
-                                    const dayIcon = days <= 5 ? 'fa-solid fa-heart-circle-check' : days <= 10 ? 'fa-solid fa-heart-circle-exclamation' : 'fa-solid fa-heart-circle-xmark';
+                                    const dayClass = days <= 5
+                                        ? 'text-green-600'
+                                        : days <= 10
+                                            ? 'text-orange-600'
+                                            : 'text-red-600';
+                                    const dayIcon = days <= 5
+                                        ? 'fa-solid fa-heart-circle-check'
+                                        : days <= 10
+                                            ? 'fa-solid fa-heart-circle-exclamation'
+                                            : 'fa-solid fa-heart-circle-xmark';
                                     return (
                                         <tr key={index} className='border-b-[1px] border-gray-400'>
                                             <td className='border-r-[1px] border-gray-400'>

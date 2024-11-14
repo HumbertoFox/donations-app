@@ -97,7 +97,8 @@ export default function ConfirmCollection({ records, flash }) {
             <Head title='Conformar Coleta' />
             <SideBar>
                 <div className='w-full p-1'>
-                    <div className='bg-white p-4 shadow sm:rounded-lg sm:p-8'>
+                    <h2 className='text-center text-sm'>Lista de Doações</h2>
+                    <div className='bg-white p-4 shadow sm:rounded-lg'>
                         <table className='w-full text-center'>
                             <thead>
                                 <tr className='border-b-[1px] border-gray-600 cursor-default'>
@@ -146,7 +147,9 @@ export default function ConfirmCollection({ records, flash }) {
                                             <td
                                                 onClick={() => showRecordDetailsVehicle(record)}
                                                 className='cursor-pointer hover:text-blue-500 duration-500'
-                                            >{record.vehicle.plate}</td>
+                                            >
+                                                {record.vehicle.plate}
+                                            </td>
                                             <td>{formatCep(record.donor.address.zipcode.zipcode)}</td>
                                             <td>{formatDate(record.created_at)}</td>
                                             <td>{formatDateToLocal(record.colleted_date)}</td>
