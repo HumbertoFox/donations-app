@@ -18,9 +18,15 @@ export default function Dashboard() {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className='text-lg font-semibold leading-tight text-gray-800'>
-                    Painel
-                </h2>
+                <div className='flex justify-between'>
+                    <h2 className='text-lg font-semibold leading-tight text-gray-800'>
+                        Painel
+                    </h2>
+
+                    <nav className='text-sm text-gray-500 dark:text-gray-400'>
+                        <span className='cursor-default'>Painel</span>
+                    </nav>
+                </div>
             }
         >
             <Head title='Painel' />

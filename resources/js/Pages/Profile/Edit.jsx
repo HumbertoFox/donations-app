@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import DeleteUserForm from './Partials/DeleteUserForm';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
@@ -8,9 +8,33 @@ export default function Edit({ mustVerifyEmail, status }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-lg font-semibold leading-tight text-gray-800">
-                    Perfil
-                </h2>
+                <div className='flex justify-between'>
+                    <h2 className="text-lg font-semibold leading-tight text-gray-800">
+                        Perfil
+                    </h2>
+
+                    <nav className='text-sm text-gray-500 dark:text-gray-400'>
+                        <Link
+                            href={route('dashboard')}
+                            className='hover:text-gray-700 dark:text-gray-300'
+                        >
+                            Painel
+                        </Link>
+
+                        <span className='mx-1'>/</span>
+
+                        <Link
+                            href={route('profile.all')}
+                            className='hover:text-gray-700 dark:text-gray-300'
+                        >
+                            Usuários
+                        </Link>
+
+                        <span className='mx-1'>/</span>
+
+                        <span className='cursor-default'>Usuário</span>
+                    </nav>
+                </div>
             }
         >
             <Head title="Perfil" />
