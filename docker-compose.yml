@@ -1,0 +1,45 @@
+services:
+    react:
+        build:
+            context: .
+            dockerfile: Dockerfile.react
+        volumes:
+            - .:/usr/src/app
+        depends_on:
+            - php
+        networks:
+            - app-donarions-network
+        command: sh -c "npm install && npm run build && npx serve build"
+
+    php:
+        build:
+            context: .
+            dockerfile: Dockerfile.php
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "8080:80"
+        networks:
+            - app-donarions-network
+        entrypoint: ["/bin/bash", "-c", "composer install --no-dev --optimize-autoloader && apache2-foreground", "docker-php-entrypoint"]
+
+    db:
+        image: postgres:16.5
+        restart: always
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        networks:
+            - app-donarions-network
+
+networks:
+    app-donarions-network:
+        name: app-donarions-network
+        driver: bridge
+
+volumes:
+    pgdata:
+        driver: local
