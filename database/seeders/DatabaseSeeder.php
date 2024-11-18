@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        Vehicle::factory()->count(5)->create();
-        Driver::factory()->count(5)->create();
-        Helper::factory()->count(10)->create();
+        Vehicle::factory()->count(2)->create();
+        Driver::factory()->count(2)->create();
+        Helper::factory()->count(6)->create();
         Donor::factory()->count(20)->create();
     }
 }
