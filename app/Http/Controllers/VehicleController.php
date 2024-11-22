@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VehicleRequest;
 use App\Models\Vehicle;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -15,17 +15,9 @@ class VehicleController extends Controller
         return Inertia::render('Vehicle/RegisterVehicle');
     }
 
-    public function store(Request $request)
+    public function store(VehicleRequest $request)
     {
-        $request->validate(
-            [
-                'renavam' => 'required|string|max:100|unique:vehicles,renavam',
-                'plate' => 'required|string|uppercase|max:10|unique:vehicles,plate',
-                'km' => 'required|string|min:0',
-                'model' => 'required|string|uppercase|max:150',
-                'automaker' => 'required|string|uppercase|max:100'
-            ]
-        );
+        $request->validate();
 
         $userId = Auth::id();
 
@@ -36,7 +28,7 @@ class VehicleController extends Controller
                 'km' => $request->km,
                 'model' => $request->model,
                 'automaker' => $request->automaker,
-                'user_id' => $userId
+                'user_id' => $userId,
             ]
         );
 
@@ -47,7 +39,7 @@ class VehicleController extends Controller
     {
         $vehicles = Vehicle::paginate(10);
         return Inertia::render('Vehicle/ShowVehicle', [
-            'vehicles' => $vehicles
+            'vehicles' => $vehicles,
         ]);
     }
 
@@ -55,18 +47,13 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::findOrFail($id);
         return Inertia::render('Vehicle/EditVehicle', [
-            'vehicle' => $vehicle
+            'vehicle' => $vehicle,
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(VehicleRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'renavam' => 'required|string|max:100',
-            'plate' => 'required|string|uppercase|max:50',
-            'model' => 'required|string|uppercase|max:150',
-            'automaker' => 'required|string|uppercase|max:100'
-        ]);
+        $validatedData = $request->validate();
 
         $vehicle = Vehicle::findOrFail($id);
         $vehicle->update($validatedData);

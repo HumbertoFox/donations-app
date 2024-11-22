@@ -18,10 +18,10 @@ services:
         volumes:
             - .:/var/www/html
         ports:
-            - "8080:80"
+            - "80:80"
         networks:
             - app-donarions-network
-        entrypoint: ["/bin/bash", "-c", "composer install --no-dev --optimize-autoloader && apache2-foreground", "docker-php-entrypoint"]
+        entrypoint: [ "/bin/bash", "-c", "composer install --no-dev --optimize-autoloader && apache2-foreground", "docker-php-entrypoint" ]
 
     db:
         image: postgres:16.5
