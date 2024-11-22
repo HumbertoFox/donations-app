@@ -21,7 +21,7 @@ class HelperController extends Controller
 
     public function store(HelperRequest $request)
     {
-        $request->validate();
+        $request->validated();
 
         $userId = Auth::id();
 
@@ -98,7 +98,7 @@ class HelperController extends Controller
 
     public function update(HelperRequest $request, $id)
     {
-        $request->validate();
+        $request->validated();
 
         $cpf = Cpf::where('cpf', $request->cpf)->first();
 

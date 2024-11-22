@@ -22,7 +22,7 @@ class DriverController extends Controller
 
     public function store(DriverRequest $request)
     {
-        $request->validate();
+        $request->validated();
 
         $userId = Auth::id();
 
@@ -109,7 +109,7 @@ class DriverController extends Controller
 
     public function update(DriverRequest $request, $id)
     {
-        $request->validate();
+        $request->validated();
 
         $cpf = Cpf::where('cpf', $request->cpf)->first();
 

@@ -17,7 +17,7 @@ class VehicleController extends Controller
 
     public function store(VehicleRequest $request)
     {
-        $request->validate();
+        $request->validated();
 
         $userId = Auth::id();
 
@@ -53,7 +53,7 @@ class VehicleController extends Controller
 
     public function update(VehicleRequest $request, $id)
     {
-        $validatedData = $request->validate();
+        $validatedData = $request->validated();
 
         $vehicle = Vehicle::findOrFail($id);
         $vehicle->update($validatedData);

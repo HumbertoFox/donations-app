@@ -22,7 +22,7 @@ class DonorController extends Controller
 
     public function store(DonorRequest $request)
     {
-        $request->validate();
+        $request->validated();
 
         $userId = Auth::id();
 
