@@ -52,12 +52,12 @@ export default function Index({ users }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.data.length === 0 && (
+                                {users?.data?.length === 0 && (
                                     <tr className='text-red-600 cursor-default'>
                                         <td colSpan={7}>Não Existe Usuário Cadastrado</td>
                                     </tr>
                                 )}
-                                {users.data.map((user, index) => (
+                                {users?.data?.map((user, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
                                         <td className='border-r-[1px] border-gray-400'>
                                             {index + 1 + (users.current_page - 1) * users.per_page}
@@ -68,9 +68,11 @@ export default function Index({ users }) {
                                         <td>{formatPhone(user.phone.phone)}</td>
                                         <td>{formatCep(user.address.zipcode.zipcode)}</td>
                                         <td className='flex justify-center items-center my-1'>
-                                            <Link href={route('profile.all')}>
+                                            <Link href={route('user.edit', { id: user.id })}>
                                                 <Icon
-                                                    icon={hoveredIcon[user.id] ? 'fa-solid fa-user-gear' : 'fa-solid fa-user-pen'}
+                                                    icon={hoveredIcon[user.id]
+                                                        ? 'fa-solid fa-user-gear'
+                                                        : 'fa-solid fa-user-pen'}
                                                     title={`Editar ${user.name}`}
                                                     aria-label={`Editar ${user.name}`}
                                                     className='text-[25px] text-[blue] duration-500 cursor-pointer hover:text-orange-600'

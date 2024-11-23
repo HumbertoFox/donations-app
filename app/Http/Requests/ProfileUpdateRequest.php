@@ -32,7 +32,7 @@ class ProfileUpdateRequest extends FormRequest
                 'lowercase',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id)
+                Rule::unique(User::class)->ignore($this->user()->id),
             ],
             'zipcode' => ['required', 'string', 'max:9'],
             'city' => ['required', 'string', 'max:255'],
@@ -43,7 +43,7 @@ class ProfileUpdateRequest extends FormRequest
             'building' => ['nullable', 'string', 'max:255'],
             'block' => ['nullable', 'string', 'max:50'],
             'livingapartmentroom' => ['nullable', 'string', 'max:50'],
-            'reference_point' => ['nullable', 'string', 'max:255']
+            'reference_point' => ['nullable', 'string', 'max:255'],
         ];
     }
 }

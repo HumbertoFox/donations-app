@@ -14,11 +14,11 @@ class VehicleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'renavam' => 'required|string|max:100|unique:vehicles,renavam',
-            'plate' => 'required|string|uppercase|max:10|unique:vehicles,plate',
-            'km' => 'required|string|min:0',
-            'model' => 'required|string|uppercase|max:150',
-            'automaker' => 'required|string|uppercase|max:100',
+            'renavam' => ['required', 'string', 'max:100', 'unique:vehicles,renavam'],
+            'plate' => ['required', 'string', 'uppercase', 'max:10', 'unique:vehicles,plate'],
+            'km' => ['required', 'string', 'min:0'],
+            'model' => ['required', 'string', 'uppercase', 'max:150'],
+            'automaker' => ['required', 'string', 'uppercase', 'max:100'],
         ];
     }
 }

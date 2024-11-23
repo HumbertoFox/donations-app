@@ -29,7 +29,7 @@
         "moment": "^2.30.1",
         "react-big-calendar": "^1.15.0",
         "sass-embedded": "^1.80.3",
-        "sweetalert2": "^11.14.4"
+        "sweetalert2": "^11.6.13"
     },
     "keywords": [],
     "author": "BetoFoxNet_Info",

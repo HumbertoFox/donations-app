@@ -2,45 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Models\Zipcode;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ProfileController extends Controller
+class UserController extends Controller
 {
-    public function index(): Response
+    public function edit($id): Response
     {
-        $users = User::with([
-            'cpf',
-            'phone',
-            'address.zipcode',
-        ])
-            ->where('id', '!=', Auth::user()->id)
-            ->paginate(10);
-
-        return Inertia::render('Profile/Index', [
-            'users' => $users
-        ]);
-    }
-
-    public function edit(Request $request): Response
-    {
-        $user = $request->user();
+        $user = User::findOrFail($id);
         $cpf = $user->cpf;
         $address = $user->address;
         $zipcode = $address->zipcode;
         $phone = $user->phone;
-
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
+        return Inertia::render('User/Edit', [
+            'user' => $user,
             'cpf' => $cpf,
             'address' => $address,
             'zipcode' => $zipcode,
@@ -48,11 +28,11 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(UserRequest $request): RedirectResponse
     {
-        $user = $request->user();
+        $user = User::findOrFail($request->id);
 
-        $user->fill($request->validated());
+        $request->validated();
 
         $user->cpf()->update(
             [
@@ -96,30 +76,20 @@ class ProfileController extends Controller
         );
 
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         };
 
-        $request->user()->save();
+        $user->update(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+            ]
+        );
 
-        return Redirect::route('profile.edit');
-    }
-
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'password' => ['required', 'current_password'],
+        return Redirect::route('user.edit', [
+            $user->id,
+            session()->flash('success', 'Usuário atualizado com Sucesso!'),
         ]);
-
-        $user = $request->user();
-
-        Auth::logout();
-
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
     }
 }
