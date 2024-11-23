@@ -1,8 +1,16 @@
 import { formatDateToLocal } from '@/utils/dataFormat';
 
-export default function TablePrint({ sheetheader, guide, user, donor, donation, colleted_date, vehiclePlate, observation }) {
+export default function TablePrint({
+    sheetheader,
+    guide,
+    user,
+    donor,
+    donation,
+    colleted_date,
+    vehiclePlate,
+    observation }) {
     return (
-        <table className='w-full text-sm border-[1px] border-gray-700'>
+        <table className='w-full text-xs border-[1px] border-gray-700'>
             <thead>
                 {sheetheader && (
                     <tr className='bg-gray-300'>

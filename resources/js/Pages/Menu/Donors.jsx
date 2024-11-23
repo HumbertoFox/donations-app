@@ -91,7 +91,7 @@ export default function ShowDonors({ donors, filters }) {
                     <div className='bg-white p-4 shadow sm:rounded-lg'>
                         <table className='w-full text-center'>
                             <thead>
-                                <tr className='border-b-[1px] border-gray-600'>
+                                <tr className='border-b-[1px] border-gray-600 cursor-default'>
                                     <th>Nº</th>
                                     <th>Cód.</th>
                                     <th>Nome</th>

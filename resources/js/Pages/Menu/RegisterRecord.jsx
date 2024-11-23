@@ -52,35 +52,37 @@ export default function RegisterRecord({ user, donor, donation, vehicles, driver
             <Head title='Agendar Coleta' />
             <SideBar>
                 <div className='flex flex-col duration-[400ms] p-1'>
-                    <form className='flex flex-col gap-2 pb-5' onSubmit={submit}>
+                    <form className='flex flex-col gap-2 pb-5 text-sm' onSubmit={submit}>
                         <div className='flex flex-wrap gap-2'>
-                            <label className='flex flex-col max-w-40' htmlFor='donorcode'>Código do Doador
-                                <input
-                                    id='donorcode'
-                                    className='rounded py-0.5 cursor-not-allowed'
-                                    type='number'
-                                    value={data.donorcode}
-                                    onChange={(e) => setData('donorcode', e.target.value)}
-                                    disabled
-                                    required
-                                />
-                                {errors.donorcode && <div className='text-red-600'>{errors.donorcode}</div>}
-                            </label>
+                            <div>
+                                <label className='flex flex-col max-w-36' htmlFor='donorcode'>Código do Doador
+                                    <input
+                                        id='donorcode'
+                                        className='rounded py-0.5 cursor-not-allowed'
+                                        type='number'
+                                        value={data.donorcode}
+                                        onChange={(e) => setData('donorcode', e.target.value)}
+                                        disabled
+                                        required
+                                    />
+                                    {errors.donorcode && <div className='text-red-600'>{errors.donorcode}</div>}
+                                </label>
 
-                            <label className='flex flex-col max-w-40' htmlFor='donationcode'>Código da Doação
-                                <input
-                                    id='donationcode'
-                                    className='rounded py-0.5 cursor-not-allowed'
-                                    type='number'
-                                    value={data.donationcode}
-                                    onChange={(e) => setData('donationcode', e.target.value)}
-                                    disabled
-                                    required
-                                />
-                                {errors.donationcode && <div className='text-red-600'>{errors.donationcode}</div>}
-                            </label>
+                                <label className='flex flex-col max-w-36' htmlFor='donationcode'>Código da Doação
+                                    <input
+                                        id='donationcode'
+                                        className='rounded py-0.5 cursor-not-allowed'
+                                        type='number'
+                                        value={data.donationcode}
+                                        onChange={(e) => setData('donationcode', e.target.value)}
+                                        disabled
+                                        required
+                                    />
+                                    {errors.donationcode && <div className='text-red-600'>{errors.donationcode}</div>}
+                                </label>
+                            </div>
 
-                            <label className='flex flex-col max-w-60' htmlFor='colleted_date'>Data da Coleta
+                            <label className='flex flex-col max-w-36' htmlFor='colleted_date'>Data da Coleta
                                 <input
                                     id='colleted_date'
                                     className='rounded py-0.5'
