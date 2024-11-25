@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/record/{id}/register', [RecordController::class, 'create'])->name('menu.register');
     Route::post('/record/store', [RecordController::class, 'store'])->name('menu.store');
-    Route::get('/record', [RecordController::class, 'confirmed'])->name('menu.confirmed');
+    Route::get('/records', [RecordController::class, 'confirmed'])->name('menu.confirmed');
 
     Route::get('/registervehicle', [VehicleController::class, 'create'])->name('vehicle.register');
     Route::post('/vehicle/store', [VehicleController::class, 'store'])->name('vehicle.store');

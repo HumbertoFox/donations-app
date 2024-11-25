@@ -15,10 +15,10 @@ export default function ScheduleCollection({ donations, filters }) {
     const [hoveredDaysIndex, setHoveredDaysIndex] = useState(null);
 
     const { data, setData, get } = useForm({
-        phone: '',
-        zipcode: '',
-        date_start: '',
-        date_end: '',
+        phone: filters?.phone || '',
+        zipcode: filters?.zipcode || '',
+        date_start: filters?.date_start || '',
+        date_end: filters?.date_end || '',
     });
 
     const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));

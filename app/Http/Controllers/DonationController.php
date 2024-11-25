@@ -13,18 +13,40 @@ use Inertia\Response;
 
 class DonationController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
         $donations = Donation::with([
             'donor.phone',
             'donor.address.zipcode',
             'donation_items.item',
         ])
+            ->when($request->has('phone'), function ($query) use ($request) {
+                $query->whereHas('donor.phone', function ($query) use ($request) {
+                    $query->where('phone', 'like', '%' . $request->phone . '%');
+                });
+            })
+            ->when($request->has('zipcode'), function ($query) use ($request) {
+                $query->whereHas('donor.address.zipcode', function ($query) use ($request) {
+                    $query->where('zipcode', 'like', '%' . $request->zipcode . '%');
+                });
+            })
+            ->when($request->filled('date_start'), function ($whenQuery) use ($request) {
+                $whenQuery->where('created_at', '>=', \Carbon\Carbon::parse($request->date_start)->format('Y-m-d H:i:s'));
+            })
+            ->when($request->filled('date_end'), function ($whenQuery) use ($request) {
+                $whenQuery->where('created_at', '<=', \Carbon\Carbon::parse($request->date_end)->format('Y-m-d H:i:s'));
+            })
             ->where('status', DonationStatus::PENDING->value)
-            ->paginate();
+            ->paginate(10);
 
         return Inertia::render('Menu/Donations', [
             'donations' => $donations,
+            'filters' => [
+                'phone' => $request->phone,
+                'zipcode' => $request->zipcode,
+                'date_start' => $request->date_start,
+                'date_end' => $request->date_end,
+            ],
         ]);
     }
 

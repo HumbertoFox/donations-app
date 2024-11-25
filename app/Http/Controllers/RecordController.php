@@ -23,7 +23,7 @@ class RecordController extends Controller
             'donation_items.item',
         ])
             ->where('status', DonationStatus::PENDING->value)
-            ->paginate();
+            ->paginate(10);
 
         return Inertia::render('Menu/Donations', [
             'donations' => $donations,
