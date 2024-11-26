@@ -1,18 +1,28 @@
+import ConfirmDelete from '@/Components/Delete/ConfirmDelete';
 import Icon from '@/Components/Icon';
 import Pagination from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { formatCep } from '@/utils/cepFormat';
 import { formatCpf } from '@/utils/cpfFormat';
 import { formatPhone } from '@/utils/phoneFormat';
+import { Toast } from '@/utils/sweetAlert';
 import { Head, Link } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function Index({ users }) {
+export default function Index({ users, flash }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: true }));
-    const handleMouseLeave = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: false }));
+    const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
+    const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
 
+    useEffect(() => {
+        if (flash.success) {
+            Toast.fire({
+                icon: 'success',
+                title: flash.success,
+            })
+        };
+    }, [flash]);
     return (
         <AuthenticatedLayout
             header={
@@ -67,28 +77,46 @@ export default function Index({ users }) {
                                         <td>{formatCpf(user.cpf.cpf)}</td>
                                         <td>{formatPhone(user.phone.phone)}</td>
                                         <td>{formatCep(user.address.zipcode.zipcode)}</td>
-                                        <td className='flex justify-center items-center my-1'>
+                                        <td className='flex justify-center items-center gap-3 my-1'>
                                             <Link href={route('user.edit', { id: user.id })}>
                                                 <Icon
-                                                    icon={hoveredIcon[user.id]
+                                                    icon={hoveredIcon[`${user.id}-edit`]
                                                         ? 'fa-solid fa-user-gear'
-                                                        : 'fa-solid fa-user-pen'}
+                                                        : 'fa-solid fa-user-pen'
+                                                    }
                                                     title={`Editar ${user.name}`}
                                                     aria-label={`Editar ${user.name}`}
                                                     className='text-[25px] text-[blue] duration-500 cursor-pointer hover:text-orange-600'
-                                                    onMouseEnter={() => handleMouseEnter(user.id)}
-                                                    onMouseLeave={() => handleMouseLeave(user.id)}
+                                                    onMouseEnter={() => handleMouseEnter(user.id, 'edit')}
+                                                    onMouseLeave={() => handleMouseLeave(user.id, 'edit')}
                                                 />
                                             </Link>
+
+                                            <ConfirmDelete
+                                                id={user.id}
+                                                routeName={'user.destroy'}
+                                            >
+                                                <Icon
+                                                    icon={hoveredIcon[`${user.id}-delete`]
+                                                        ? 'fa-solid fa-trash-can'
+                                                        : 'fa-regular fa-trash-can'
+                                                    }
+                                                    title={`Exculir ${user.name}`}
+                                                    aria-label={`Excluir ${user.name}`}
+                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-red-600'
+                                                    onMouseEnter={() => handleMouseEnter(user.id, 'delete')}
+                                                    onMouseLeave={() => handleMouseLeave(user.id, 'delete')}
+                                                />
+                                            </ConfirmDelete>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                        {users.last_page > 1 && (
+                        {users?.last_page > 1 && (
                             <Pagination
-                                links={users.links}
-                                currentPage={users.current_page}
+                                links={users?.links}
+                                currentPage={users?.current_page}
                             />
                         )}
                     </div>

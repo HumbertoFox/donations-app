@@ -157,4 +157,13 @@ class DriverController extends Controller
 
         session()->flash('success', 'Motorista Atualizado com Sucesso!');
     }
+
+    public function destroy($id)
+    {
+        $driver = Driver::findOrFail($id);
+
+        $driver->delete();
+
+        session()->flash('success', 'Motorista Excluído com Sucesso!');
+    }
 }

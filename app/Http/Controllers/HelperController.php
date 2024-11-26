@@ -146,4 +146,13 @@ class HelperController extends Controller
 
         session()->flash('success', 'Ajudante Atualizado com Sucesso!');
     }
+
+    public function destroy($id)
+    {
+        $helper = Helper::findOrFail($id);
+
+        $helper->delete();
+
+        session()->flash('success', 'Ajudante Excluído com Sucesso!');
+    }
 }

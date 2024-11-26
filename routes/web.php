@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/{id}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
 
     Route::get('/agenda', [AgendaController::class, 'show'])->name('menu.agenda');
 
@@ -66,18 +67,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/vehicle/store', [VehicleController::class, 'store'])->name('vehicle.store');
     Route::get('/vehicle/{id}/edit', [VehicleController::class, 'edit'])->name('vehicle.edit');
     Route::put('/vehicle/{id}', [VehicleController::class, 'update'])->name('vehicle.update');
+    Route::delete('/vehicle/{id}/destroy', [VehicleController::class, 'destroy'])->name('vehicle.destroy');
     Route::get('/vehicles', [VehicleController::class, 'index'])->name('vehicle.all');
 
     Route::get('/registerdriver', [DriverController::class, 'create'])->name('driver.register');
     Route::post('/driver/store', [DriverController::class, 'store'])->name('driver.store');
     Route::get('/driver/{id}/edit', [DriverController::class, 'edit'])->name('driver.edit');
     Route::put('/driver/{id}', [DriverController::class, 'update'])->name('driver.update');
+    Route::delete('/driver/{id}/destroy', [DriverController::class, 'destroy'])->name('driver.destroy');
     Route::get('/drivers', [DriverController::class, 'index'])->name('driver.all');
 
     Route::get('/registerhelper', [HelperController::class, 'create'])->name('helper.register');
     Route::post('/helper/store', [HelperController::class, 'store'])->name('helper.store');
     Route::get('/helper/{id}/edit', [HelperController::class, 'edit'])->name('helper.edit');
     Route::put('/helper/{id}', [HelperController::class, 'update'])->name('helper.update');
+    Route::delete('/helper/{id}/destroy', [HelperController::class, 'destroy'])->name('helper.destroy');
     Route::get('/helpers', [HelperController::class, 'index'])->name('helper.all');
 });
 

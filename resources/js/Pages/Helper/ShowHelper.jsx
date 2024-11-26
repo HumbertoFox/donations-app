@@ -2,15 +2,25 @@ import Icon from '@/Components/Icon';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Pagination from '@/Components/Pagination';
 import { Head, Link } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { formatCpf } from '@/utils/cpfFormat';
+import { Toast } from '@/utils/sweetAlert';
+import ConfirmDelete from '@/Components/Delete/ConfirmDelete';
 
-export default function ShowHelper({ helpers }) {
+export default function ShowHelper({ helpers, flash }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: true }));
-    const handleMouseLeave = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: false }));
+    const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
+    const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
 
+    useEffect(() => {
+        if (flash.success) {
+            Toast.fire({
+                icon: 'success',
+                title: flash.success,
+            })
+        };
+    }, [flash]);
     return (
         <AuthenticatedLayout
             header={
@@ -48,38 +58,58 @@ export default function ShowHelper({ helpers }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {helpers.data.length === 0 && (
+                                {helpers?.data?.length === 0 && (
                                     <tr className='text-red-600 cursor-default'>
                                         <td colSpan={5}>Não Existe Ajudante Cadastrado</td>
                                     </tr>
                                 )}
-                                {helpers.data.map((helper, index) => (
+                                {helpers?.data?.map((helper, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
                                         <td className='border-r-[1px] border-gray-400'>
-                                            {index + 1 + (helpers.current_page - 1) * helpers.per_page}
+                                            {index + 1 + (helpers?.current_page - 1) * helpers?.per_page}
                                         </td>
                                         <td>{helper.id}</td>
-                                        <td>{formatCpf(helper.cpf?.cpf)}</td>
-                                        <td>{helper.cpf?.name}</td>
-                                        <td className='flex justify-center items-center my-1'>
+                                        <td>{formatCpf(helper.cpf.cpf)}</td>
+                                        <td>{helper.cpf.name}</td>
+                                        <td className='flex justify-center items-center gap-3 my-1'>
                                             <Link href={`/helper/${helper.id}/edit`}>
                                                 <Icon
-                                                    icon={hoveredIcon[helper.id] ? 'fa-solid fa-id-card' : 'fa-regular fa-id-card'}
-                                                    title={`Editar ${helper.cpf?.name}`}
+                                                    icon={hoveredIcon[`${helper.id}-edit`]
+                                                        ? 'fa-solid fa-id-card'
+                                                        : 'fa-regular fa-id-card'
+                                                    }
+                                                    title={`Editar ${helper.cpf.name}`}
                                                     className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
-                                                    onMouseEnter={() => handleMouseEnter(helper.id)}
-                                                    onMouseLeave={() => handleMouseLeave(helper.id)}
+                                                    onMouseEnter={() => handleMouseEnter(helper.id, 'edit')}
+                                                    onMouseLeave={() => handleMouseLeave(helper.id, 'edit')}
                                                 />
                                             </Link>
+
+                                            <ConfirmDelete
+                                                id={helper.id}
+                                                routeName={'helper.destroy'}
+                                            >
+                                                <Icon
+                                                    icon={hoveredIcon[`${helper.id}-delete`]
+                                                        ? 'fa-solid fa-trash-can'
+                                                        : 'fa-regular fa-trash-can'
+                                                    }
+                                                    title={`Exculir ${helper.cpf.name}`}
+                                                    aria-label={`Excluir ${helper.cpf.name}`}
+                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-red-600'
+                                                    onMouseEnter={() => handleMouseEnter(helper.id, 'delete')}
+                                                    onMouseLeave={() => handleMouseLeave(helper.id, 'delete')}
+                                                />
+                                            </ConfirmDelete>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                        {helpers.last_page > 1 && (
+                        {helpers?.last_page > 1 && (
                             <Pagination
-                                links={helpers.links}
-                                currentPage={helpers.current_page}
+                                links={helpers?.links}
+                                currentPage={helpers?.current_page}
                             />
                         )}
                     </div>

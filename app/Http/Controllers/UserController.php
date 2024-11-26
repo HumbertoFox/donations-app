@@ -92,4 +92,13 @@ class UserController extends Controller
             session()->flash('success', 'Usuário atualizado com Sucesso!'),
         ]);
     }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->delete();
+
+        session()->flash('success', 'Usuário Excluído com Sucesso!');
+    }
 }

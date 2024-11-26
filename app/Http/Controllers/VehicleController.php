@@ -60,4 +60,13 @@ class VehicleController extends Controller
 
         session()->flash('success', 'Veículo Atualizado com sucesso!');
     }
+
+    public function destroy($id)
+    {
+        $vehicle = Vehicle::findOrFail($id);
+
+        $vehicle->delete();
+
+        session()->flash('success', 'Veículo Excluído com Sucesso!');
+    }
 }

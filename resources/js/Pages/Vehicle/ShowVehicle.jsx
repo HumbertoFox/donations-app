@@ -1,15 +1,25 @@
+import ConfirmDelete from '@/Components/Delete/ConfirmDelete';
 import Icon from '@/Components/Icon';
 import Pagination from '@/Components/Pagination';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Toast } from '@/utils/sweetAlert';
 import { Head, Link } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function ShowVehicle({ vehicles }) {
+export default function ShowVehicle({ vehicles, flash }) {
     const [hoveredIcon, setHoveredIcon] = useState({});
 
-    const handleMouseEnter = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: true }));
-    const handleMouseLeave = (id) => setHoveredIcon((prev) => ({ ...prev, [id]: false }));
+    const handleMouseEnter = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: true }));
+    const handleMouseLeave = (id, action) => setHoveredIcon((prev) => ({ ...prev, [`${id}-${action}`]: false }));
 
+    useEffect(() => {
+        if (flash.success) {
+            Toast.fire({
+                icon: 'success',
+                title: flash.success,
+            })
+        };
+    }, [flash]);
     return (
         <AuthenticatedLayout
             header={
@@ -49,41 +59,61 @@ export default function ShowVehicle({ vehicles }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {vehicles.data.length === 0 && (
+                                {vehicles?.data?.length === 0 && (
                                     <tr className='text-red-600 cursor-default'>
                                         <td colSpan={7}>Não Existe Veículo Cadastrado</td>
                                     </tr>
                                 )}
-                                {vehicles.data.map((vehicle, index) => (
+                                {vehicles?.data?.map((vehicle, index) => (
                                     <tr key={index} className='border-b-[1px] border-gray-400'>
                                         <td className='border-r-[1px] border-gray-400'>
-                                            {index + 1 + (vehicles.current_page - 1) * vehicles.per_page}
+                                            {index + 1 + (vehicles?.current_page - 1) * vehicles?.per_page}
                                         </td>
                                         <td>{vehicle.id}</td>
                                         <td>{vehicle.renavam}</td>
                                         <td>{vehicle.plate}</td>
                                         <td>{vehicle.model}</td>
                                         <td>{vehicle.automaker}</td>
-                                        <td className='flex justify-center items-center my-1'>
+                                        <td className='flex justify-center items-center gap-3 my-1'>
                                             <Link href={`/vehicle/${vehicle.id}/edit`}>
                                                 <Icon
-                                                    icon={hoveredIcon[vehicle.id] ? 'fa-solid fa-truck' : 'fa-solid fa-truck-medical'}
+                                                    icon={hoveredIcon[`${vehicle.id}-edit`]
+                                                        ? 'fa-solid fa-truck'
+                                                        : 'fa-solid fa-truck-medical'
+                                                    }
                                                     title={`Editar ${vehicle.plate}`}
                                                     aria-label={`Editar ${vehicle.plate}`}
                                                     className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-orange-600'
-                                                    onMouseEnter={() => handleMouseEnter(vehicle.id)}
-                                                    onMouseLeave={() => handleMouseLeave(vehicle.id)}
+                                                    onMouseEnter={() => handleMouseEnter(vehicle.id, 'edit')}
+                                                    onMouseLeave={() => handleMouseLeave(vehicle.id, 'edit')}
                                                 />
                                             </Link>
+
+                                            <ConfirmDelete
+                                                id={vehicle.id}
+                                                routeName={'vehicle.destroy'}
+                                            >
+                                                <Icon
+                                                    icon={hoveredIcon[`${vehicle.id}-delete`]
+                                                        ? 'fa-solid fa-trash-can'
+                                                        : 'fa-regular fa-trash-can'
+                                                    }
+                                                    title={`Exculir ${vehicle.plate}`}
+                                                    aria-label={`Excluir ${vehicle.plate}`}
+                                                    className='text-[25px] text-[blue] duration-[400ms] cursor-pointer hover:text-red-600'
+                                                    onMouseEnter={() => handleMouseEnter(vehicle.id, 'delete')}
+                                                    onMouseLeave={() => handleMouseLeave(vehicle.id, 'delete')}
+                                                />
+                                            </ConfirmDelete>
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                        {vehicles.last_page > 1 && (
+                        {vehicles?.last_page > 1 && (
                             <Pagination
-                                links={vehicles.links}
-                                currentPage={vehicles.current_page}
+                                links={vehicles?.links}
+                                currentPage={vehicles?.current_page}
                             />
                         )}
                     </div>
