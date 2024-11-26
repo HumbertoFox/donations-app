@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory(2)->create();
 
         User::firstOrCreate(
             ['email' => 'betofoxnet.info@betofoxnet.com.br'],
@@ -30,6 +29,7 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        User::factory(2)->create();
         Vehicle::factory()->count(2)->create();
         Driver::factory()->count(2)->create();
         Helper::factory()->count(6)->create();
