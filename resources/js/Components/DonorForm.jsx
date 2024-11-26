@@ -6,23 +6,23 @@ import PrimaryButton from './Buttons/PrimaryButton';
 
 export default function DonorForm({ donor = {}, point, valueButton }) {
     const { data, setData, post, put, processing, errors, reset } = useForm({
-        donorcode: donor.id ?? '',
-        name: donor.name ?? '',
-        phone: donor.phone?.phone ?? '',
-        contact: donor.phone?.contact ?? '',
-        contact_old: donor.phone?.contact_old ?? '',
-        zipcode: donor.address?.zipcode?.zipcode ?? '',
-        street: donor.address?.zipcode?.street ?? '',
-        district: donor.address?.zipcode?.district ?? '',
-        city: donor.address?.zipcode?.city ?? '',
-        type_residence: donor.address?.type_residence ?? 'house',
-        number_residence: donor.address?.number_residence ?? '',
-        cnpj: donor.cnpj?.cnpj ?? '',
-        corporatename: donor.cnpj?.corporatename ?? '',
-        building: donor.address?.building ?? '',
-        block: donor.address?.block ?? '',
-        livingapartmentroom: donor.address?.livingapartmentroom ?? '',
-        reference_point: donor.address?.reference_point ?? ''
+        donorcode: donor?.id ?? '',
+        name: donor?.name ?? '',
+        phone: donor?.phone?.phone ?? '',
+        contact: donor?.phone?.contact ?? '',
+        contact_old: donor?.phone?.contact_old ?? '',
+        zipcode: donor?.address?.zipcode?.zipcode ?? '',
+        street: donor?.address?.zipcode?.street ?? '',
+        district: donor?.address?.zipcode?.district ?? '',
+        city: donor?.address?.zipcode?.city ?? '',
+        type_residence: donor?.address?.type_residence ?? 'house',
+        number_residence: donor?.address?.number_residence ?? '',
+        cnpj: donor?.cnpj?.cnpj ?? '',
+        corporatename: donor?.cnpj?.corporatename ?? '',
+        building: donor?.address?.building ?? '',
+        block: donor?.address?.block ?? '',
+        livingapartmentroom: donor?.address?.livingapartmentroom ?? '',
+        reference_point: donor?.address?.reference_point ?? ''
     });
 
     const [clickedButton, setClickedButton] = useState(null);

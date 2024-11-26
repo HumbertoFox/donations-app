@@ -11,22 +11,22 @@ import { useRef, useState } from 'react';
 
 export default function DriverForm({ driver = {}, point, valueButton }) {
     const { data, setData, post, put, processing, errors, reset } = useForm({
-        name: driver.cnh?.cpf?.name ?? '',
-        cpf: driver.cnh?.cpf?.cpf ?? '',
-        cnh: driver.cnh?.cnh ?? '',
-        birthdate: driver.cnh?.cpf?.birthdate ?? '',
-        phone: driver.phone?.phone ?? '',
-        email: driver.phone?.email ?? '',
-        zipcode: driver.address?.zipcode?.zipcode ?? '',
-        street: driver.address?.zipcode?.street ?? '',
-        district: driver.address?.zipcode?.district ?? '',
-        city: driver.address?.zipcode?.city ?? '',
-        number_residence: driver.address?.number_residence ?? '',
-        type_residence: driver.address?.type_residence ?? 'house',
-        building: driver.address?.building ?? '',
-        block: driver.address?.block ?? '',
-        livingapartmentroom: driver.address?.livingapartmentroom ?? '',
-        reference_point: driver.address?.reference_point ?? ''
+        name: driver?.cnh?.cpf?.name ?? '',
+        cpf: driver?.cnh?.cpf?.cpf ?? '',
+        cnh: driver?.cnh?.cnh ?? '',
+        birthdate: driver?.cnh?.cpf?.birthdate ?? '',
+        phone: driver?.phone?.phone ?? '',
+        email: driver?.phone?.email ?? '',
+        zipcode: driver?.address?.zipcode?.zipcode ?? '',
+        street: driver?.address?.zipcode?.street ?? '',
+        district: driver?.address?.zipcode?.district ?? '',
+        city: driver?.address?.zipcode?.city ?? '',
+        number_residence: driver?.address?.number_residence ?? '',
+        type_residence: driver?.address?.type_residence ?? 'house',
+        building: driver?.address?.building ?? '',
+        block: driver?.address?.block ?? '',
+        livingapartmentroom: driver?.address?.livingapartmentroom ?? '',
+        reference_point: driver?.address?.reference_point ?? ''
     });
 
     const cpfRef = useRef(null);

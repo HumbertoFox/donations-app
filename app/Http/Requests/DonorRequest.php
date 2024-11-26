@@ -2,7 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Cnpj;
+use App\Models\Donor;
+use App\Models\Phone;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class DonorRequest extends FormRequest
 {
@@ -13,12 +17,30 @@ class DonorRequest extends FormRequest
 
     public function rules(): array
     {
+        if ($this->route('id')) {
+            $donor = Donor::findOrFail($this->route('id'));
+        }
+
         return [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:15', 'unique:phones,phone'],
+            'phone' => [
+                'required',
+                'string',
+                'max:15',
+                $this->route('id')
+                    ? Rule::unique(Phone::class)->ignore($donor->phone_id)
+                    : 'unique:phones,phone',
+            ],
             'contact' => ['required', 'string', 'max:30'],
             'contact_old' => ['nullable', 'string', 'max:30'],
-            'cnpj' => ['nullable', 'string', 'max:255', 'unique:cnpjs,cnpj'],
+            'cnpj' => [
+                'nullable',
+                'string',
+                'max:255',
+                $this->route('id')
+                    ? Rule::unique(Cnpj::class)->ignore($donor->cnpj_id)
+                    : 'unique:cnpjs,cnpj',
+            ],
             'corporatename' => ['nullable', 'string', 'max:255'],
             'zipcode' => ['required', 'string', 'max:9'],
             'city' => ['required', 'string', 'max:255'],

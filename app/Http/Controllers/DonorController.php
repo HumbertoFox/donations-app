@@ -133,7 +133,7 @@ class DonorController extends Controller
 
     public function update(DonorRequest $request, $id)
     {
-        $request->validate();
+        $request->validated();
 
         $cnpjId = null;
         if ($request->cnpj) {

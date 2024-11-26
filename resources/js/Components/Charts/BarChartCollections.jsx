@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
-export default function BarChartCollections({ data }) {
+export default function BarChartCollections({ data, datacollecteds, datanotcollecteds }) {
     const monthNames = [
         'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
         'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'
@@ -50,14 +50,30 @@ export default function BarChartCollections({ data }) {
         ...data,
         labels: labels,
         axis: 'y',
-        datasets: data?.datasets.map(dataset => ({
-            ...dataset,
-            label: 'Gráfico de Coletas',
-            hoverBackgroundColor: labels.map((_, index) => monthsBordersColors[index]),
-            backgroundColor: labels.map((_, index) => monthsBackgroundsColors[index]),
-            borderColor: labels.map((_, index) => monthsBordersColors[index]),
-            borderWidth: 1,
-        })),
+        datasets: [
+            {
+                label: 'Total de Doacões',
+                data: data.datasets[0].data,
+                hoverBackgroundColor: labels.map((_, index) => monthsBordersColors[index]),
+                backgroundColor: labels.map((_, index) => monthsBackgroundsColors[index]),
+                borderColor: labels.map((_, index) => monthsBordersColors[index]),
+                borderWidth: 1,
+            }, {
+                label: 'Total de Doações coletadas',
+                data: datacollecteds.datasets[0].data,
+                hoverBackgroundColor: labels.map((_, index) => monthsBordersColors[index]),
+                backgroundColor: labels.map((_, index) => monthsBackgroundsColors[index]),
+                borderColor: labels.map((_, index) => monthsBordersColors[index]),
+                borderWidth: 1,
+            }, {
+                label: 'Total de Doações não coletadas',
+                data: datanotcollecteds.datasets[0].data,
+                hoverBackgroundColor: labels.map((_, index) => monthsBordersColors[index]),
+                backgroundColor: labels.map((_, index) => monthsBackgroundsColors[index]),
+                borderColor: labels.map((_, index) => monthsBordersColors[index]),
+                borderWidth: 1,
+            }
+        ]
     };
 
     const options = {
@@ -71,7 +87,7 @@ export default function BarChartCollections({ data }) {
             title: {
                 display: true,
             },
-            Tooltip: {
+            tooltip: {
                 enabled: true,
                 mode: 'index',
                 intersect: false,
@@ -94,7 +110,7 @@ export default function BarChartCollections({ data }) {
                     options={options}
                 />
             ) : (
-                <p>Carregando...</p>
+                <p>Nehum dado Encontrado!</p>
             )}
         </>
     );
