@@ -50,8 +50,10 @@ export default function SideBar({ children }) {
                     <li className='duration-500 mt-4 ease-in-out' title='Sair/Logout'>
                         <Link
                             className='flex items-center p-2.5 gap-[15px] duration-500 hover:text-red-600 active:bg-[#79D1FF] ease-in-out'
-                            href={route('logout')}
                             method='post'
+                            href={route('logout')}
+                            as='button'
+                            role='button'
                         >
                             <Icon icon='fa-solid fa-right-from-bracket' className='text-[2rem] rotate-180' />
                             <span className='text-sm max-[1080px]:hidden'>Sair do Sistema</span>

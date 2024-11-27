@@ -115,12 +115,12 @@ export default function ConfirmCollection({ records, flash }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {records.data.length === 0 && (
+                                {records?.data?.length === 0 && (
                                     <tr className='text-red-600 cursor-default'>
                                         <td colSpan={10}>Não Existe Doação Cadastrada</td>
                                     </tr>
                                 )}
-                                {records.data.map((record, index) => {
+                                {records?.data?.map((record, index) => {
                                     return (
                                         <tr key={index} className='border-b-[1px] border-gray-400'>
                                             <td className='border-r-[1px] border-gray-400'>
@@ -155,9 +155,17 @@ export default function ConfirmCollection({ records, flash }) {
                                             <td>{formatDateToLocal(record.colleted_date)}</td>
                                             <td>{record.donation.status}</td>
                                             <td className='flex justify-evenly items-center my-1'>
-                                                <Link href={route('donation.update.status.confirmed', record.donation.id)} method="put">
+                                                <Link
+                                                    method='put'
+                                                    href={route('donation.update.status.confirmed', record.donation.id)}
+                                                    as='button'
+                                                    role='button'
+                                                >
                                                     <Icon
-                                                        icon={hoveredIcon[`${record.id}-show`] ? 'fa-solid fa-file-circle-plus' : 'fa-solid fa-file-circle-check'}
+                                                        icon={hoveredIcon[`${record.id}-show`]
+                                                            ? 'fa-solid fa-file-circle-plus'
+                                                            : 'fa-solid fa-file-circle-check'
+                                                        }
                                                         title={`Confirmar Doação de ${record.donor.name}`}
                                                         aria-label={`Confirmar Doação de ${record.donor.name}`}
                                                         className='text-[25px] text-[blue] duration-500 cursor-pointer hover:text-green-600'
@@ -166,9 +174,17 @@ export default function ConfirmCollection({ records, flash }) {
                                                     />
                                                 </Link>
 
-                                                <Link href={route('donation.update.status.pending', record.donation.id)} method="put">
+                                                <Link
+                                                    method='put'
+                                                    href={route('donation.update.status.pending', record.donation.id)}
+                                                    as='button'
+                                                    role='button'
+                                                >
                                                     <Icon
-                                                        icon={hoveredIcon[`${record.id}-pending`] ? 'fa-solid fa-file-circle-plus' : 'fa-solid fa-file-circle-exclamation'}
+                                                        icon={hoveredIcon[`${record.id}-pending`]
+                                                            ? 'fa-solid fa-file-circle-plus'
+                                                            : 'fa-solid fa-file-circle-exclamation'
+                                                        }
                                                         title={`Ré-marcar Doação de ${record.donor.name}`}
                                                         aria-label={`Confirmar Doação de ${record.donor.name}`}
                                                         className='text-[25px] text-[blue] duration-500 cursor-pointer hover:text-orange-400'
@@ -177,9 +193,17 @@ export default function ConfirmCollection({ records, flash }) {
                                                     />
                                                 </Link>
 
-                                                <Link href={route('donation.update.status.canceled', record.donation.id)} method="put">
+                                                <Link
+                                                    method='put'
+                                                    href={route('donation.update.status.canceled', record.donation.id)}
+                                                    as='button'
+                                                    role='button'
+                                                >
                                                     <Icon
-                                                        icon={hoveredIcon[`${record.id}-cancelled`] ? 'fa-solid fa-file-circle-plus' : 'fa-solid fa-file-circle-xmark'}
+                                                        icon={hoveredIcon[`${record.id}-cancelled`]
+                                                            ? 'fa-solid fa-file-circle-plus'
+                                                            : 'fa-solid fa-file-circle-xmark'
+                                                        }
                                                         title={`Cancelar Doação de ${record.donor.name}`}
                                                         aria-label={`Confirmar Doação de ${record.donor.name}`}
                                                         className='text-[25px] text-[blue] duration-500 cursor-pointer hover:text-red-600'
@@ -193,10 +217,10 @@ export default function ConfirmCollection({ records, flash }) {
                                 })}
                             </tbody>
                         </table>
-                        {records.last_page > 1 && (
+                        {records?.last_page > 1 && (
                             <Pagination
-                                links={records.links}
-                                currentPage={records.current_page}
+                                links={records?.links}
+                                currentPage={records?.current_page}
                             />
                         )}
                     </div>

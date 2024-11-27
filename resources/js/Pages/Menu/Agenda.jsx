@@ -28,20 +28,20 @@ export default function Agenda({ records }) {
         });
     };
 
-    const events = records.map(record => {
-        const startDate = moment(record.colleted_date).set({ hour: 8, minute: 0, second: 0 }).toDate();
-        const endDate = moment(record.colleted_date).set({ hour: 17, minute: 0, second: 0 }).toDate();
+    const events = records?.map(record => {
+        const startDate = moment(record?.colleted_date).set({ hour: 8, minute: 0, second: 0 }).toDate();
+        const endDate = moment(record?.colleted_date).set({ hour: 17, minute: 0, second: 0 }).toDate();
 
         return {
-            phone: record.donor.phone.phone,
-            title: record.donor.name,
-            vehicle: record.vehicle.plate,
-            driver: record.driver.cnh.cpf.name,
+            phone: record?.donor?.phone?.phone ?? 'N/A',
+            title: record?.donor?.name ?? 'N/A',
+            vehicle: record?.vehicle?.plate ?? 'N/A',
+            driver: record?.driver?.cnh?.cpf?.name ?? 'N/A',
             start: startDate,
             end: endDate,
-            status: record.donation.status,
-            desc: record.observation,
-            color: record.vehicle.id === 1 ? '#3c91e6' : '#19cc19',
+            status: record?.donation?.status ?? 'N/A',
+            desc: record?.observation ?? 'N/A',
+            color: record?.vehicle?.id === 1 ? '#3c91e6' : '#19cc19',
         };
     });
 
