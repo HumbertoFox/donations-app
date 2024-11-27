@@ -5,11 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\VehicleRequest;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
 class VehicleController extends Controller
 {
+    public function index(): Response
+    {
+        $vehicles = Vehicle::paginate(10);
+
+        return Inertia::render('Vehicle/ShowVehicle', [
+            'vehicles' => $vehicles,
+        ]);
+    }
+
     public function create(): Response
     {
         return Inertia::render('Vehicle/RegisterVehicle');
@@ -17,30 +27,15 @@ class VehicleController extends Controller
 
     public function store(VehicleRequest $request)
     {
-        $request->validated();
+        $validatedData = $request->validated();
 
-        $userId = Auth::id();
+        $validatedData['user_id'] = Auth::id();
 
-        Vehicle::create(
-            [
-                'renavam' => $request->renavam,
-                'plate' => $request->plate,
-                'km' => $request->km,
-                'model' => $request->model,
-                'automaker' => $request->automaker,
-                'user_id' => $userId,
-            ]
-        );
+        Vehicle::create($validatedData);
 
         session()->flash('success', 'Veículo cadastrado com sucesso!');
-    }
 
-    public function index(): Response
-    {
-        $vehicles = Vehicle::paginate(10);
-        return Inertia::render('Vehicle/ShowVehicle', [
-            'vehicles' => $vehicles,
-        ]);
+        return Redirect::route('vehicle.all');
     }
 
     public function edit($id): Response
@@ -56,6 +51,7 @@ class VehicleController extends Controller
         $validatedData = $request->validated();
 
         $vehicle = Vehicle::findOrFail($id);
+
         $vehicle->update($validatedData);
 
         session()->flash('success', 'Veículo Atualizado com sucesso!');

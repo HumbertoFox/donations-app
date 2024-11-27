@@ -25,7 +25,7 @@ export default function HelperForm({ helper = {}, point, valueButton }) {
         building: helper.address?.building ?? '',
         block: helper.address?.block ?? '',
         livingapartmentroom: helper.address?.livingapartmentroom ?? '',
-        reference_point: helper.address?.reference_point ?? ''
+        reference_point: helper.address?.reference_point ?? '',
     });
 
     const cpfRef = useRef(null);

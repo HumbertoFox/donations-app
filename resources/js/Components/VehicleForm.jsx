@@ -11,7 +11,7 @@ export default function VehicleForm({ vehicle = {}, point, valueButton }) {
         automaker: vehicle.automaker ?? '',
         renavam: vehicle.renavam ?? '',
         plate: vehicle.plate ?? '',
-        km: vehicle.km ?? ''
+        km: vehicle.km ?? '',
     });
 
     const submit = async (e) => {

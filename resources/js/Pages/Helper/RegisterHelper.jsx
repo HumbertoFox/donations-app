@@ -5,17 +5,7 @@ import { Toast } from '@/utils/sweetAlert';
 import { Head, Link } from '@inertiajs/react';
 import { useEffect } from 'react';
 
-export default function RegisterHelper({ flash }) {
-
-    useEffect(() => {
-        if (flash[0]) {
-            Toast.fire({
-                icon: flash[0],
-                title: flash[1],
-            })
-        };
-    }, [flash]);
-
+export default function RegisterHelper() {
     return (
         <AuthenticatedLayout
             header={

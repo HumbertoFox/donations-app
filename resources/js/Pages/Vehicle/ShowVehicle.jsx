@@ -17,7 +17,7 @@ export default function ShowVehicle({ vehicles, flash }) {
             Toast.fire({
                 icon: 'success',
                 title: flash.success,
-            })
+            });
         };
     }, [flash]);
     return (
